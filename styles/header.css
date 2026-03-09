@@ -1,0 +1,19 @@
+.nav{
+    background-color: var(--color-bg-main);
+    display: inline-flex;
+    position: sticky;
+    padding: 10px;
+
+
+}
+
+.linked__pages{
+    align-self:center;
+    display: left;
+}
+
+button{
+    background-color:var(--color-primary);
+    border-radius: 5px;
+    right: 10px;
+}
