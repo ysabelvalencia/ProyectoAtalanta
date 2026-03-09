@@ -30,6 +30,66 @@
   --border-red:rgba(220,6,48,0.4);
   --border-dark:#1A1A1A;
   
+  
+  .container { 
+    color: var(--text-main);
+    background: var(--bg-main);
+    max-width:1200px;
+    margin:0 auto;
+    padding:20px;
+  }
+   
+  .container__main {
+   
+    background-color: var(--bg-section);
+    padding: 30px;
+    border-radius: 10px;
+  }
+  .container__main-box1{
+    color: var(--text-main);
+    background: linear-gradient(
+      to bottom,
+      var(--primary) 0%,    
+      var(--primary-dark) 35%,   
+      var(--bg-black) 60%,  
+      var(--bg-black) 80%
+    );
+    max-width:1200px;
+    margin: 20px;
+    padding:30px;
+    border: 1px solid var(--primary); 
+    border-radius: 8px; 
+  }
+  .container__main-box2{
+    color: var(--text-main);
+    background: linear-gradient(
+      to bottom,
+      var(--primary) 0%,    
+      var(--primary-dark) 35%,   
+      var(--bg-black) 60%,  
+      var(--bg-black) 80%
+    );
+    max-width:1200px;
+    margin:20px;
+    padding:30px;
+    border: 1px solid var(--primary); 
+    border-radius: 8px; 
+  }
+  .container__main-box3{
+    color: var(--text-main);
+    background: linear-gradient(
+      to bottom,
+      var(--primary) 0%,    
+      var(--primary-dark) 35%,   
+      var(--bg-black) 60%,  
+      var(--bg-black) 80%
+    );
+    max-width:1200px;
+    margin:20px;
+    padding:30px;
+    border: 1px solid var(--primary); 
+    border-radius: 8px; 
+  }
   }
 
   /*
