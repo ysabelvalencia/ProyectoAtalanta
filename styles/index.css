@@ -1,0 +1,51 @@
+@import "./header.css";
+@import "footer.css";
+
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+
+  /* BRAND */
+  --primary:#DC0630;
+  --primary-strong:#FF003C;
+  --primary-light:#FF2B5C;
+  --primary-dark:#7A0018;
+  
+  /* BACKGROUNDS */
+  --bg-black:#000000;
+  --bg-main:#050505;
+  --bg-navbar:#0B1116;
+  --bg-section:#0B0B0D;
+  --bg-deep:#0A0002;
+  
+  /* TEXT */
+  --text-main:#FFFFFF;
+  --text-secondary:#CFCFCF;
+  --text-muted:#9A9A9A;
+  
+  /* BORDERS */
+  --border-red:rgba(220,6,48,0.4);
+  --border-dark:#1A1A1A;
+  
+  }
+
+  /*
+  CSS FONTS
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+
+*/
