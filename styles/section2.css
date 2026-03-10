@@ -1,0 +1,79 @@
+
+.container {
+    color: var(--text-main);
+    background: var(--bg-main);
+    margin:0 auto;
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+  }
+  .container__main {
+    background-color: var(--bg-section);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif; /* TITULO */
+  }
+  .container__main-descripcion h3{
+    text-align:center;
+    margin-bottom:30px;
+    font-family: "Poppins", sans-serif; /* TEXTO GENERAL */
+    font-weight:400;
+  }
+  .container__main-box{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch; 
+    gap:20px;
+  }
+  .card{
+    color: var(--text-main);
+    background: linear-gradient(
+      to bottom,
+      var(--primary) 0%,    
+      var(--primary-dark) 35%,   
+      var(--bg-black) 60%,  
+      var(--bg-black) 80%
+    );
+    padding:30px;
+    border:1px solid var(--primary);
+    border-radius:8px;
+    width:100%;
+    max-width:360px;
+    display:flex;          /* NUEVO */
+    flex-direction:column; /* NUEVO */
+    font-family: "Poppins", sans-serif; /* TEXTO GENERAL */
+}
+
+.card h1{
+  font-family: "Montserrat", sans-serif; /* TITULO */
+}
+  /*TABLET*/
+  @media (min-width:768px){
+
+    .container__main-box{
+      flex-direction:row;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+  
+    .card{
+      width:45%;
+    }
+  
+  }
+  /*DESKTOP*/
+  @media (min-width:1024px){
+
+    .container__main-box{
+      flex-wrap:nowrap;
+      justify-content:center;
+    }
+  
+    .card{
+      width:30%;
+      max-width:380px;
+    }
+  
+  }
+  
