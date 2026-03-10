@@ -361,6 +361,16 @@ color:white;
         ul{
             text-align: left;
         }
+
+        .services3{
+
+            padding:80px 10%;
+            display: block;
+            align-items: center;
+            text-align: center;
+            background:linear-gradient(180deg,rgb(0, 0, 0),rgb(73, 20, 20));
+            
+            }
     
     
     
