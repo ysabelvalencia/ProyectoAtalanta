@@ -1,0 +1,137 @@
+/* MOBILE (base) */
+
+.offsec{
+    padding:80px 20px;
+    background: #e9eaee;
+  }
+  .offsec__container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:40px;
+  }
+  
+  /* TEXTO */
+  
+  .offsec__text{
+    font-family:"Poppins", sans-serif;
+  }
+  
+  .offsec__title{
+    font-family:"Montserrat", sans-serif;
+    font-size:24px;
+    font-weight:700;
+    line-height:1.3;
+    margin-bottom:25px;
+  }
+  
+  .offsec__desc{
+    font-size:16px;
+    font-weight:400;
+    margin-bottom:20px;
+    line-height:1.6;
+  }
+  
+  .offsec__list{
+    margin-bottom:30px;
+    padding-left:20px;
+  }
+  
+  .offsec__list li{
+    margin-bottom:8px;
+    text-align:left;
+  }
+  
+  /* BOTON */
+  
+  .offsec__btn{
+    background:#e5093f;
+    color:white;
+    border:none;
+    padding:14px 28px;
+    border-radius:6px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    text-decoration:none;
+  }
+  
+  .offsec__btn:hover{
+    background:#b0062f;
+    transform:translateY(-2px);
+  }
+  
+  /* IMAGENES */
+  
+  .offsec__images{
+    text-align:center;
+  }
+  
+  .offsec__logo{
+    width:160px;
+    margin-bottom:20px;
+  }
+  
+  .offsec__badges{
+    width:220px;
+    display:block;
+    margin:0 auto 15px auto;
+  }
+  
+  .offsec__rank{
+    font-size:14px;
+    font-weight:600;
+    font-family:"Poppins", sans-serif;
+  }
+  
+  
+  /* TABLET */
+  
+  @media (min-width:768px){
+  
+  .offsec__container{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    text-align:left;
+  }
+  
+  .offsec__text{
+    flex:1;
+  }
+  
+  .offsec__images{
+    flex:1;
+  }
+  
+  .offsec__title{
+    font-size:28px;
+  }
+  
+  .offsec__badges{
+    width:260px;
+  }
+  
+  }
+  
+  
+  /* DESKTOP */
+  
+  @media (min-width:1024px){
+  
+  .offsec__title{
+    font-size:32px;
+  }
+  
+  .offsec__badges{
+    width:300px;
+  }
+  
+  .offsec__logo{
+    width:200px;
+  }
+  
+  }
