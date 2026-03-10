@@ -1,234 +1,238 @@
 .hero-slider {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background: black;
-  }
-  
-  .hero-slider__container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .hero-slider__slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.7s ease;
-    pointer-events: none;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    transform-origin: center;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 70px);
+  overflow: hidden;
+  background: black;
+}
+
+.hero-slider__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slider__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.hero-slider__slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1);
+  transform-origin: center;
+  z-index: -1;
+}
+
+.hero-slider__slide--1::before {
+  background-image: url("../images/Atalanta/Fondo3.jpg");
+}
+
+.hero-slider__slide--2::before {
+  background-image: url("../images/Atalanta/Fondo2.png");
+}
+
+.hero-slider__slide--3::before {
+  background-image: url("../images/Atalanta/Atalanta-Fondo.jpeg");
+}
+
+.hero-slider__slide--4::before {
+  background-image: url("../images/Atalanta/Planes-de-Carrera-03-scaled.jpg");
+}
+
+.hero-slider__slide--active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+.hero-slider__slide--active::before {
+  animation: heroZoom 12s ease forwards;
+}
+@keyframes heroZoom {
+  0% {
+    transform: scale(1);
   }
 
-  .hero-slider__slide--1{
-    background-image:url("../images/Atalanta/Fondo3.jpg");
+  100% {
+    transform: scale(1.1);
   }
-  
-  .hero-slider__slide--2{
-    background-image:url("../images/Atalanta/Fondo2.png");
-  }
-  
-  .hero-slider__slide--3{
-    background-image:url("../images/Atalanta/Atalanta-Fondo.jpeg");
-  }
-  
-  .hero-slider__slide--4{
-    background-image:url("../images/Atalanta/Planes-de-Carrera-03-scaled.jpg");
-  }
-  
-  .hero-slider__slide--active {
-    opacity: 1;
-    z-index: 1;
-    pointer-events: auto;
-    animation: heroZoom 12s ease forwards;
-  }
-  @keyframes heroZoom {
+}
 
-    0%{
-      transform: scale(1);
-    }
-  
-    100%{
-      transform: scale(1.1);
-    }
-  
-  }
+.hero-slider__slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+.hero-slider__content {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  max-width: 500px;
+  padding: 0 20px;
+  color: white;
+  z-index: 2;
+}
 
-  .hero-slider__slide::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    pointer-events: none;
-  }
+.hero-slider__title {
+  font-size: 22px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.hero-slider__subtitle {
+  font-size: 16px;
+  margin-bottom: 25px;
+  font-family: "Montserrat", sans-serif;
+  color: #ff1c48;
+  text-transform: uppercase;
+}
+
+.hero-slider__description {
+  margin-top: 20px;
+  font-size: 15px;
+  opacity: 0.9;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-slider__button {
+  background: #e50934;
+  color: white;
+  border: none;
+  padding: 16px 28px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero-slider__button:hover {
+  background: #ff1c48;
+}
+
+.hero-slider__dots {
+  position: absolute;
+  bottom: 40px;
+  left: 8%;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.hero-slider__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #7a0d1e;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.hero-slider__dot--active {
+  background: white;
+}
+
+.hero-slider__control {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #e50934;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  transition: 0.3s;
+}
+
+.hero-slider__control--prev {
+  right: 90px;
+}
+
+.hero-slider__control:hover {
+  background: #e50934;
+}
+
+@media (min-width: 768px) {
   .hero-slider__content {
-    position: absolute;
-    top: 50%;
-    left: 8%;
-    transform: translateY(-50%);
-    max-width:500px;
-    padding:0 20px;
-    color: white;
-    z-index: 2;
+    left: 10%;
+    max-width: 600px;
   }
 
   .hero-slider__title {
-    font-size: 22px;
-    text-transform: uppercase;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    font-family: "Montserrat", sans-serif;
+    font-size: 50px;
+  }
 
-  }
-  
   .hero-slider__subtitle {
-    font-size: 16px;
-    margin-bottom: 25px;
-    font-family: "Montserrat", sans-serif;
-    color:#ff1c48;
-    text-transform: uppercase;
+    font-size: 18px;
   }
-  
+
   .hero-slider__description {
-    margin-top: 20px;
-    font-size: 15px;
-    opacity: 0.9;
-    font-family: "Poppins", sans-serif;
+    font-size: 16px;
   }
 
   .hero-slider__button {
-    background: #e50934;
-    color: white;
-    border: none;
-    padding: 16px 28px;
-    border-radius: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .hero-slider__button:hover {
-    background: #ff1c48;
+    font-size: 16px;
+    padding: 16px 30px;
   }
 
   .hero-slider__dots {
-    position: absolute;
-    bottom: 40px;
-    left: 8%;
-    display: flex;
-    gap: 12px;
-    z-index: 10;
+    bottom: 50px;
   }
-  
-  .hero-slider__dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #7a0d1e;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .hero-slider__dot--active {
-    background: white;
-  }
-  
+
   .hero-slider__control {
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid #e50934;
-    background: transparent;
-    color: white;
-    cursor: pointer;
-    z-index: 10;
-    transition: 0.3s;
+    bottom: 50px;
   }
-  
-  .hero-slider__control--prev {
-    right: 90px;
-  }
-  
-  .hero-slider__control:hover {
-    background: #e50934;
+}
+
+@media (min-width: 1024px) {
+  .hero-slider {
+    height: calc(100vh - 70px);
   }
 
-
-  @media (min-width: 768px) {
-
-    .hero-slider__content{
-      left:10%;
-      max-width:600px;
-    }
-  
-    .hero-slider__title{
-      font-size:50px;
-    }
-  
-    .hero-slider__subtitle{
-      font-size:18px;
-    }
-  
-    .hero-slider__description{
-      font-size:16px;
-    }
-  
-    .hero-slider__button{
-      font-size:16px;
-      padding:16px 30px;
-    }
-  
-    .hero-slider__dots{
-      bottom:50px;
-    }
-  
-    .hero-slider__control{
-      bottom:50px;
-    }
-  
+  .hero-slider__content {
+    left: 12%;
+    max-width: 700px;
   }
 
-  @media (min-width: 1024px) {
-
-    .hero-slider{
-      height:95vh;
-    }
-  
-    .hero-slider__content{
-      left:12%;
-      max-width:700px;
-    }
-  
-    .hero-slider__title{
-      font-size:48px;
-      line-height:1.2;
-    }
-  
-    .hero-slider__subtitle{
-      font-size:18px;
-      letter-spacing:2px;
-    }
-  
-    .hero-slider__description{
-      font-size:18px;
-      max-width:550px;
-    }
-  
-    .hero-slider__button{
-      padding:18px 36px;
-      font-size:17px;
-    }
-  
-    .hero-slider__dots{
-      left:12%;
-    }
-  
+  .hero-slider__title {
+    font-size: 48px;
+    line-height: 1.2;
   }
+
+  .hero-slider__subtitle {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .hero-slider__description {
+    font-size: 18px;
+    max-width: 550px;
+  }
+
+  .hero-slider__button {
+    padding: 18px 36px;
+    font-size: 17px;
+  }
+
+  .hero-slider__dots {
+    left: 12%;
+  }
+}

@@ -9,9 +9,6 @@
   padding-top: 60px;
   font-family: "Poppins", sans-serif;
 }
-
-/* LOGO + SOCIAL */
-
 .footer__brand {
   display: flex;
   flex-direction: column;
@@ -50,8 +47,6 @@
   color: white;
   font-size: 20px;
 }
-
-/* MENU + CONTACTO */
 
 .footer__box {
   display: flex;
@@ -99,8 +94,6 @@
   margin-right: 8px;
   color: var(--primary);
 }
-
-/* LEGAL */
 
 .footer__legal {
   background: linear-gradient(
@@ -192,6 +185,9 @@
 
   .footer__legal {
     padding: 25px 40px;
+    margin-left: -40px;
+    margin-right: -40px;
+    text-align: center;
   }
 }
 
@@ -199,7 +195,6 @@
 
 @media (min-width: 1024px) {
   .footer {
-    padding: 80px;
     text-align: left;
   }
 
@@ -222,9 +217,9 @@
   }
 
   .footer__legal {
-    max-width: 1200px;
-    margin: auto;
-    padding: 25px 0;
+    padding: 25px 40px;
+    margin-left: -40px;
+    margin-right: -40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
