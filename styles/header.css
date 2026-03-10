@@ -1,0 +1,53 @@
+.header{
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    
+    .nav__bar{
+        background-color: var(--bg-navbar);
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+        position: fixed;
+
+        .linked__pages{
+            display: none;
+        }
+    }
+
+    .btn__link{
+        color: var(--text-main);
+    }
+}
+
+#button__menu{
+    background-color: var(--primary);
+    border-color: var(--border-red);
+    border-radius: 10%;
+    border-width: 2px;
+    margin-left: 3%;
+}
+
+@media(min-width:768px){
+    
+    .nav__bar{
+      
+        display: flex;
+        flex-flow: row wrap;
+        padding: 10px;
+        align-items: center;
+        position: fixed;
+
+        .linked__pages{
+            text-align: center;
+            width: 30%;
+        }
+    }
+
+    .btn__link{
+        display: none;
+    }
+}
