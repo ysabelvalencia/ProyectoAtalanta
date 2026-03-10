@@ -25,6 +25,7 @@
   --text-main:#FFFFFF;
   --text-secondary:#CFCFCF;
   --text-muted:#9A9A9A;
+  --text-legal: #bbc1c6;
   
   /* BORDERS */
   --border-red:rgba(220,6,48,0.4);
