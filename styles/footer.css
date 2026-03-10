@@ -177,10 +177,14 @@
     justify-content: center;
     gap: 120px;
   }
+  
 
   .footer__menu,
   .footer__contact {
-    align-items: flex-start;
+    align-self: flex-start;
+  }
+  .footer__title {
+    margin-bottom: 18px;
   }
 
   .footer__legal {
