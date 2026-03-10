@@ -1,129 +1,240 @@
+.footer {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)),
+    url("../images/Atalanta/Atalanta-Fondo.jpeg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding-top: 60px;
+  font-family: "Poppins", sans-serif;
+}
 
-.footer{
-    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.95)),
-                url("../images/Atalanta/Atalanta-Fondo.jpeg");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding-top: 60px;
-    font-family: system-ui, -apple-system, sans-serif;
+/* LOGO + SOCIAL */
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.footer__logo {
+  width: 200px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 25px;
+}
+
+.footer__social a {
+  width: 45px;
+  height: 45px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.footer__social a:hover {
+  background: var(--primary-light);
+  transform: translateY(-3px);
+}
+
+.footer__social i {
+  color: white;
+  font-size: 20px;
+}
+
+/* MENU + CONTACTO */
+
+.footer__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer__menu,
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.footer__menu-item {
+  margin: 6px 0;
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.footer__menu-item:hover {
+  color: var(--primary);
+}
+
+.footer__contact a,
+.footer__contact p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer__contact i {
+  margin-right: 8px;
+  color: var(--primary);
+}
+
+/* LEGAL */
+
+.footer__legal {
+  background: linear-gradient(
+    to bottom,
+    #280004 30%,
+    #1b0003 60%,
+    #000000 100%
+  );
+  padding: 25px 15px;
+  border-top: 2px solid var(--primary);
+}
+
+.footer__legal-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footer__legal-boxItem {
+  font-size: 13px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer__legal-boxItem:hover {
+  color: var(--primary);
+}
+
+.footer__legal-copy {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  z-index: 1000;
+  transition: 0.3s;
+}
+
+.scroll-top:hover {
+  background: var(--primary-light);
+  transform: translateY(-3px);
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .footer {
+    text-align: left;
+    padding: 70px 40px 0;
   }
 
-  .footer__social{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-bottom:50px;
-  }
-  
-  .footer__social a{
-    width:45px;
-    height:45px;
-    background:#e5092f;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:8px;
-    transition:0.3s;
-    text-decoration:none;
-  }
-  
-  .footer__social a:hover{
-    background:#ff1e40;
-    transform:translateY(-3px);
-  }
-  
-  .footer__social i{
-    color:white !important;
-    font-size:20px;
-  }
-  
-  .footer__services{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:60px;
-    margin-bottom:60px;
+  .footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
-  
+  .footer__brand {
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .footer__box {
+    flex-direction: row;
+    justify-content: center;
+    gap: 120px;
+  }
+
   .footer__menu,
-  .footer__services > div:last-child{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+  .footer__contact {
+    align-items: flex-start;
   }
 
-  .footer__title,
-  .footer__services h3{
-    font-size:24px;
-    font-weight:700;
-    margin-bottom:18px;
-    text-transform:uppercase;
+  .footer__legal {
+    padding: 25px 40px;
   }
-  
-  .footer__services-item{
-    display:block;
-    margin:6px 0;
-    font-size:18px;
-    color:white;
-    text-decoration:none;
-    cursor:pointer;
-    transition:color 0.25s ease;
-  }
-  
-  .footer__services-item:hover{
-    color:#e5092f;
-  }
-  
-  .footer__services div a,
-  .footer__services div p{
-    display:block;
-    margin:8px 0;
-    font-size:16px;
-    color:white;
-    text-decoration:none;
-  }
-  
-  .footer__services i{
-    margin-right:8px;
+}
+
+/* DESKTOP */
+
+@media (min-width: 1024px) {
+  .footer {
+    padding: 80px;
+    text-align: left;
   }
 
-  .footer__legal{
-    background:#5a000a;
-    padding:25px 15px;
+  .footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: auto;
   }
-  
-  .footer__legal-box{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:12px;
-    font-size:13px;
-  }
-  
-  .footer__legal-boxItem{
-    font-size:13px;
-  }
-  
-  .footer__legal-copy{
-    font-size:14px;
-  }
-  
 
-  @media (min-width:768px){
-  
-    .footer{
-      padding-top:80px;
-    }
-  
-    .footer__services{
-      flex-direction:row;
-      justify-content:center;
-      align-items:flex-start;
-      gap:120px;
-    }
-  
+  .footer__brand {
+    align-items: flex-start;
+    gap: 40px;
   }
+
+  .footer__box {
+    display: flex;
+    gap: 120px;
+  }
+
+  .footer__legal {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer__legal-box {
+    order: 2;
+  }
+
+  .footer__legal-copy {
+    order: 1;
+  }
+}
