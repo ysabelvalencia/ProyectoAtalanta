@@ -32,6 +32,9 @@
   --text-secondary:#CFCFCF;
   --text-muted:#9A9A9A;
   --text-legal: #bbc1c6;
+
+  /*CONTACT*/
+  --form-label: #111827;
   
   /* BORDERS */
   --border-red:rgba(220,6,48,0.4);
