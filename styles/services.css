@@ -463,6 +463,39 @@ color:white;
         line-height:1.5;
         font-family:"Poppins", sans-serif;
     }
-    
+/* TABLET */
+
+@media (min-width: 768px) {
+    .hero {
+      padding: 80px 40px;
+    }
+    .hero__subtitle {
+      font-size: 42px;
+    }
+    .hero__description {
+      font-size: 18px;
+    }
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* DESKTOP */
+  
+  @media (min-width: 1024px) {
+    .hero {
+      padding: 120px 20px;
+    }
+    .hero__content {
+      max-width: 900px;
+    }
+    .hero__subtitle {
+      font-size: 56px;
+    }
+    .services {
+      padding: 100px 10%;
+    }
+  }
+  
     
        
