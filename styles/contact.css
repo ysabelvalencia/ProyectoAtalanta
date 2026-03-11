@@ -1,39 +1,192 @@
 @import "./footer.css";
 @import "./header.css";
-:root{
-/* BRAND */
---primary:#DC0630;
---primary-strong:#FF003C;
---primary-light:#FF2B5C;
---primary-dark:#7A0018;
 
-/* BACKGROUNDS */
---bg-black:#000;
---bg-navbar:#000;
---bg-section:#0B0B0D;
+:root {
+  /* BRAND */
+  --primary: #dc0630;
+  --primary-strong: #ff003c;
+  --primary-light: #ff2b5c;
+  --primary-dark: #7a0018;
 
-/* TEXT */
---text-main:#FFFFFF;
---text-secondary:#CFCFCF;
+  /* BACKGROUNDS */
+  --bg-black: #000;
+  --bg-navbar: #000;
+  --bg-section: #0b0b0d;
 
+  /* TEXT */
+  --text-main: #ffffff;
+  --text-secondary: #cfcfcf;
 }
 
 /* RESET */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-background:#050505;
-color:white;
+body {
+  background: #050505;
+  color: white;
 }
 
+/********HERO************/
 
-/* HEADER */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background-image: url("../images/Atalanta/contacto_manos.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index:0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.hero__subtitle {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero__description {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.hero__btn {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.button--primary {
+  background: var(--primary);
+  color: white;
+}
+.services {
+  padding: 60px 20px;
+  background: black;
+}
+
+.services__title {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 26px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.service-card {
+  text-align: center;
+  padding: 40px 25px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #dc0630, #000);
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-card__icon img {
+  width: 70px;
+  margin-bottom: 20px;
+}
+
+.service-card__title {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.service-card__description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+}
+
+/* TABLET */
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 80px 40px;
+  }
+  .hero__subtitle {
+    font-size: 42px;
+  }
+  .hero__description {
+    font-size: 18px;
+  }
+  .services__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* DESKTOP */
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 120px 20px;
+  }
+  .hero__content {
+    max-width: 900px;
+  }
+  .hero__subtitle {
+    font-size: 56px;
+  }
+  .services {
+    padding: 100px 10%;
+  }
+}
+
+/*
 
 .hero{
 
@@ -114,8 +267,6 @@ margin-bottom:30px;
 }
 
 
-/* BOTON */
-
 .btn{
 
 
@@ -141,7 +292,6 @@ background:var(--primary-strong);
 
 }
 
-/* SERVICIOS */
 
 .services{
 
@@ -158,8 +308,6 @@ margin-bottom:60px;
 
 }
 
-/* GRID */
-
 .grid-container{
 
 display:grid;
@@ -169,8 +317,6 @@ grid-template-columns:repeat(3,1fr);
 gap:40px;
 
 }
-
-/* CARDS */
 
 .card{
 
@@ -212,7 +358,4 @@ color:var(--text-secondary);
 
 }
 
-
-
-
-
+*/
