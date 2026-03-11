@@ -6,8 +6,10 @@
     flex-direction: row;
     align-items: center;
     position: fixed;
-    justify-content: space-around;
+    justify-content: space-between;
     z-index: 1000; /* Ensure the header is above other content */
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .navbar img{
