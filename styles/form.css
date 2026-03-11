@@ -141,6 +141,18 @@
   background: #e1002b;
 }
 
+.diagnostic__error {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+  min-height: 16px;
+  display: block;
+}
+
+.diagnostic__input--error,
+.diagnostic__select--error {
+  border: 2px solid #ff4d4d;
+}
+
 @media (min-width: 768px) {
 
   .diagnostic__container {

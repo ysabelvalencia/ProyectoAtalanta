@@ -22,24 +22,35 @@
     <header class="header" id="header">
       <nav class="navbar">
         <!---Logo Atalanta-->
-        <img src="images/Atalanta/ATALANTA_logo.png" alt="Atalanta's logo">
-        <div>
-            <!-- Link -->
-            <a href="index.html" class="btn__link">Inicio</a>
-            <span class="span__header">|</span>
-            <!-- Link -->
-            <a href="services.html" class="btn__link">Servicios</a>
-            <span class="span__header">|</span>
-            <!-- Link -->
-            <a href="login.html" class="btn__link">Login</a>
+        <img src="images/Atalanta/ATALANTA_logo.png" alt="Atalanta's logo" />
+        <div class="navbar__div">
+          <!-- Link -->
+          <a href="services.html" class="btn__link">Servicios</a>
+          <span class="span__header">|</span>
+          <!-- Link -->
+          <a href="contact.html" class="btn__link">Contacto</a>
+          <span class="span__header">|</span>
+          <!-- Link -->
+          <a href="login.html" class="btn__link" target="_blank">Login</a>
         </div>
         <!--button-->
         <button id="button__menu">
-            <img id="icon__menu" src="images/icons/icono_menu.png" alt="menu's icon">
+          <img
+            id="icon__menu"
+            src="images/icons/icono_menu.png"
+            alt="menu's icon"
+          />
         </button>
-        <!--<div class="sidebar">
-          <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-        </div>-->
+      </nav>
+      <nav class="sidebar" id="sidebar">
+        <div class="sidebar" id="sidebar2">
+          <!-- Link -->
+          <a href="services.html" class="btn__link">Servicios</a>
+          <!-- Link -->
+          <a href="contact.html" class="btn__link">Contacto</a>
+          <!-- Link -->
+          <a href="login.html" class="btn__link">Login</a>
+        </div>
       </nav>
     </header>
     <main>
@@ -121,7 +132,11 @@
             </p>
             <ul class="diagnostic__features">
               <li class="diagnostic__feature">
-                <img src="./images/icons/pc.png" alt="" class="diagnostic__icon">
+                <img
+                  src="./images/icons/pc.png"
+                  alt=""
+                  class="diagnostic__icon"
+                />
                 <span>Respuesta rápida y asesoramiento personalizado</span>
               </li>
               <li class="diagnostic__feature">
@@ -150,83 +165,127 @@
               </li>
             </ul>
           </div>
-          <!-- LADO DERECHO (FORMULARIO) -->
           <div class="diagnostic__form-wrapper">
-            <form class="diagnostic__form">
+            <form class="diagnostic__form" id="diagnosticForm" novalidate>
               <h3 class="diagnostic__form-title">
                 Iniciar Diagnóstico de Seguridad
               </h3>
-              <!-- FILA -->
               <div class="diagnostic__row">
                 <div class="diagnostic__field">
-                  <label class="diagnostic__label">Nombre</label>
+                  <label for="name" class="diagnostic__label">Nombre</label>
                   <input
                     type="text"
+                    id="name"
+                    name="name"
                     class="diagnostic__input"
                     placeholder="Introduce tu nombre"
                   />
+                  <small class="diagnostic__error"></small>
                 </div>
                 <div class="diagnostic__field">
-                  <label class="diagnostic__label">Apellidos</label>
+                  <label for="lastname" class="diagnostic__label"
+                    >Apellidos</label
+                  >
                   <input
                     type="text"
+                    id="lastname"
+                    name="lastname"
                     class="diagnostic__input"
                     placeholder="Introduce tus apellidos"
                   />
+                  <small class="diagnostic__error"></small>
                 </div>
               </div>
               <!-- EMAIL -->
               <div class="diagnostic__field">
-                <label class="diagnostic__label"> Email corporativo <span class="diagnostic__label-dot">*</span></label>
+                <label for="email" class="diagnostic__label">
+                  Email corporativo
+                  <span class="diagnostic__label-dot">*</span></label
+                >
                 <input
                   type="email"
+                  id="email"
+                  name="email"
                   class="diagnostic__input"
                   placeholder="Email"
+                  required
                 />
+                <small class="diagnostic__error"></small>
               </div>
-              <!-- EMPRESA -->
+              <!-- COMPANY -->
               <div class="diagnostic__field">
-                <label class="diagnostic__label"> Empresa <span class="diagnostic__label-dot">*</span></label>
+                <label for="company" class="diagnostic__label">
+                  Empresa <span class="diagnostic__label-dot">*</span></label
+                >
                 <input
                   type="text"
+                  id="company"
+                  name="company"
                   class="diagnostic__input"
                   placeholder="Empresa"
+                  required
                 />
+                <small class="diagnostic__error"></small>
               </div>
-              <!-- CARGO -->
+              <!-- ROLE -->
               <div class="diagnostic__field">
-                <label class="diagnostic__label"> Cargo <span class="diagnostic__label-dot">*</span></label>
-                <select class="diagnostic__select">
-                  <option>Selecciona cargo</option>
-                  <option>CEO</option>
-                  <option>CTO</option>
-                  <option>CISO</option>
+                <label for="role" class="diagnostic__label">
+                  Cargo <span class="diagnostic__label-dot">*</span></label
+                >
+                <select
+                  id="role"
+                  name="role"
+                  class="diagnostic__select"
+                  required
+                >
+                  <option value="">Selecciona cargo</option>
+                  <option value="ceo">CEO</option>
+                  <option value="cto">CTO</option>
+                  <option value="ciso">CISO</option>
                 </select>
               </div>
-              <!-- AREA INTERES -->
+              <!-- INTEREST -->
               <div class="diagnostic__field">
-                <label class="diagnostic__label"> Área de interés <span class="diagnostic__label-dot">*</span></label>
-
-                <select class="diagnostic__select">
-                  <option>¿Cuál es el desafío que más le urge resolver?</option>
-                  <option>Pentesting</option>
-                  <option>Auditoría</option>
-                  <option>Consultoría</option>
+                <label for="interest" class="diagnostic__label">
+                  Área de interés
+                  <span class="diagnostic__label-dot">*</span></label
+                >
+                <select
+                  id="interest"
+                  name="interest"
+                  class="diagnostic__select"
+                  required
+                >
+                  <option value="">
+                    ¿Cuál es el desafío que más le urge resolver?
+                  </option>
+                  <option value="pentesting">Pentesting</option>
+                  <option value="auditoria">Auditoría</option>
+                  <option value="consultoria">Consultoría</option>
                 </select>
               </div>
-              <!-- PLANIFICACION -->
+              <!-- PLANNING -->
               <div class="diagnostic__field">
-                <label class="diagnostic__label">
-                  ¿Busca una solución inmediata o está en fase de planificación? <span class="diagnostic__label-dot">*</span>
+                <label for="planning" class="diagnostic__label">
+                  ¿Busca una solución inmediata o está en fase de planificación?
+                  <span class="diagnostic__label-dot">*</span>
                 </label>
-                <input type="text" class="diagnostic__input" />
+                <input
+                  type="text"
+                  id="planning"
+                  name="planning"
+                  class="diagnostic__input"
+                  required
+                />
+                <small class="diagnostic__error"></small>
               </div>
-              <!-- PRIVACIDAD -->
+              <!-- PRIVACY -->
               <div class="diagnostic__checkbox">
                 <input
                   type="checkbox"
                   class="diagnostic__checkbox-input"
                   id="privacy"
+                  required
                 />
                 <label for="privacy" class="diagnostic__checkbox-label">
                   Acepto la
@@ -236,8 +295,8 @@
                   de Atalanta Evolution
                 </label>
               </div>
-              <!-- BOTON -->
-              <button class="diagnostic__button">
+              <!-- BUTTON -->
+              <button type="submit" class="diagnostic__button">
                 Solicitar Sesión de Diagnóstico Técnico
               </button>
             </form>
@@ -314,5 +373,9 @@
         </p>
       </div>
     </footer>
+    <a href="#" class="scroll-top">
+      <i class="fa-solid fa-chevron-up"></i>
+    </a>
+    <script type="module" src="./scripts/script.js"></script>
   </body>
 </html>
