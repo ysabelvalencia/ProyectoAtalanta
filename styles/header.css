@@ -70,7 +70,7 @@
 /*TABLET and DESKTOP*/
 @media(min-width:768px){
     .navbar div{
-        visibility: hidden;
+        visibility: visible;
         color: var(--text-main);
     }
 
