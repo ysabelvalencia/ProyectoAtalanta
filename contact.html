@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/contact.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="styleIndex" href="./styles/index.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
@@ -19,22 +20,27 @@
   </head>
 
   <body>
-    <header class="header">
-      <nav class="nav__bar">
-        <img
-          id="Atalanta__logo"
-          src="images/Atalanta/ATALANTA_logo.png"
-          alt="Atalanta's logo"
-          height="50"
-        />
-        <div class="linked__pages">
-          <a href="services.html" class="btn__link">Ciberseguridad |</a>
-          <a href="contact.html" class="btn__link">Contacto |</a>
-          <a href="login.html" class="btn__link">Login</a>
+    <header class="header" id="header">
+      <nav class="navbar">
+        <!---Logo Atalanta-->
+        <img src="images/Atalanta/ATALANTA_logo.png" alt="Atalanta's logo">
+        <div>
+            <!-- Link -->
+            <a href="index.html" class="btn__link">Inicio</a>
+            <span class="span__header">|</span>
+            <!-- Link -->
+            <a href="cybersecurity.html" class="btn__link">Servicios</a>
+            <span class="span__header">|</span>
+            <!-- Link -->
+            <a href="login.html" class="btn__link">Login</a>
         </div>
+        <!--button-->
         <button id="button__menu">
-          <img src="images/icons/icono_menu.png" alt="icon menu" height="30" />
+            <img id="icon__menu" src="images/icons/icono_menu.png" alt="menu's icon">
         </button>
+        <!--<div class="sidebar">
+          <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        </div>-->
       </nav>
     </header>
     <main>
