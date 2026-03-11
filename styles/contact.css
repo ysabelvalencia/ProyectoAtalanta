@@ -1,39 +1,46 @@
 @import "./footer.css";
 @import "./header.css";
+@import "./form.css";
 
-:root {
-  /* BRAND */
-  --primary: #dc0630;
-  --primary-strong: #ff003c;
-  --primary-light: #ff2b5c;
-  --primary-dark: #7a0018;
-
-  /* BACKGROUNDS */
-  --bg-black: #000;
-  --bg-navbar: #000;
-  --bg-section: #0b0b0d;
-
-  /* TEXT */
-  --text-main: #ffffff;
-  --text-secondary: #cfcfcf;
-}
-
-/* RESET */
-
-* {
-  margin: 0;
+*{
+  margin:0;
   padding: 0;
   box-sizing: border-box;
 }
+:root{
 
-body {
-  background: #050505;
-  color: white;
+  /* BRAND */
+  --primary:#DC0630;
+  --primary-strong:#FF003C;
+  --primary-light:#FF2B5C;
+  --primary-dark:#7A0018;
+  
+  /* BACKGROUNDS */
+  --bg-black:#000000;
+  --bg-main:#050505;
+  --bg-navbar:#0B1116;
+  --bg-section:#0B0B0D;
+  --bg-deep:#0A0002;
+  
+  /* TEXT */
+  --text-main:#FFFFFF;
+  --text-secondary:#CFCFCF;
+  --text-muted:#9A9A9A;
+  --text-legal: #bbc1c6;
+
+  /*CONTACT*/
+  --form-label: #111827;
+  
+  /* BORDERS */
+  --border-red:rgba(220,6,48,0.4);
+  --border-dark:#1A1A1A;
+  
 }
-
+ 
 /********HERO************/
 
 .hero {
+  color: white;
   position: relative;
   min-height: 90vh;
   display: flex;
@@ -104,6 +111,7 @@ body {
   color: white;
 }
 .services {
+  color: white;
   padding: 60px 20px;
   background: black;
 }

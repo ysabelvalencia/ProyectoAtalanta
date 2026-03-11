@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles/contact.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="styleIndex" href="./styles/index.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
@@ -106,7 +105,145 @@
           </article>
         </div>
       </section>
-      <section>AQUI VA EL FORMULARIO</section>
+      <section class="diagnostic">
+        <div class="diagnostic__container">
+          <!-- LADO IZQUIERDO -->
+          <div class="diagnostic__content">
+            <h2 class="diagnostic__title">
+              ¿Listo para llevar tu seguridad al siguiente nivel?
+            </h2>
+            <p class="diagnostic__description">
+              Protege tu negocio e impulsa tu transformación digital con
+              soluciones diseñadas por expertos certificados con experiencia
+              internacional. Completa los datos para iniciar vuestro
+              <strong>reconocimiento de superficie pública</strong>
+              y estrategia adaptada.
+            </p>
+            <ul class="diagnostic__features">
+              <li class="diagnostic__feature">
+                <img src="./images/icons/pc.png" alt="" class="diagnostic__icon">
+                <span>Respuesta rápida y asesoramiento personalizado</span>
+              </li>
+              <li class="diagnostic__feature">
+                <img
+                  src="./images/icons/escudo3.png"
+                  alt=""
+                  class="diagnostic__icon"
+                />
+                <span>Soluciones adaptadas a tu sector</span>
+              </li>
+              <li class="diagnostic__feature">
+                <img
+                  src="./images/icons/networking-1.png"
+                  alt=""
+                  class="diagnostic__icon"
+                />
+                <span>Más de 70 organizaciones confían en nosotros</span>
+              </li>
+              <li class="diagnostic__feature">
+                <img
+                  src="./images/icons/diploma.png"
+                  alt=""
+                  class="diagnostic__icon"
+                />
+                <span>Equipo certificado con experiencia internacional</span>
+              </li>
+            </ul>
+          </div>
+          <!-- LADO DERECHO (FORMULARIO) -->
+          <div class="diagnostic__form-wrapper">
+            <form class="diagnostic__form">
+              <h3 class="diagnostic__form-title">
+                Iniciar Diagnóstico de Seguridad
+              </h3>
+              <!-- FILA -->
+              <div class="diagnostic__row">
+                <div class="diagnostic__field">
+                  <label class="diagnostic__label">Nombre</label>
+                  <input
+                    type="text"
+                    class="diagnostic__input"
+                    placeholder="Introduce tu nombre"
+                  />
+                </div>
+                <div class="diagnostic__field">
+                  <label class="diagnostic__label">Apellidos</label>
+                  <input
+                    type="text"
+                    class="diagnostic__input"
+                    placeholder="Introduce tus apellidos"
+                  />
+                </div>
+              </div>
+              <!-- EMAIL -->
+              <div class="diagnostic__field">
+                <label class="diagnostic__label"> Email corporativo <span class="diagnostic__label-dot">*</span></label>
+                <input
+                  type="email"
+                  class="diagnostic__input"
+                  placeholder="Email"
+                />
+              </div>
+              <!-- EMPRESA -->
+              <div class="diagnostic__field">
+                <label class="diagnostic__label"> Empresa <span class="diagnostic__label-dot">*</span></label>
+                <input
+                  type="text"
+                  class="diagnostic__input"
+                  placeholder="Empresa"
+                />
+              </div>
+              <!-- CARGO -->
+              <div class="diagnostic__field">
+                <label class="diagnostic__label"> Cargo <span class="diagnostic__label-dot">*</span></label>
+                <select class="diagnostic__select">
+                  <option>Selecciona cargo</option>
+                  <option>CEO</option>
+                  <option>CTO</option>
+                  <option>CISO</option>
+                </select>
+              </div>
+              <!-- AREA INTERES -->
+              <div class="diagnostic__field">
+                <label class="diagnostic__label"> Área de interés <span class="diagnostic__label-dot">*</span></label>
+
+                <select class="diagnostic__select">
+                  <option>¿Cuál es el desafío que más le urge resolver?</option>
+                  <option>Pentesting</option>
+                  <option>Auditoría</option>
+                  <option>Consultoría</option>
+                </select>
+              </div>
+              <!-- PLANIFICACION -->
+              <div class="diagnostic__field">
+                <label class="diagnostic__label">
+                  ¿Busca una solución inmediata o está en fase de planificación? <span class="diagnostic__label-dot">*</span>
+                </label>
+                <input type="text" class="diagnostic__input" />
+              </div>
+              <!-- PRIVACIDAD -->
+              <div class="diagnostic__checkbox">
+                <input
+                  type="checkbox"
+                  class="diagnostic__checkbox-input"
+                  id="privacy"
+                />
+                <label for="privacy" class="diagnostic__checkbox-label">
+                  Acepto la
+                  <a href="#" class="diagnostic__link">
+                    política de privacidad
+                  </a>
+                  de Atalanta Evolution
+                </label>
+              </div>
+              <!-- BOTON -->
+              <button class="diagnostic__button">
+                Solicitar Sesión de Diagnóstico Técnico
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -114,7 +251,7 @@
         <div class="footer__brand">
           <img
             class="footer__logo"
-            src="./images/Atalanta/Logotipo-principal.png"
+            src="./images/Atalanta/ATALANTA_logo.png"
             alt=""
           />
 
