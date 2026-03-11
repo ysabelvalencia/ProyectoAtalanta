@@ -1,6 +1,8 @@
 @import "./footer.css";
 @import "./header.css";
+
 :root{
+
 /* BRAND */
 --primary:#DC0630;
 --primary-strong:#FF003C;
@@ -29,473 +31,489 @@ box-sizing:border-box;
 body{
 background:#050505;
 color:white;
+font-family:"Poppins", sans-serif;
 }
 
-/* HEADER */
+/* HERO */
 
 .hero{
 
-    position:relative;
-    height:90vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding: 60px 20px;
-    background-image: url("../images/Atalanta/Atalanta-Fondo.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    }
-    
-    .hero::before{
-    
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    z-index:0;
-    
-    }
-    .hero__content {
-        position: relative;
-        z-index: 1;
-      }
-      
-    .hero__title {
-        font-size: 22px;
-        margin-bottom: 20px;
-        color: var(--primary);
-        font-family: "Montserrat", sans-serif;
-        text-transform: uppercase;
-        font-weight: 800;
-      }
-      
-    .hero__subtitle {
-        font-size: 50px;
-        font-family: "Montserrat", sans-serif;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-    }
-    .hero__description {
-        font-size: 23px;
-        font-weight: 700;
-        line-height: 1.6;
-        color: var(--primary);
-        margin-bottom: 30px;
-        font-family: "Poppins", sans-serif;
-      }
-      
-    .hero__btn {
-        display: flex;
-        justify-content: center;
-    }
-      
-    .button {
-        border: none;
-        padding: 14px 28px;
-        border-radius: 8px;
-      
-        font-size: 16px;
-        font-weight: 600;
-      
-        cursor: pointer;
-      }
-    .button--primary {
-        background: var(--primary);
-        color: white;
-    }
-    .text{
-        background: #fffefe;
-        color: #000;
+position:relative;
+height:90vh;
 
-    }
-    .text_title{
-        font-size: 30px;
-        text-align: center;
-        padding: 20px;
-        font-family: "Montserrat", sans-serif;
-        text-transform: uppercase;
-        font-weight: 800;
-    }
-    .text_description{
-        font-size: 20px;
-       text-align: center;
-        padding: 20px;
-        font-family: "Poppins", sans-serif;
-    }
-        
-    .services{
-        padding:80px 20px;
-        text-align:center;
-      
-        background: linear-gradient(
-          to bottom,
-          #000000 0%,
-          #1a0006 60%,
-          #33000a 100%
-        );
-    }
+display:flex;
+align-items:center;
+justify-content:center;
 
-    .services__title{
-        font-size:1.8rem;
-        margin-bottom:20px;
-        color:#ffffff;
-        font-family:"Montserrat", sans-serif;
-        font-weight:700;
-    }
-    .services__description{
-        font-size:1.09rem;
-        color:#d1d1d1;
-        margin-bottom:50px;
-        max-width:600px;
-        margin-left:auto;
-        margin-right:auto;
-        line-height:1.5;
-        font-family:"Poppins", sans-serif;
-    }
-    .services__grid{
-        display:grid;
-        grid-template-columns:1fr;
-        gap:25px;
-        max-width:1100px;
-        margin:0 auto;
-        justify-items:center;
-        align-items:stretch;
-        font-family:"Montserrat", sans-serif;
-        
-    }
-    .card-container{
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); 
-        grid-auto-rows: minmax(100px, auto); 
-        gap: 100px; 
-        padding: 20px;
-        margin: auto;
-         
-    }
-    .service-card{
-        width:130%;
-        max-width:400px;
-        height:350px;
-        padding:40px 25px;
-        border-radius:14px;
-        background: linear-gradient(
-          to bottom,
-          #ff003c 0%,
-          #6b0016 45%,
-          #000000 100%
-        );
-      
-        border:1px solid #ff003c;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-    .service-card:hover{
-        transform: translateY(-12px) scale(1.03);
-        box-shadow: 0 20px 40px rgba(255,0,60,0.5);
-    }
-    .service-card img{
-        width:50px;
-        margin-bottom: 20px;
-        margin-top: 20px;
-       
-    }
+text-align:center;
+padding:60px 20px;
 
-    .service-card__description{
-        margin-bottom: 20px;
-        
-    }
+background-image:url("../images/Atalanta/Atalanta-Fondo.jpeg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
 
-    .areas{
-        padding:80px 20px;
-        text-align:center;
-      
-        background: linear-gradient(
-          to bottom,
-          #000000 0%,
-          #1a0006 60%,
-          #33000a 100%
-        );
+}
 
-    }
-    .areas__title{
-        font-size:1.8rem;
-        margin-bottom:20px;
-        color:#ffffff;
-        font-family:"Montserrat", sans-serif;
-        font-weight:700;
-    }
-    .areas__description{
-        font-size:1.12rem;
-        color:#d1d1d1;
-        margin-bottom:50px;
-        max-width:600px;
-        margin-left: auto;
-        margin-right: auto;
-        font-family:"Poppins", sans-serif;
-    }
-    .card2{
-        width: 550px; 
-        height: 350px; 
-        max-width: 100%; 
-        margin: 5px;
-        margin-bottom: 10px;
-        padding:40px 25px;
-        border-radius:14px;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-   .card2:hover{
-        transform: translateY(-12px) scale(1.03);
-        box-shadow: 0 20px 40px rgba(255,0,60,0.5);
-    }
-    
-      
-    .card2{
-        position: relative;
-        padding:40px;
-        border-radius:10px;
-        text-align:center;
-        transition:0.3s;
-        background-image: url("../images/Atalanta/fondo1.0.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    
-        
-    .card2::before{
-        content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            z-index: 0;
-            }
-        .card2 *{
-            position: relative;
-            z-index:1;
-        }
-        
-        .card3{
-            width: 550px; 
-            height: 350px; 
-            max-width: 100%; 
-            margin: 10px;
-            padding:40px 25px;
-            border-radius:14px;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-        .card3:hover{
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(255,0,60,0.5);
-        } 
-        .card3{
-            position: relative;
-            padding:40px;
-            border-radius:10px;
-            text-align:center;
-            transition:0.3s;
-            background-image: url("../images/Atalanta/fondo2.0.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .card3::before{
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            z-index:0;
-        }
-        
-        .card3 *{
-            position: relative;
-            z-index:1;
-        }
-        .card4{
-            width: 550px; 
-            height: 350px; 
-            max-width: 100%; 
-            margin: 10px;
-            padding:40px 25px;
-            border-radius:14px;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-        
-        .card4:hover{
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(255,0,60,0.5);
-        }
-        
-        .card4{
-            position: relative;
-            padding:40px;
-            border-radius:10px;
-            text-align:center;
-            transition:0.3s;
-            background-image: url("../images/Atalanta/fondo3.0.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .card4::before{
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            z-index:0;
-        }
-        
-        .card4 *{
-            position: relative;
-            z-index:1;
-        }
-        .card5{
-            width: 550px; 
-            height: 350px; 
-            max-width: 100%; 
-            margin: 10px;
-            padding:40px 25px;
-            border-radius:14px;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-        }
-          
-        .card5:hover{
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(255,0,60,0.5);
-            
-        }
-        .card5{
-            position: relative;
-            padding:40px;
-            border-radius:10px;
-            text-align:center;
-            transition:0.3s;
-            background-image: url("../images/Atalanta/fondo4.0.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            
-        }
-        
-        .card5::before{
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            z-index:0;
-            
-        }
-        
-        .card5 *{
-            position: relative;
-            z-index:1;
-        }
+.hero::before{
 
-        ul{
-            text-align: left;
-        }
+content:"";
+position:absolute;
+inset:0;
 
-        .areas-grid{
-            display: grid;
-            margin: auto; 
-            margin:0 auto;
-            justify-items:center;
-            align-items:stretch;
-            font-family:"Montserrat", sans-serif;
-        }
-    .areas-container{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        grid-auto-rows: minmax(100px, auto); 
-        gap: 50px; 
-        padding: 20px;
-        margin: auto;
-    }
+background:rgba(0,0,0,0.65);
 
-    .teams{
-        padding:80px 20px;
-        text-align:center;
-      
-        background:linear-gradient(rgb(117, 15, 15), rgb(0, 0, 0));
+z-index:0;
 
-    
-    }
-    .teams__title{
-        font-size:1.8rem;
-        margin-bottom:20px;
-        color:#ffffff;
-        font-family:"Montserrat", sans-serif;
-        font-weight:700;
-    }
-    .teams__description{
-        font-size:1.09rem;
-        color:#ffffff;
-        margin-bottom:50px;
-        max-width:600px;
-        margin-left:auto;
-        margin-right:auto;
-        line-height:1.5;
-        font-family:"Poppins", sans-serif;
-    }
+}
+
+.hero__content{
+position:relative;
+z-index:1;
+}
+
+.hero__title{
+
+font-size:22px;
+margin-bottom:20px;
+
+color:var(--primary);
+
+font-family:"Montserrat",sans-serif;
+text-transform:uppercase;
+font-weight:800;
+
+}
+
+.hero__subtitle{
+
+font-size:50px;
+margin-bottom:20px;
+
+font-family:"Montserrat",sans-serif;
+text-transform:uppercase;
+
+}
+
+.hero__description{
+
+font-size:23px;
+font-weight:700;
+
+line-height:1.6;
+
+color:var(--primary);
+
+margin-bottom:30px;
+
+}
+
+.hero__btn{
+display:flex;
+justify-content:center;
+}
+
+/* BUTTON */
+
+.button{
+
+border:none;
+padding:14px 28px;
+
+border-radius:8px;
+
+font-size:16px;
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+.button--primary{
+background:var(--primary);
+color:white;
+}
+
+/* TEXT SECTION */
+
+.text{
+background:#ffffff;
+color:#000;
+}
+
+.text_title{
+
+font-size:30px;
+
+text-align:center;
+
+padding:20px;
+
+font-family:"Montserrat",sans-serif;
+text-transform:uppercase;
+font-weight:800;
+
+}
+
+.text_description{
+
+font-size:20px;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+/* SERVICES */
+
+.services{
+
+padding:80px 20px;
+
+text-align:center;
+
+background:linear-gradient(
+to bottom,
+#000000 0%,
+#1a0006 60%,
+#33000a 100%
+);
+
+}
+
+.services__title{
+
+font-size:1.8rem;
+
+margin-bottom:20px;
+
+font-family:"Montserrat",sans-serif;
+font-weight:700;
+
+}
+
+.services__description{
+
+font-size:1.09rem;
+
+color:#d1d1d1;
+
+margin-bottom:50px;
+
+max-width:600px;
+
+margin-left:auto;
+margin-right:auto;
+
+line-height:1.5;
+
+}
+
+/* GRID */
+
+.services__grid{
+
+max-width:1200px;
+margin:auto;
+
+}
+
+.card-container{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:40px;
+
+padding:20px;
+
+}
+
+/* SERVICE CARD */
+
+.service-card{
+
+width:100%;
+max-width:320px;
+min-height:320px;
+
+padding:35px 25px;
+
+border-radius:14px;
+
+background:linear-gradient(
+to bottom,
+#ff003c 0%,
+#6b0016 45%,
+#000000 100%
+);
+
+border:1px solid #ff003c;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+transition:transform .35s ease,box-shadow .35s ease;
+
+}
+
+.service-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 20px 40px rgba(255,0,60,0.4);
+
+}
+
+.service-card img{
+
+width:48px;
+
+margin-bottom:18px;
+
+}
+
+.service-card__description{
+margin-bottom:20px;
+}
+
+/* AREAS */
+
+.areas{
+
+padding:80px 20px;
+
+text-align:center;
+
+background:linear-gradient(
+to bottom,
+#000000 0%,
+#1a0006 60%,
+#33000a 100%
+);
+
+}
+
+.areas__title{
+
+font-size:1.8rem;
+
+margin-bottom:20px;
+
+font-family:"Montserrat",sans-serif;
+font-weight:700;
+
+}
+
+.areas__description{
+
+font-size:1.12rem;
+
+color:#d1d1d1;
+
+margin-bottom:50px;
+
+max-width:600px;
+
+margin:auto;
+
+}
+
+/* AREAS GRID */
+
+.areas-container{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+gap:40px;
+
+max-width:1200px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+/* AREA CARD BASE */
+
+.area-card{
+
+width:100%;
+height:350px;
+
+padding:40px 25px;
+
+border-radius:14px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+position:relative;
+
+transition:transform .35s ease,box-shadow .35s ease;
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+}
+
+.area-card:hover{
+
+transform:translateY(-12px) scale(1.03);
+
+box-shadow:0 20px 40px rgba(255,0,60,0.5);
+
+}
+
+.area-card::before{
+
+content:"";
+
+position:absolute;
+inset:0;
+
+background:rgba(0,0,0,0.65);
+
+z-index:0;
+
+}
+
+.area-card *{
+
+position:relative;
+
+z-index:1;
+
+}
+
+/* BACKGROUNDS */
+
+.card2{background-image:url("../images/Atalanta/fondo1.0.png");}
+.card3{background-image:url("../images/Atalanta/fondo2.0.png");}
+.card4{background-image:url("../images/Atalanta/fondo3.0.png");}
+.card5{background-image:url("../images/Atalanta/fondo4.0.png");}
+
+/* LIST */
+
+ul{
+text-align:left;
+}
+
+/* TEAMS */
+
+.teams{
+
+padding:80px 20px;
+
+text-align:center;
+
+background:linear-gradient(rgb(117,15,15),rgb(0,0,0));
+
+}
+
+.teams__title{
+
+font-size:1.8rem;
+
+margin-bottom:20px;
+
+font-family:"Montserrat",sans-serif;
+
+font-weight:700;
+
+}
+
+.teams__description{
+
+font-size:1.09rem;
+
+margin-bottom:50px;
+
+max-width:600px;
+
+margin-left:auto;
+margin-right:auto;
+
+line-height:1.5;
+
+
+}
+.areas-container{
+display:grid;
+grid-template-columns:1fr;
+gap:40px;
+
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
 /* TABLET */
 
-@media (min-width: 768px) {
-    .hero {
-      padding: 80px 40px;
-    }
-    .hero__subtitle {
-      font-size: 42px;
-    }
-    .hero__description {
-      font-size: 18px;
-    }
-    .services__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
-  /* DESKTOP */
-  
-  @media (min-width: 1024px) {
-    .hero {
-      padding: 120px 20px;
-    }
-    .hero__content {
-      max-width: 900px;
-    }
-    .hero__subtitle {
-      font-size: 56px;
-    }
-    .services {
-      padding: 100px 10%;
-    }
-  }
+@media (min-width:768px){
+
+.hero{
+padding:80px 40px;
+}
+
+.hero__subtitle{
+font-size:42px;
+}
+
+.hero__description{
+font-size:18px;
+}
+.areas-container{
+grid-template-columns:repeat(2,1fr);
+}
+
+
+
+}
+
+/* DESKTOP */
+
+@media (min-width:1024px){
+
+.hero{
+padding:120px 20px;
+}
+
+.hero__content{
+max-width:900px;
+}
+
+.hero__subtitle{
+font-size:56px;
+}
+
+.services{
+padding:100px 10%;
+}
+
+.areas-container{
+grid-template-columns:repeat(2,1fr);
+max-width:1100px;
+}
+
+}
   
     
        
