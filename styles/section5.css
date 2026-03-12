@@ -26,6 +26,7 @@
   color: white;
   font-weight: 400;
   margin-bottom: 50px;
+  
 }
 
 .carousel3d__container {
@@ -162,5 +163,6 @@
 
   .next {
     right: -70px;
+    
   }
 }

@@ -74,7 +74,7 @@
   transform:translateY(-2px);
 }
 
-/* IMAGENES */
+/* TARJETA IMAGENES */
 
 .offsec__images{
   text-align:center;
@@ -87,15 +87,29 @@
 
   border:1px solid rgba(255,255,255,0.08);
 }
+
+/* LOGO */
+
 .offsec__logo{
   width:160px;
   margin-bottom:20px;
+  transition:transform 0.3s ease;
 }
+
+/* BADGES */
 
 .offsec__badges{
   width:220px;
   display:block;
   margin:0 auto 15px auto;
+  transition:transform 0.3s ease;
+}
+
+/* HOVER SOLO EN LAS IMAGENES */
+
+.offsec__logo:hover,
+.offsec__badges:hover{
+  transform:scale(1.05);
 }
 
 .offsec__rank{
