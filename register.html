@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Ciberseguridad" />
     <meta name="keywords" content="cybersecurity" />
+    <title>Register -Atalanta</title>
     <link rel="icon" href="images/icons/9.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/register.css">
     <script
       src="https://kit.fontawesome.com/bcc6ce623e.js"
       crossorigin="anonymous"
@@ -28,6 +29,89 @@
           <a href="login.html" class="btn__link">Login</a>
         </div>
     </header>
+      <main class="register">
+        <section class="register__section">
+          <div class="register__container">
+            <header class="register__header">
+              <h1 class="register__title">Regístrate</h1>
+              <p class="register__subtitle">
+                Crea una nueva cuenta en el sistema
+              </p>
+            </header>
+            <form class="register__form">
+              <!-- nombre -->
+              <div class="register__field">
+                <label class="register__label" for="user"></label>
+                <div class="register__input-wrapper">
+                  <i class="fa-solid fa-user" style="color: rgba(250, 250, 250, 0.733);"></i>
+                  <input
+                    class="register__input"
+                    type="user"
+                    id="user"
+                    name="user"
+                    placeholder="  Introduce tu nombre"
+                    required
+                  />
+                </div>
+                <div class="register__input-wrapper">
+                  <i class="fa-solid fa-envelope login__icon" style="color: rgb(250, 250, 250);"></i>
+                  <input
+                    class="register__input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="  Introduce tu email"
+                    required
+                  />
+                </div>
+                  <div class="register__input-wrapper">
+                    <i class="fa-solid fa-lock login__icon" style="color: rgba(250, 250, 250, 0.733);"></i>
+                    <input
+                      class="register__input"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="  Introduce tu Contraseña"
+                      required
+                    />
+                  </div>
+              </div>
+              
+                
+                <div class="register__input-wrapper">
+                  
+                <select
+                  id="role"
+                  name="role"
+                  class="diagnostic__select"
+                  required
+                >
+                <i class="fa-solid fa-briefcase" style="color: rgba(250, 250, 250, 0.733);"></i>
+                  <option value="">Selecciona cargo</option>
+                  <option value="ceo">CEO</option>
+                  <option value="cto">CTO</option>
+                  <option value="ciso">CISO</option>
+                </select>
+                </label>
+                </div>
+              <!-- Button -->
+              <button class="register__button" type="submit">Crear Cuenta</button>
+               <!-- Register -->
+               <p class="login__register">
+                ¿Ya tienes cuenta?
+                <a class="register__login-link" href="login.html">
+                  Inicia sesión aquí
+                </a>
+              </p>
+              </div>
+            
+              
+              
+              
+            </form>
+          </div>
+        </section>
+      </main>
 
    
     <script type="module" src="./scripts/script.js"></script>
