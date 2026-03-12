@@ -136,6 +136,7 @@
   border-radius: 12px;
   background: linear-gradient(180deg, #dc0630, #000);
   transition: transform 0.3s;
+  border:1px solid #ff003c;
 }
 
 .service-card:hover {
