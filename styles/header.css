@@ -33,8 +33,8 @@
 /*navbar styles*/
 .navbar{ 
     padding: var(--padding);
-    padding-left: var(--padding-left-right);
-    padding-right: var(--padding-left-right);
+    padding-left: 5%;
+    padding-right: 5%;
     width: var(--width);
     display: flex;
     flex-direction: row;
@@ -77,7 +77,6 @@
 
 .sidebar{
     visibility: hidden;
-    transform: translateY(0%);
     height: 100%;
     background-color: white;
     display: grid;
@@ -91,7 +90,7 @@
 
 /*links html*/
 .sidebar a{ 
-    color: inherit;
+    color: var(--bg-navbar);
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     text-decoration: none;
