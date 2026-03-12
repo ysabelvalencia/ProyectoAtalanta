@@ -51,7 +51,7 @@
 .navbar img:hover{
     color:var(--hover-color);
 }
-
+/*links*/
 .navbar div{
     display:none
 }
@@ -80,7 +80,7 @@
     height: 100%;
     background: linear-gradient(
         to bottom,
-        #0B1116 0%,
+        var(--bg-navbar) 0%,
         #000000 50%,
         #3a0000 100%
       );
@@ -99,7 +99,6 @@
     font-weight: 500;
     text-decoration: none;
     padding: var(--padding);
-    
 }
 
 .sidebar a:hover{
@@ -109,22 +108,26 @@
 
 /*TABLET and DESKTOP*/
 @media(min-width:768px){
-   
+    /*Links*/
     .navbar div{
-        display: block;
+        display: flex;
         flex-direction: row;
         align-items: center;
         color: var(--color-text);
+        list-style: none;
     }
 
     .navbar div a{
         font-family: "Poppins", sans-serif;
         color: var(--color-text);
         font-weight: 500;
-        text-decoration: none; 
+        text-decoration: none;
     }
-
-    .navbar div span{
+    .navbar div a.current{
+        text-decoration: dashed;
+    }
+    
+    .navbar span{
         visibility: visible;
         padding:var(--padding);
     }

@@ -1,10 +1,6 @@
 @import "./header.css";
 @import "./footer.css";
 
-.nav div a{
-    display: contents;
-}
-
 .register {
     min-height: 100vh;
     padding: 20px;
