@@ -10,5 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSlider();
   initHeaderMenu();
   initDiagnosticForm();
+  initScrollTop();
+  initPartnersCarousel();
 
 });
