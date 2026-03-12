@@ -78,23 +78,28 @@
 .sidebar{
     visibility: hidden;
     height: 100%;
-    background-color: white;
+    background: linear-gradient(
+        to bottom,
+        #0B1116 0%,
+        #000000 50%,
+        #3a0000 100%
+      );
     display: grid;
     justify-items: center;
     align-items: center;
     text-align: center;
     width: 100%;
     padding: var(--padding);
-    
 }
 
 /*links html*/
 .sidebar a{ 
-    color: var(--bg-navbar);
+    color: var(--color-text);
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     text-decoration: none;
     padding: var(--padding);
+    
 }
 
 .sidebar a:hover{
