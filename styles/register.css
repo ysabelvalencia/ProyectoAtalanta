@@ -4,3 +4,169 @@
 .nav div a{
     display: contents;
 }
+
+.register {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background-image: url("../images/Atalanta/Fondo2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .register::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index:0;
+  }
+  
+  
+  
+  .register__container {
+    width: 100%;
+    padding: 24px;
+    border-radius: 12px;
+  
+    background: rgba(10, 15, 25, 0.85);
+    backdrop-filter: blur(10px);
+    
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  
+  .register__header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .register__title {
+    font-size: 24px;
+    font-family: "Poppins", sans-serif;
+    color: white;
+    margin-bottom: 6px;
+  }
+  
+  .register__subtitle {
+    font-size: 13px;
+    font-family: "Poppins", sans-serif;
+    color: #c7c7c7;
+  }
+  
+  .register__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .register__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .register__label {
+    font-size: 12px;
+    color: #c7c7c7;
+  }
+  
+  .register__input-wrapper {
+    display: flex;
+    align-items: center;
+  
+    background: rgba(15, 22, 35, 0.95);
+  
+    border-radius: 8px;
+    padding: 10px;
+  
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .register__icon {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-right: 10px;
+  }
+  
+  .register__input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+  
+    color: white;
+    font-size: 14px;
+  }
+  
+  .register__input-wrapper:focus-within {
+    border: 1px solid #e11d48;
+  }
+  
+  .register__rol {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #c7c7c7;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .register__button {
+    margin-top: 6px;
+  
+    padding: 12px;
+  
+    border: none;
+    border-radius: 8px;
+  
+    background: #e11d48;
+    color: white;
+  
+    font-size: 14px;
+    font-weight: 600;
+  
+    cursor: pointer;
+  
+    transition: all 0.25s ease;
+  }
+  
+  .register__button:hover {
+    background: #be123c;
+  }
+  
+  .login__register {
+    text-align: center;
+    font-size: 13px;
+    color: #c7c7c7;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .register__login-link {
+    color: #e11d48;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .register__login-link:hover {
+    text-decoration: underline;
+  }
+  
+  .diagnostic__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    color: #000;
+  }
+ 
+  
+  .diagnostic__input,
+  .diagnostic__select {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
