@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -292,65 +292,48 @@
           </article>
         </section>
       </section>
-      <section class="carousel3d">
-        <h2 class="carousel3d__title">
+      <section class="partners">
+
+        <h2 class="partners__title">
           RESPALDADOS POR LOS REFERENTES EN CIBERSEGURIDAD
         </h2>
-        <p class="carousel3d__descripcion">
-          Colaboramos con los principales referentes en ciberseguridad ofensiva
-          y defensiva
+      
+        <p class="partners__subtitle">
+          Colaboramos con los principales referentes en ciberseguridad ofensiva y defensiva
         </p>
+      
+        <div class="partners__container">
+      
+          <button class="partners__btn prev">&#10094;</button>
+      
+          <div class="partners__carousel">
+      
+            <div class="partners__track">
+      
+              <div class="partners__logo"><img src="images/logos/Logo-Fortinet-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-Hineywell-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logos-Microsoft.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-OffSec-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-SentinelOne-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-Zepo-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-zscaler.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-Acronis-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-AWS-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-Azure-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-Checkmarx-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-Cloudflare-1.png"></div>
+              <div class="partners__logo"><img src="images/logos/CrowdStrike.png"></div>
+              <div class="partners__logo"><img src="images/logos/Logo-CyberGuru-1.png"></div>
 
-        <div class="carousel3d__container">
-          <button class="carousel3d__btn prev">❮</button>
-
-          <div class="carousel3d__track" id="carousel">
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Fortinet-1.png" />
+      
             </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Hineywell-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logos-Microsoft.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-OffSec-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-SentinelOne-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Zepo-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-zscaler.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Acronis-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-AWS-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Azure-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Checkmarx-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Cloudflare-1.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/CrowdStrike.png" />
-            </div>
-            <div class="carousel3d__card">
-              <img src="images/logos/Logo-Azure-1.png" />
-            </div>
+      
           </div>
-
-          <button class="carousel3d__btn next">❯</button>
+      
+          <button class="partners__btn next">&#10095;</button>
+      
         </div>
+      
       </section>
       <section class="diagnostic">
         <div class="diagnostic__container">
@@ -420,7 +403,9 @@
                   <small class="diagnostic__error"></small>
                 </div>
                 <div class="diagnostic__field">
-                  <label for="lastname" class="diagnostic__label">Apellidos</label>
+                  <label for="lastname" class="diagnostic__label"
+                    >Apellidos</label
+                  >
                   <input
                     type="text"
                     id="lastname"
@@ -467,7 +452,12 @@
                 <label for="role" class="diagnostic__label">
                   Cargo <span class="diagnostic__label-dot">*</span></label
                 >
-                <select id="role" name="role" class="diagnostic__select" required>
+                <select
+                  id="role"
+                  name="role"
+                  class="diagnostic__select"
+                  required
+                >
                   <option value="">Selecciona cargo</option>
                   <option value="ceo">CEO</option>
                   <option value="cto">CTO</option>
@@ -480,8 +470,15 @@
                   Área de interés
                   <span class="diagnostic__label-dot">*</span></label
                 >
-                <select id="interest" name="interest" class="diagnostic__select" required>
-                  <option value="">¿Cuál es el desafío que más le urge resolver?</option>
+                <select
+                  id="interest"
+                  name="interest"
+                  class="diagnostic__select"
+                  required
+                >
+                  <option value="">
+                    ¿Cuál es el desafío que más le urge resolver?
+                  </option>
                   <option value="pentesting">Pentesting</option>
                   <option value="auditoria">Auditoría</option>
                   <option value="consultoria">Consultoría</option>
@@ -489,7 +486,7 @@
               </div>
               <!-- PLANNING -->
               <div class="diagnostic__field">
-                <label  for="planning" class="diagnostic__label">
+                <label for="planning" class="diagnostic__label">
                   ¿Busca una solución inmediata o está en fase de planificación?
                   <span class="diagnostic__label-dot">*</span>
                 </label>
