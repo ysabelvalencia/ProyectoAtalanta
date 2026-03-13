@@ -48,7 +48,7 @@
 
 /* TARJETAS */
 
-.card2 {
+.card-offsec {
   width: 100%;
   max-width: 320px;
   height: 240px;
@@ -73,21 +73,21 @@
 
 /* HOVER TARJETAS */
 
-.card2:hover {
+.card-offsec:hover {
   transform: translateY(-12px) scale(1.03);
   box-shadow: 0 20px 40px rgba(255, 0, 60, 0.5);
 }
 
 /* ICONOS */
 
-.card2 img {
+.card-offsec img {
   width: 70px;
   margin-bottom: 20px;
 }
 
 /* TEXTO */
 
-.card2 h3 {
+.card-offsec h3 {
   font-size: 1.05rem;
   line-height: 1.4;
   font-weight: 700;

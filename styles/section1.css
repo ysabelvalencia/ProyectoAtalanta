@@ -1,29 +1,26 @@
-/* ======================
-SECTION STATS
-====================== */
 
+/* SECCION 1 */
 .stats{
     padding:80px 20px;
     background:#eef0f3;
     text-align:center;
   }
   
+  /* CONTAINER */
   .stats__container{
     max-width:1100px;
     margin:auto;
   }
   
   /* TITLE */
-  
   .stats__title{
     font-family:"Montserrat", sans-serif;
     font-size:24px;
     font-weight:700;
     margin-bottom:60px;
   }
-  
+ 
   /* GRID */
-  
   .stats__grid{
     display:grid;
     grid-template-columns:1fr;
@@ -34,16 +31,14 @@ SECTION STATS
   .stats__item{
     max-width:300px;
     margin:auto;
-  
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:flex-start;
-  
     text-align:center;
   }
+
   /* NUMBER */
-  
   .stats__number{
     font-family:"Montserrat", sans-serif;
     font-size:52px;
@@ -60,11 +55,9 @@ SECTION STATS
     line-height:1.5;
     max-width:260px;
   }
-  /* ======================
-  TABLET
-  ====================== */
-  
-  @media (min-width:768px){
+
+  /* TABLET */
+@media (min-width:768px){
   
   .stats__grid{
     grid-template-columns:repeat(3,1fr);
@@ -79,13 +72,10 @@ SECTION STATS
     font-size:60px;
   }
   
-  }
+}
   
-  /* ======================
-  DESKTOP
-  ====================== */
-  
-  @media (min-width:1024px){
+  /* DESKTOP */
+@media (min-width:1024px){
   
   .stats{
     padding:100px 20px;
@@ -103,4 +93,4 @@ SECTION STATS
     font-size:17px;
   }
   
-  }
+}
