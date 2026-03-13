@@ -1,3 +1,30 @@
+@import "/.header.css";
+
+/*HEADER*/
+
+.navbar button{
+  background-color: #0B1116;
+  border-color:  #0B1116;
+  border-radius: 0;
+  border-width: 0;
+  padding: 0%;
+  list-style: none;
+}
+.navbar button a{
+  color: white;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: medium;
+  padding: 0%;
+}
+
+.navbar button:hover{
+  background-color: #0B1116; 
+}
+
+
+
 .login {
   min-height: 100vh;
   padding: 20px;
