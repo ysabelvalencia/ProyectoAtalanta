@@ -32,9 +32,24 @@
   align-items: center;
   justify-content: center;
 
-  background-image: url("../images/Atalanta/contacto_manos.png");
+  background-image: url("../images/Atalanta/login.webp");
   background-size: cover;
   background-position: center;
+  position:relative;
+
+}
+
+
+.login::before{
+
+content:"";
+position:absolute;
+inset:0;
+
+background:rgba(0,0,0,0.65);
+
+z-index:0;
+
 }
 
 .login__container {
