@@ -52,7 +52,13 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-top: 70px;
 }
+
+.hero {
+  margin-top: 70px;
+}
+
 .hero::before {
   content: "";
   position: absolute;
