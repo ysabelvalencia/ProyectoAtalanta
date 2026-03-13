@@ -1,4 +1,3 @@
-@import "./header.css";
 @import "./hero.css";
 @import "./footer.css";
 @import "./section2.css";
@@ -7,7 +6,7 @@
 @import "./section5.css";
 @import "./form.css";
 @import "./login.css";
-
+@import "./header.css";
 
 *{
   margin:0;

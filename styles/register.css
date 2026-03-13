@@ -18,19 +18,18 @@ box-sizing:border-box;
     border-radius: 0;
     border-width: 0;
     padding: 0%;
-    list-style: none;
 }
+
 .navbar button a{
     color: white;
     font-family: "Poppins", sans-serif;
     text-decoration: none;
     font-weight: 500;
     font-size: medium;
-    padding: 0%;
 }
 
 .navbar button:hover{
-    background-color: #0B1116; 
+    background-color: #0b0f19;
 }
 
 body{
