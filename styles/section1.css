@@ -1,0 +1,106 @@
+/* ======================
+SECTION STATS
+====================== */
+
+.stats{
+    padding:80px 20px;
+    background:#eef0f3;
+    text-align:center;
+  }
+  
+  .stats__container{
+    max-width:1100px;
+    margin:auto;
+  }
+  
+  /* TITLE */
+  
+  .stats__title{
+    font-family:"Montserrat", sans-serif;
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:60px;
+  }
+  
+  /* GRID */
+  
+  .stats__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:50px;
+  }
+  
+  /* ITEM */
+  .stats__item{
+    max-width:300px;
+    margin:auto;
+  
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+  
+    text-align:center;
+  }
+  /* NUMBER */
+  
+  .stats__number{
+    font-family:"Montserrat", sans-serif;
+    font-size:52px;
+    font-weight:700;
+    color:#e5093f;
+    display:block;
+    margin-bottom:15px;
+  }
+  
+  /* TEXT */
+  .stats__text{
+    font-family:"Poppins", sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    max-width:260px;
+  }
+  /* ======================
+  TABLET
+  ====================== */
+  
+  @media (min-width:768px){
+  
+  .stats__grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+  }
+  
+  .stats__title{
+    font-size:26px;
+  }
+  
+  .stats__number{
+    font-size:60px;
+  }
+  
+  }
+  
+  /* ======================
+  DESKTOP
+  ====================== */
+  
+  @media (min-width:1024px){
+  
+  .stats{
+    padding:100px 20px;
+  }
+  
+  .stats__title{
+    font-size:30px;
+  }
+  
+  .stats__number{
+    font-size:70px;
+  }
+  
+  .stats__text{
+    font-size:17px;
+  }
+  
+  }
