@@ -1,40 +1,77 @@
+/*SECTION PARTNERS*/
 .partners{
   text-align:center;
-  padding:80px 20px;
-  background:#f5f6fa;
+  padding:100px 20px;
+
+  background: linear-gradient(
+    to bottom,
+    #33000a 0%,
+    #1a0006 60%,
+    #000000 100%
+  );
 }
+/* TITULO */
+
+.partners__title{
+  font-family:"Montserrat", sans-serif;
+  color:#ffffff;
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+/* SUBTITULO */
+
+.partners__subtitle{
+  font-family:"Poppins", sans-serif;
+  color:#ffffff;
+  margin-bottom:40px;
+}
+
+/* CONTENEDOR */
 
 .partners__container{
   position:relative;
   max-width:1100px;
   margin:auto;
+
 }
+
+/* CAROUSEL */
 
 .partners__carousel{
   overflow:hidden;
+  margin-top:40px;
 }
+
+/* TRACK */
 
 .partners__track{
   display:flex;
   align-items:center;
-  gap:40px;
   transition:transform .5s ease;
 }
 
 /* LOGOS */
 
 .partners__logo{
-  flex:0 0 auto;
+  flex:0 0 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index: 1;
 }
 
 .partners__logo img{
-  height:50px;
+  height:90px;
   width:auto;
   object-fit:contain;
 
-  transition:transform .3s, opacity .3s;
-}
+  background:#ffffff;
+  padding:18px;
+  border-radius:14px;
 
+  transition:transform .3s ease, opacity .3s ease;
+}
 .partners__logo img:hover{
   transform:scale(1.1);
   opacity:1;
@@ -48,8 +85,8 @@
   top:50%;
   transform:translateY(-50%);
 
-  width:42px;
-  height:42px;
+  width:48px;
+  height:48px;
 
   border:none;
   border-radius:50%;
@@ -57,60 +94,52 @@
   background:#e5093f;
   color:white;
 
-  font-size:20px;
+  font-size:22px;
   cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 2;
+
+}
+
+.partners__btn *{
+  pointer-events:none;
 }
 
 .prev{
-  left:-20px;
+  left:-10px;
 }
 
 .next{
-  right:-20px;
+  right:-10px;
 }
 
-/* MOBILE */
+/*TABLET */
 
-@media (max-width:768px){
+@media (min-width:768px){
 
-  .partners__track{
-    gap:30px;
-  }
-  
-  .partners__logo{
-    width:140px;
-  }
-  
-  .partners__logo img{
-    height:79px;
-  }
-  
-  }
-  
-  /* TABLET */
-  
-  @media (min-width:768px){
-  
-  .partners__track{
-    gap:60px;
-  }
-  
-  .partners__logo img{
-    height:55px;
-  }
-  
-  }
-  
-  /* DESKTOP */
-  
-  @media (min-width:1024px){
-  
-  .partners__logo img{
-    height:70px;
-  }
-  
-  .partners__track{
-    gap:80px;
-  }
-  
-  }
+.partners__logo{
+  flex:0 0 25%;
+}
+
+.partners__logo img{
+  height:85px;
+}
+
+}
+
+/*DESKTOP*/
+
+@media (min-width:1024px){
+
+.partners__logo{
+  flex:0 0 25%;
+}
+
+.partners__logo img{
+  height:90px;
+}
+
+}
