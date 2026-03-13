@@ -49,8 +49,18 @@
 
 /*links*/
 .navbar div{
-    display:none
+    display: none;
 }
+
+.navbar div a.active{
+    display:flex;
+    text-decoration-line: underline;
+    text-decoration-color: #DC0630;
+    text-decoration-thickness:3px;
+    padding-bottom: 6px;
+    text-underline-offset: 4px;
+}
+
 /*menu's button*/
 .navbar button{
     display: block;
@@ -68,14 +78,6 @@
 .navbar button:hover{
     background-color: var(--color-text);
     border-color: var(--color-text);
-}
-
-.navbar div a.active{
-    text-decoration-line: underline;
-    text-decoration-color: #DC0630;
-    text-decoration-thickness:3px;
-    padding-bottom: 8px;
-    text-underline-offset: 4px;
 }
 
 
@@ -110,10 +112,10 @@
 }
        
 
-/*TABLET and DESKTOP*/
-@media(min-width:768px){
+/*DESKTOP*/
+@media(min-width:1024px){
     /*Links*/
-    .navbar div{
+    .navbar div {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -136,5 +138,5 @@
     .navbar button{
         display: none;
     }
- 
+
 }
