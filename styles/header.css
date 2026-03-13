@@ -6,7 +6,7 @@
     --padding: 10px;
     --padding-left-right: 20%;
     
-    --bg-navbar: #0B1116;
+    --bg-color-navbar: #0B1116;
     --bg-color-button:#DC0630;
     --border-color-button:rgba(220,6,48,0.4);
     --color-text: #FFFFFF;
@@ -40,17 +40,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    
-    background-color: var(--bg-navbar);   
+    background-color: var(--bg-color-navbar);
 }
 
 .navbar img{
     height: 50px;
 }
 
-.navbar img:hover{
-    color:var(--hover-color);
-}
 /*links*/
 .navbar div{
     display:none
@@ -58,21 +54,22 @@
 /*menu's button*/
 .navbar button{
     display: block;
-    padding: 0%;
-    border-color: var(--bg-color-button);
+    border-color: var(--border-color-button);
     border-radius: 10%;
     border-width: 2px;
-    background-color: var(--bg-color-button);   
-}
-
-.navbar button:hover{
-    border-color: var(--color-text);
-    background-color: var(--color-text);
+    background-color: var(--bg-color-button);
 }
 
 .navbar button img{
-    height: 30px; 
+    height: 30px;
+    border-color: var(--bg-color-button);
 }
+
+.navbar button:hover{
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+}
+
 
 .sidebar{
     visibility: hidden;
