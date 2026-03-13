@@ -1,0 +1,26 @@
+.user {
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("../images/Atalanta/login.webp");
+  background-size: cover;
+  background-position: center;
+  position:relative;
+
+}
+
+
+.user::before{
+
+content:"";
+position:absolute;
+inset:0;
+
+background:rgba(0,0,0,0.65);
+
+z-index:0;
+
+}
