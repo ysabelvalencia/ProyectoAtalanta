@@ -35,19 +35,19 @@
 }
 
 .hero-slider__slide--1::before {
-  background-image: url("../images/Atalanta/Fondo3.jpg");
+  background-image: url("../../assets/images/backgrounds/Fondo3.jpg");
 }
 
 .hero-slider__slide--2::before {
-  background-image: url("../images/Atalanta/Fondo2.png");
+  background-image: url("../../assets/images/backgrounds/Fondo2.png");
 }
 
 .hero-slider__slide--3::before {
-  background-image: url("../images/Atalanta/Atalanta-Fondo.jpeg");
+  background-image: url("../../assets/images/backgrounds/Atalanta-Fondo.jpeg");
 }
 
 .hero-slider__slide--4::before {
-  background-image: url("../images/Atalanta/Planes-de-Carrera-03-scaled.jpg");
+  background-image: url("../../assets/images/backgrounds/Planes-de-Carrera-03-scaled.jpg");
 }
 
 .hero-slider__slide--active {
