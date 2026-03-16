@@ -1,5 +1,5 @@
 :root{
-
+    
     /* BRAND */
     --primary:#DC0630;
     --primary-strong:#FF003C;
@@ -25,6 +25,17 @@
     /* BORDERS */
     --border-red:rgba(220,6,48,0.4);
     --border-dark:#1A1A1A;
+
+    /*HEADER*/
+    --position-header: fixed;
+    --width: 100%;
+    --padding: 10px;
+    --padding-left-right: 20%;
+    --bg-color-navbar: #0B1116;
+    --bg-color-button:#DC0630;
+    --border-color-button:rgba(220,6,48,0.4);
+    --color-text: #FFFFFF;
+    --hover-color:#FF2B5C;
     
   }
 

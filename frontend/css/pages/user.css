@@ -4,23 +4,178 @@
   display: flex;
   align-items: center;
   justify-content: center;
+ 
+  background-image: url("../../assets/images/backgrounds/login.webp");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+ 
+.user::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+  z-index:0;
+}
+ 
 
+/* botón menú móvil */
+ 
+#button__menu{
+  background:none;
+  border:none;
+  cursor:pointer;
+  color: white;
+}
+ 
+#icon__menu{
+  width:24px;
+}
+ 
+
+ @media (min-width: 1024px) {
+    .navbar button {
+        display:inline;
+    }
+ }
+
+ 
+
+/* fondo aplicado al body para que sí se vea */
+body{
+  font-family: "Poppins", sans-serif;
+  background:#0b1320;
+  color:white;
+  margin:0;
+ 
   background-image: url("../images/Atalanta/login.webp");
   background-size: cover;
   background-position: center;
-  position:relative;
-
+  position: relative;
 }
-
-
-.user::before{
-
-content:"";
-position:absolute;
-inset:0;
-
-background:rgba(0,0,0,0.65);
-
-z-index:0;
-
+ 
+/* overlay */
+body::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+  z-index:0;
+}
+ 
+/* aseguramos que el contenido esté encima */
+header,
+.dashboard{
+  position:relative;
+  z-index:1;
+}
+ 
+.dashboard{
+  padding:40px 8%;
+}
+ 
+.welcome h1{
+  font-size:36px;
+}
+ 
+.welcome p{
+  color:#aaa;
+}
+ 
+.cards{
+  display:flex;
+  gap:30px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+ 
+.card{
+  flex:1;
+  min-width:250px;
+  background:rgba(255,255,255,0.05);
+  padding:30px;
+  border-radius:12px;
+  backdrop-filter: blur(10px);
+}
+ 
+.card h2{
+  margin-bottom:10px;
+}
+ 
+.card p{
+  color:#aaa;
+}
+ 
+.btn-red{
+  margin-top:20px;
+  background:#ff2e4d;
+  border:none;
+  padding:12px 20px;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+}
+ 
+.btn-blue{
+  margin-top:20px;
+  background:#3b82f6;
+  border:none;
+  padding:12px 20px;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+}
+ 
+.tickets{
+  margin-top:50px;
+}
+ 
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+ 
+th, td{
+  padding:15px;
+  text-align:left;
+}
+ 
+thead{
+  color:#aaa;
+}
+ 
+tbody tr{
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+ 
+.status{
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:14px;
+}
+ 
+.open{
+  background:#ff2e4d;
+}
+ 
+.progress{
+  background:#f59e0b;
+}
+ 
+.resolved{
+  background:#10b981;
+}
+ 
+.closed{
+  background:#6b7280;
+}
+ 
+.btn-view{
+  background:#1f2937;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  color:white;
 }

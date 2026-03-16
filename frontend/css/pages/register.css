@@ -3,11 +3,6 @@
 
 /* RESET */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
 
 /* BODY */
 
@@ -49,7 +44,7 @@ justify-content:center;
 
 padding:40px;
 
-background-image:url("../images/Atalanta/Fondo2.png");
+background-image:url("../../assets/images/backgrounds/Fondo2.png");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
