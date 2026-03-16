@@ -1,0 +1,35 @@
+/* BASE */
+@import "./base/reset.css";
+@import "./base/variables.css";
+
+/* LAYOUT */
+@import "./layout/header.css";
+@import "./layout/footer.css";
+
+/* COMPONENTS */
+@import "./components/hero.css";
+@import "./components/form.css";
+@import "./components/sections.css";
+
+/* PAGES */
+@import "./pages/home.css";
+@import "./pages/login.css";
+@import "./pages/register.css";
+@import "./pages/services.css";
+@import "./pages/contact.css";
+@import "./pages/user.css";
+
+
+
+
+@import "./hero.css";
+@import "./footer.css";
+@import "./section1.css";
+@import "./section2.css";
+@import "./section3.css";
+@import "./section4.css";
+@import "./section5.css";
+@import "./form.css";
+@import "./login.css";
+@import "./header.css";
+
