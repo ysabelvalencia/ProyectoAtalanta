@@ -2,39 +2,13 @@
 @import "./header.css";
 @import "./form.css";
 */
-
-:root{
-
-/* BRAND */
---primary:#DC0630;
---primary-strong:#FF003C;
---primary-light:#FF2B5C;
---primary-dark:#7A0018;
-
-/* BACKGROUNDS */
---bg-black:#000;
---bg-navbar:#000;
---bg-section:#0B0B0D;
-
-/* TEXT */
---text-main:#FFFFFF;
---text-secondary:#CFCFCF;
-
-}
-
-/* RESET */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
+/*
 body{
 background:#050505;
 color:white;
 font-family:"Poppins", sans-serif;
 }
+*/
 
 /* HERO */
 
@@ -46,7 +20,7 @@ align-items:center;
 justify-content:center;
 text-align:center;
 padding:60px 20px;
-background-image:url("../images/Atalanta/fondoCiber");
+background-image:url("../../assets/images/backgrounds/fondoCiber.png");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -299,10 +273,10 @@ z-index:1;
 
 /* BACKGROUNDS */
 
-.card2{background-image:url("../images/Atalanta/fondo1.0.png");}
-.card3{background-image:url("../images/Atalanta/fondo2.0.png");}
-.card4{background-image:url("../images/Atalanta/fondo3.0.png");}
-.card5{background-image:url("../images/Atalanta/fondo4.0.png");}
+.card2{background-image:url("../../assets/images/backgrounds/fondo1.0.png");}
+.card3{background-image:url("../../assets/images/backgrounds/fondo2.0.png");}
+.card4{background-image:url("../../assets/images/backgrounds/fondo3.0.png");}
+.card5{background-image:url("../../assets/images/backgrounds/fondo4.0.png");}
 
 /* LIST */
 
