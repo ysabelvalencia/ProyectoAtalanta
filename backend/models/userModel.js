@@ -1,46 +1,55 @@
 /************************************************
  * userModel.js
  *
- * Este archivo representa la capa de acceso a datos (Model).
- * Se encarga de interactuar directamente con la base de datos MySQL,
- * ejecutando consultas relacionadas con los usuarios.
- *
- * Aquí se definen funciones que permiten:
- * - Buscar usuarios (por ejemplo, por email)
- * - Crear nuevos usuarios en la base de datos
- *
- * No contiene lógica de negocio ni validaciones complejas,
- * ya que esa responsabilidad pertenece a los controllers.
- *
- * Su objetivo es separar la lógica de base de datos del resto de la aplicación,
- * facilitando el mantenimiento, la escalabilidad y la reutilización del código.
- **********************************************************************************/
+ * Modelo de usuario.
+ * Se encarga de interactuar directamente con la base de datos.
+ * Aquí SOLO se hacen consultas SQL.
+ ************************************************/
 
-
-// Importamos la conexión a la base de datos
 const db = require('../config/db');
 
-// Función para buscar usuario por email
+// =======================
+// BUSCAR USUARIO
+// =======================
+
 const getUserByEmail = async (email) => {
-  // Ejecuta query segura (evita SQL Injection)
-  const [rows] = await db.query(
-    'SELECT * FROM users WHERE email = ?',
-    [email]
-  );
+  try {
+    // Query segura con parámetros (evita SQL Injection)
+    const [rows] = await db.query(
+      'SELECT id_user, email, password_hash, rol FROM users WHERE email = ?',
+      [email]
+    );
 
-  // Devuelve el primer resultado
-  return rows[0];
+    // Devolvemos el primer usuario encontrado
+    return rows[0];
+
+  } catch (error) {
+    console.error('Error en getUserByEmail:', error);
+    throw error;
+  }
 };
 
-// Función para crear un usuario nuevo
+
+// =======================
+// CREAR USUARIO
+// =======================
+
 const createUser = async (email, password, role) => {
-  const [result] = await db.query(
-    'INSERT INTO users (email, password, role) VALUES (?, ?)',
-    [email, password, role]
-  );
+  try {
+    // Insertamos usuario en la base de datos
+    const [result] = await db.query(
+      'INSERT INTO users (email, password_hash, rol) VALUES (?, ?, ?)',
+      [email, password, role]
+    );
 
-  return result;
+    return result;
+
+  } catch (error) {
+    console.error('Error en createUser:', error);
+    throw error;
+  }
 };
+
 
 // Exportamos funciones
 module.exports = {

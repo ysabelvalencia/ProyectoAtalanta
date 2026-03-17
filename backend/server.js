@@ -1,39 +1,65 @@
 /**
  * server.js
  *
- * Archivo principal del servidor.
- * Inicializa la aplicación Express, configura middlewares globales
- * y registra las rutas disponibles.
- *
- * Es el punto de entrada del backend.
+ * Punto de entrada del backend.
+ * Configura Express, middlewares globales y rutas.
  */
 
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+//npm install helmet
+
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-// Middleware global para permitir peticiones entre dominios
-app.use(cors());
 
-// Middleware para interpretar JSON en las peticiones
+// =======================
+//  SEGURIDAD
+// =======================
+
+// Headers de seguridad
+app.use(helmet());
+
+// Control de CORS (solo permitir tu frontend)
+app.use(cors({
+  origin: 'http://localhost:5500'
+}));
+
+
+// =======================
+//  MIDDLEWARES
+// =======================
+
+// Permite recibir JSON en peticiones
 app.use(express.json());
 
-// Rutas principales de autenticación
+
+// =======================
+//  RUTAS
+// =======================
+
 app.use('/api/auth', authRoutes);
 
-// Ruta de prueba para comprobar que el servidor funciona
+
+// =======================
+//  RUTA TEST
+// =======================
+
 app.get('/', (req, res) => {
   res.send('API funcionando 🚀');
 });
 
-// Puerto del servidor
-const PORT = 4000;
 
-// Arranque del servidor
+// =======================
+// SERVIDOR
+// =======================
+
+const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

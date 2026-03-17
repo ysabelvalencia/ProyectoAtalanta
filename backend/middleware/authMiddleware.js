@@ -1,36 +1,47 @@
 /**
  * authMiddleware.js
  *
- * Este middleware se encarga de proteger rutas privadas mediante JWT.
- * Verifica que el token enviado en la cabecera sea válido y, en caso correcto,
- * añade la información del usuario a la request.
+ * Middleware de autenticación con JWT.
  *
- * Se utiliza en endpoints que requieren autenticación.
+ * Su función es:
+ * - Proteger rutas privadas
+ * - Verificar que el token sea válido
+ * - Extraer la información del usuario
+ * - Añadirla a req.user para usarla después
  */
 
+// Importamos JWT para verificar el token
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 const authMiddleware = (req, res, next) => {
-  // Obtenemos el token del header Authorization
-  const token = req.headers.authorization;
 
-  // Si no hay token, acceso denegado
-  if (!token) {
+  // Obtenemos la cabecera Authorization
+  const authHeader = req.headers.authorization;
+
+  // Validamos que exista y tenga formato correcto: "Bearer TOKEN"
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ message: 'No autorizado' });
   }
 
+  // Extraemos el token (quitamos "Bearer ")
+  const token = authHeader.split(' ')[1];
+
   try {
-    // Verificamos el token
+    // Verificamos el token con la clave secreta
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Guardamos datos del usuario en la request
+    // Guardamos los datos del usuario en la request
+    // (vienen del payload del token)
     req.user = decoded;
 
-    next(); // continúa hacia el controller
+    // Continuamos hacia la siguiente función (controller o middleware)
+    next();
+
   } catch (error) {
-    res.status(403).json({ message: 'Token inválido' });
+    // Token inválido o expirado
+    return res.status(403).json({ message: 'Token inválido' });
   }
 };
 
+// Exportamos el middleware
 module.exports = authMiddleware;

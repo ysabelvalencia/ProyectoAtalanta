@@ -1,83 +1,114 @@
 /**
  * authController.js
  *
- * Este archivo contiene la lógica de negocio relacionada con la autenticación.
- * Gestiona el registro y login de usuarios, utilizando el modelo para acceder
- * a la base de datos y aplicando reglas como validación, hash de contraseñas
- * y generación de tokens JWT.
+ * Controlador de autenticación.
+ * Aquí se gestiona la lógica de:
+ * - Registro de usuario
+ * - Login de usuario
+ *
+ * Se encarga de:
+ * - Validar datos
+ * - Hashear contraseñas
+ * - Generar tokens JWT
  */
 
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+// Importamos librerías necesarias
+const bcrypt = require('bcrypt');          // Para encriptar contraseñas
+const jwt = require('jsonwebtoken');       // Para generar tokens de autenticación
 
+// Importamos el modelo de usuario (acceso a BD)
 const userModel = require('../models/userModel');
 
-// REGISTRO DE USUARIO
+
+// =======================
+// 🟢 REGISTRO DE USUARIO
+// =======================
+
 const register = async (req, res) => {
   try {
-    const { email, password, role } = req.body;
+    // Extraemos datos del body (petición del frontend)
+    let { email, password } = req.body;
 
-    // Validación básica de datos
+    // 🔹 Validación: campos obligatorios
     if (!email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
     }
-    // Evitar que cualquiera se registre como admin (seguridad básica)
-    if (role === 'admin') {
-      return res.status(403).json({ message: 'No permitido crear admin' });
+
+    // 🔹 Validación básica de email
+    if (!email.includes('@')) {
+      return res.status(400).json({ message: 'Email inválido' });
     }
 
-    // Comprobamos si el usuario ya existe
+    // 🔹 Validación de seguridad de contraseña
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Password demasiado corta' });
+    }
+
+    // 🔹 Comprobamos si el usuario ya existe en la BD
     const existingUser = await userModel.getUserByEmail(email);
 
     if (existingUser) {
-      return res.json({ message: 'Usuario ya existe' });
+      return res.status(400).json({ message: 'Usuario ya existe' });
     }
 
-    // Hasheamos la contraseña antes de guardarla
+    // 🔐 Hasheamos la contraseña (MUY IMPORTANTE)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Guardamos el usuario en la base de datos
-    await userModel.createUser(
-      email,
-      hashedPassword,
-      role || 'cliente'
-    );
+    // 💾 Guardamos el usuario en la base de datos
+    // Siempre se registra como "Cliente" (seguridad)
+    await userModel.createUser(email, hashedPassword, 'Cliente');
 
+    // Respuesta exitosa
     res.json({ success: true });
 
   } catch (error) {
+    // Error inesperado del servidor
     console.error(error);
     res.status(500).json({ message: 'Error servidor' });
   }
 };
 
-// LOGIN DE USUARIO
+
+// =======================
+// 🔵 LOGIN DE USUARIO
+// =======================
+
 const login = async (req, res) => {
   try {
+    // Extraemos datos del body
     const { email, password } = req.body;
 
-    // Buscamos el usuario en la base de datos
+    // 🔹 Validación básica
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Faltan datos' });
+    }
+
+    // 🔍 Buscamos usuario en la base de datos
     const user = await userModel.getUserByEmail(email);
 
+    // ❌ Si no existe, error genérico (mejor práctica de seguridad)
     if (!user) {
-      return res.status(401).json({ message: 'Usuario no encontrado' });
+      return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
-    // Comparamos contraseña introducida con la hasheada
-    const validPassword = await bcrypt.compare(password, user.password);
+    // 🔐 Comparamos contraseña introducida con la hasheada
+    const validPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!validPassword) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
+      return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
-    // Generamos un token JWT con información del usuario
+    // 🔑 Generamos token JWT con datos del usuario
     const token = jwt.sign(
-      { idUser: user.idUser, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '2h' }
+      {
+        idUser: user.id_user,           // ID del usuario
+        role: user.rol.toLowerCase()   // Rol normalizado
+      },
+      process.env.JWT_SECRET,          // Clave secreta
+      { expiresIn: '2h' }              // Expira en 2 horas
     );
 
+    // Enviamos token al frontend
     res.json({ token });
 
   } catch (error) {
@@ -86,4 +117,6 @@ const login = async (req, res) => {
   }
 };
 
+
+// Exportamos funciones para usarlas en las rutas
 module.exports = { register, login };

@@ -1,21 +1,38 @@
 /**
  * authRoutes.js
  *
- * Este archivo define las rutas relacionadas con la autenticación.
- * Actúa como intermediario entre las peticiones HTTP y los controllers.
- *
- * Se encarga de mapear cada endpoint a su función correspondiente.
+ * Define las rutas de autenticación.
+ * Conecta las peticiones HTTP con los controllers.
  */
 
 const express = require('express');
 const router = express.Router();
 
+// Importamos controller de autenticación
 const authController = require('../controllers/authController');
 
-// Ruta para registrar usuario
+// =======================
+// RUTAS PÚBLICAS
+// =======================
+
+// Registro de usuario
 router.post('/register', authController.register);
 
-// Ruta para login
+// Login de usuario
 router.post('/login', authController.login);
+
+
+// =======================
+// RUTA PROTEGIDA (opcional)
+// =======================
+
+const authMiddleware = require('../middleware/authMiddleware');
+
+router.get('/profile', authMiddleware, (req, res) => {
+  res.json({
+     message: 'Acceso permitido',
+     user: req.user
+   });
+});
 
 module.exports = router;
