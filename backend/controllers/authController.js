@@ -16,11 +16,15 @@ const userModel = require('../models/userModel');
 // REGISTRO DE USUARIO
 const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     // Validación básica de datos
     if (!email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
+    }
+    // Evitar que cualquiera se registre como admin (seguridad básica)
+    if (role === 'admin') {
+      return res.status(403).json({ message: 'No permitido crear admin' });
     }
 
     // Comprobamos si el usuario ya existe
@@ -34,7 +38,11 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Guardamos el usuario en la base de datos
-    await userModel.createUser(email, hashedPassword);
+    await userModel.createUser(
+      email,
+      hashedPassword,
+      role || 'cliente'
+    );
 
     res.json({ success: true });
 

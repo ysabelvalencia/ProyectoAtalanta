@@ -33,10 +33,10 @@ const getUserByEmail = async (email) => {
 };
 
 // Función para crear un usuario nuevo
-const createUser = async (email, password) => {
+const createUser = async (email, password, role) => {
   const [result] = await db.query(
-    'INSERT INTO users (email, password) VALUES (?, ?)',
-    [email, password]
+    'INSERT INTO users (email, password, role) VALUES (?, ?)',
+    [email, password, role]
   );
 
   return result;
