@@ -5,6 +5,7 @@ import { initScrollTop } from "./utils/scrollTop.js";
 import { initPartnersCarousel } from "./components/partners-carousel.js";
 import { initRegisterForm } from "./forms/register.js";
 import { initUserWelcome } from "./utils/user.js";
+import { initLoginForm } from "./forms/login.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initSlider();
@@ -14,4 +15,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initPartnersCarousel();
   initRegisterForm();
   initUserWelcome();
+  initLoginForm();
 });
