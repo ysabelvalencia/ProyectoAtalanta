@@ -7,12 +7,20 @@
 /* BODY */
 
 /*Header*/
+/*
 .navbar button{
     background-color: #0B1116;
     border-color:  #0B1116;
     border-radius: 0;
     border-width: 0;
     padding: 0%;
+}
+*/
+.navbar .btn,
+.navbar .register-btn{
+  background: transparent;
+  border: none;
+  color: black;
 }
 
 .navbar button a{
