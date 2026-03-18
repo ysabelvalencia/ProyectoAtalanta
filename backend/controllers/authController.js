@@ -15,6 +15,7 @@
 // Importamos librerías necesarias
 const bcrypt = require('bcrypt');          // Para encriptar contraseñas
 const jwt = require('jsonwebtoken');       // Para generar tokens de autenticación
+const xss = require('xss'); 
 
 // Importamos el modelo de usuario (acceso a BD)
 const userModel = require('../models/userModel');
@@ -26,43 +27,38 @@ const userModel = require('../models/userModel');
 
 const register = async (req, res) => {
   try {
-    // Extraemos datos del body (petición del frontend)
-    let { email, password } = req.body;
+    const { nombre, email, password } = req.body;
 
-    // 🔹 Validación: campos obligatorios
-    if (!email || !password) {
+    if (!nombre || !email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
     }
 
-    // 🔹 Validación básica de email
-    if (!email.includes('@')) {
+    const cleanNombre = xss(nombre.trim());
+    const cleanEmail = xss(email.trim().toLowerCase());
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(cleanEmail)) {
       return res.status(400).json({ message: 'Email inválido' });
     }
 
-    // 🔹 Validación de seguridad de contraseña
     if (password.length < 6) {
       return res.status(400).json({ message: 'Password demasiado corta' });
     }
 
-    // 🔹 Comprobamos si el usuario ya existe en la BD
-    const existingUser = await userModel.getUserByEmail(email);
+    const existingUser = await userModel.getUserByEmail(cleanEmail);
 
     if (existingUser) {
       return res.status(400).json({ message: 'Usuario ya existe' });
     }
 
-    // 🔐 Hasheamos la contraseña (MUY IMPORTANTE)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 💾 Guardamos el usuario en la base de datos
-    // Siempre se registra como "Cliente" (seguridad)
-    await userModel.createUser(email, hashedPassword, 'Cliente');
+    await userModel.createUser(cleanNombre, cleanEmail, hashedPassword, 'Cliente');
 
-    // Respuesta exitosa
     res.json({ success: true });
 
   } catch (error) {
-    // Error inesperado del servidor
     console.error(error);
     res.status(500).json({ message: 'Error servidor' });
   }

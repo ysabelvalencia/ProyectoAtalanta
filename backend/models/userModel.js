@@ -34,12 +34,11 @@ const getUserByEmail = async (email) => {
 // CREAR USUARIO
 // =======================
 
-const createUser = async (email, password, role) => {
+const createUser = async (nombre, email, passwordHash, role) => {
   try {
-    // Insertamos usuario en la base de datos
     const [result] = await db.query(
-      'INSERT INTO users (email, password_hash, rol) VALUES (?, ?, ?)',
-      [email, password, role]
+      'INSERT INTO users (nombre, email, password_hash, rol) VALUES (?, ?, ?, ?)',
+      [nombre, email, passwordHash, role]
     );
 
     return result;
