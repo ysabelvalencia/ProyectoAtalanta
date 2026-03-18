@@ -1,53 +1,43 @@
 /*HEADER*/
-
-.navbar button{
-  background-color: #0B1116;
-  border-color:  #0B1116;
+.navbar button {
+  background-color: #0b1116;
+  border-color: #0b1116;
   border-radius: 0;
   border-width: 0;
   padding: 0%;
-  list-style: none;
 }
-.navbar button a{
+
+.navbar button a {
   color: white;
   font-family: "Poppins", sans-serif;
   text-decoration: none;
   font-weight: 500;
   font-size: medium;
-  padding: 0%;
 }
 
-.navbar button:hover{
-  background-color: #0B1116; 
+.navbar button:hover {
+  background-color: #0b0f19;
 }
-
-
 
 .login {
-  min-height: 100vh;
+  height: calc(100vh - 70px);
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-image: url("../../assets/images/backgrounds/login.webp");
   background-size: cover;
   background-position: center;
-  position:relative;
-
+  background-repeat: no-repeat;
+  position: relative;
 }
 
-
-.login::before{
-
-content:"";
-position:absolute;
-inset:0;
-
-background:rgba(0,0,0,0.65);
-
-z-index:0;
-
+.login::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 0;
 }
 
 .login__container {

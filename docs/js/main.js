@@ -4,7 +4,7 @@ import { initDiagnosticForm } from "./forms/diagnostic-form.js";
 import { initScrollTop } from "./utils/scrollTop.js";
 import { initPartnersCarousel } from "./components/partners-carousel.js";
 import { initRegisterForm } from "./forms/register.js";
-import { initUserWelcome } from "./utils/user.js";
+import { initCheckAuth, initLogout, initUserWelcome } from "./utils/user.js";
 import { initLoginForm } from "./forms/login.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollTop();
   initPartnersCarousel();
   initRegisterForm();
-  initUserWelcome();
   initLoginForm();
+
+  const path = window.location.pathname;
+  if (path.includes("user.html")) {
+    initCheckAuth();
+    initLogout();
+    initUserWelcome();
+  }
 });

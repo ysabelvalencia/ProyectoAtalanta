@@ -24,10 +24,12 @@ const app = express();
 // Headers de seguridad
 app.use(helmet());
 
+app.use(cors()); // 👈 PERMITE TODOS LOS ORÍGENES (solo desarrollo)
+
 // Control de CORS (solo permitir tu frontend)
-app.use(cors({
-  origin: 'http://localhost:5500'
-}));
+// app.use(cors({
+//   origin: 'http://localhost:5500'
+// }));
 
 
 // =======================

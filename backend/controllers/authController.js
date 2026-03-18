@@ -1,3 +1,4 @@
+
 /**
  * authController.js
  *
@@ -71,41 +72,44 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    // Extraemos datos del body
     const { email, password } = req.body;
 
-    // 🔹 Validación básica
     if (!email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
     }
 
-    // 🔍 Buscamos usuario en la base de datos
     const user = await userModel.getUserByEmail(email);
 
-    // ❌ Si no existe, error genérico (mejor práctica de seguridad)
     if (!user) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
-    // 🔐 Comparamos contraseña introducida con la hasheada
     const validPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!validPassword) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
-    // 🔑 Generamos token JWT con datos del usuario
     const token = jwt.sign(
       {
-        idUser: user.id_user,           // ID del usuario
-        role: user.rol.toLowerCase()   // Rol normalizado
+        idUser: user.id_user,
+        role: user.rol.toLowerCase()
       },
-      process.env.JWT_SECRET,          // Clave secreta
-      { expiresIn: '2h' }              // Expira en 2 horas
+      process.env.JWT_SECRET,
+      { expiresIn: '2h' }
     );
 
-    // Enviamos token al frontend
-    res.json({ token });
+    // ✅ CAMBIO: ahora devolvemos también info del usuario
+    res.json({
+      message: "Login correcto",
+      token: token,
+      user: {
+        id: user.id_user,
+        nombre: user.nombre,
+        email: user.email,
+        rol: user.rol
+      }
+    });
 
   } catch (error) {
     console.error(error);
@@ -113,6 +117,53 @@ const login = async (req, res) => {
   }
 };
 
-
 // Exportamos funciones para usarlas en las rutas
 module.exports = { register, login };
+
+// const login = async (req, res) => {
+//   try {
+//     // Extraemos datos del body
+//     const { email, password } = req.body;
+
+//     // 🔹 Validación básica
+//     if (!email || !password) {
+//       return res.status(400).json({ message: 'Faltan datos' });
+//     }
+
+//     // 🔍 Buscamos usuario en la base de datos
+//     const user = await userModel.getUserByEmail(email);
+
+//     // ❌ Si no existe, error genérico (mejor práctica de seguridad)
+//     if (!user) {
+//       return res.status(401).json({ message: 'Credenciales incorrectas' });
+//     }
+
+//     // 🔐 Comparamos contraseña introducida con la hasheada
+//     const validPassword = await bcrypt.compare(password, user.password_hash);
+
+//     if (!validPassword) {
+//       return res.status(401).json({ message: 'Credenciales incorrectas' });
+//     }
+
+//     // 🔑 Generamos token JWT con datos del usuario
+//     const token = jwt.sign(
+//       {
+//         idUser: user.id_user,           // ID del usuario
+//         role: user.rol.toLowerCase()   // Rol normalizado
+//       },
+//       process.env.JWT_SECRET,          // Clave secreta
+//       { expiresIn: '2h' }              // Expira en 2 horas
+//     );
+
+//     // Enviamos token al frontend
+//     res.json({ token });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Error servidor' });
+//   }
+// };
+
+
+// // Exportamos funciones para usarlas en las rutas
+// module.exports = { register, login };

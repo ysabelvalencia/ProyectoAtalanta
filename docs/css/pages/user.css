@@ -1,6 +1,6 @@
 /* CONTENEDOR */
 .user {
-  min-height: 100vh;
+  height: calc(100vh - 70px);
   padding: 20px;
   display: flex;
   align-items: center;
@@ -9,6 +9,8 @@
   background-size: cover;
   background-position: center;
   position: relative;
+  color: white;
+  font-family: "Poppins", sans-serif;
 }
 
 .user::before{
@@ -20,7 +22,7 @@
 }
 
 /* BOTÓN (AHORA CON IMAGEN) */
-#button__menu-user{
+.button__menu-user{
   display:flex;
   align-items:center;
   justify-content:center;
@@ -35,18 +37,8 @@
   color:white;
 }
 
-#button__menu-user img{
-  width:26px;
-  height:auto; 
-  display:block;
-}
-
-#button__menu-user:hover{
+.button__menu-user:hover{
   background:#e02640;
-}
-
-#button__menu-user:hover img{
-  filter: brightness(0.7);
 }
 
 /* DASHBOARD */
@@ -178,7 +170,7 @@ tbody tr{
     padding:20px 8%;
   }
 
-  #button__menu-user{
+  .button__menu-user{
     padding:13px 20px;
   }
 }

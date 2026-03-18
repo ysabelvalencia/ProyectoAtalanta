@@ -2,6 +2,8 @@ export function initHeaderMenu() {
   const button__menu = document.getElementById("button__menu");
   const sidebar = document.getElementsByClassName("sidebar");
 
+  if (!button__menu) return;
+
   button__menu.addEventListener("click", () => {
     for (let i = 0; i < sidebar.length; i++) {
       if (sidebar[i].style.visibility === "visible") {

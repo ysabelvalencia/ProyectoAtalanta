@@ -16,7 +16,7 @@ const getUserByEmail = async (email) => {
   try {
     // Query segura con parámetros (evita SQL Injection)
     const [rows] = await db.query(
-      'SELECT id_user, email, password_hash, rol FROM users WHERE email = ?',
+      'SELECT id_user, nombre, email, password_hash, rol FROM users WHERE email = ?', // 👈 AÑADIDO nombre
       [email]
     );
 
