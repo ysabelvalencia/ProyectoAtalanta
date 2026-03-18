@@ -36,17 +36,7 @@
   color:white;
 }
 
-<<<<<<< HEAD
 .button__menu-user:hover{
-=======
-#button__menu-user img{
-  width:39px;
-  height:30px; 
-  display:block;
-}
-
-#button__menu-user:hover{
->>>>>>> fe21f15540a4a88b1fde8e4127be1c0a121983ab
   background:#e02640;
 }
 
