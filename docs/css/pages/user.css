@@ -20,7 +20,7 @@
 }
 
 /* BOTÓN (AHORA CON IMAGEN) */
-#button__menu{
+#button__menu-user{
   display:flex;
   align-items:center;
   justify-content:center;
@@ -35,17 +35,17 @@
   color:white;
 }
 
-#button__menu img{
+#button__menu-user img{
   width:26px;
   height:auto; 
   display:block;
 }
 
-#button__menu:hover{
+#button__menu-user:hover{
   background:#e02640;
 }
 
-#button__menu:hover img{
+#button__menu-user:hover img{
   filter: brightness(0.7);
 }
 
@@ -178,7 +178,7 @@ tbody tr{
     padding:20px 8%;
   }
 
-  #button__menu{
+  #button__menu-user{
     padding:13px 20px;
   }
 }
