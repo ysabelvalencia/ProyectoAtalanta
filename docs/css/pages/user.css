@@ -26,7 +26,6 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#ff2e4d;
   border:none;
   padding:13px 20px;
   border-radius:8px;
@@ -37,7 +36,17 @@
   color:white;
 }
 
+<<<<<<< HEAD
 .button__menu-user:hover{
+=======
+#button__menu-user img{
+  width:39px;
+  height:30px; 
+  display:block;
+}
+
+#button__menu-user:hover{
+>>>>>>> fe21f15540a4a88b1fde8e4127be1c0a121983ab
   background:#e02640;
 }
 
@@ -124,6 +133,7 @@ thead{
 tbody tr{
   border-top:1px solid rgba(255,255,255,0.1);
 }
+
 
 /*  TABLET (≥768px) */
 @media (min-width: 768px){
