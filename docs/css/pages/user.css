@@ -1,16 +1,16 @@
+/* CONTENEDOR */
 .user {
   min-height: 100vh;
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
- 
   background-image: url("../../assets/images/backgrounds/login.webp");
   background-size: cover;
   background-position: center;
   position: relative;
 }
- 
+
 .user::before{
   content:"";
   position:absolute;
@@ -18,95 +18,77 @@
   background:rgba(0,0,0,0.65);
   z-index:0;
 }
- 
 
-/* botón menú móvil */
- 
+/* BOTÓN (AHORA CON IMAGEN) */
 #button__menu{
-  background:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#ff2e4d;
   border:none;
+  padding:13px 20px;
+  border-radius:8px;
   cursor:pointer;
-  color: white;
-}
- 
-#icon__menu{
-  width:24px;
-}
- 
-
- @media (min-width: 1024px) {
-    .navbar button {
-        display:inline;
-    }
- }
-
- 
-
-/* fondo aplicado al body para que sí se vea */
-body{
-  font-family: "Poppins", sans-serif;
-  background:#0b1320;
+  font-weight:500;
+  transition:0.3s;
+  text-decoration:none; /* para <a> */
   color:white;
-  margin:0;
- 
-  background-image: url("../images/Atalanta/login.webp");
-  background-size: cover;
-  background-position: center;
-  position: relative;
 }
- 
-/* overlay */
-body::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.65);
-  z-index:0;
+
+#button__menu img{
+  width:26px;
+  height:auto; 
+  display:block;
 }
- 
-/* aseguramos que el contenido esté encima */
-header,
+
+#button__menu:hover{
+  background:#e02640;
+}
+
+#button__menu:hover img{
+  filter: brightness(0.7);
+}
+
+/* DASHBOARD */
 .dashboard{
+  padding:30px 5%;
   position:relative;
   z-index:1;
 }
- 
-.dashboard{
-  padding:40px 8%;
-}
- 
+
+/* WELCOME */
 .welcome h1{
-  font-size:36px;
+  font-size:28px;
 }
- 
+
 .welcome p{
   color:#aaa;
 }
- 
-.cards{
+
+/* CARDS - MOBILE */
+.cards_user{
   display:flex;
-  gap:30px;
-  margin-top:30px;
-  flex-wrap:wrap;
+  flex-direction:column;
+  gap:20px;
+  margin-top:20px;
 }
- 
-.card{
-  flex:1;
-  min-width:250px;
+
+.card_user{
   background:rgba(255,255,255,0.05);
-  padding:30px;
+  padding:20px;
   border-radius:12px;
   backdrop-filter: blur(10px);
 }
- 
-.card h2{
+
+.card_user h2{
   margin-bottom:10px;
 }
- 
-.card p{
+
+.card_user p{
   color:#aaa;
 }
- 
+
+/* BOTONES */
 .btn-red{
   margin-top:20px;
   background:#ff2e4d;
@@ -116,7 +98,7 @@ header,
   color:white;
   cursor:pointer;
 }
- 
+
 .btn-blue{
   margin-top:20px;
   background:#3b82f6;
@@ -126,56 +108,77 @@ header,
   color:white;
   cursor:pointer;
 }
- 
+
+/* TABLE */
 .tickets{
   margin-top:50px;
 }
- 
+
 table{
   width:100%;
   border-collapse:collapse;
   margin-top:20px;
 }
- 
+
 th, td{
-  padding:15px;
+  padding:12px;
   text-align:left;
 }
- 
+
 thead{
   color:#aaa;
 }
- 
+
 tbody tr{
   border-top:1px solid rgba(255,255,255,0.1);
 }
- 
-.status{
-  padding:5px 12px;
-  border-radius:20px;
-  font-size:14px;
+
+/*  TABLET (≥768px) */
+@media (min-width: 768px){
+
+  .dashboard{
+    padding:40px 6%;
+  }
+
+  .welcome h1{
+    font-size:32px;
+  }
+
+  .cards_user{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+
+  .card_user{
+    flex:1;
+    min-width:250px;
+  }
+
+  .navbar{
+    padding:20px 6%;
+  }
 }
- 
-.open{
-  background:#ff2e4d;
-}
- 
-.progress{
-  background:#f59e0b;
-}
- 
-.resolved{
-  background:#10b981;
-}
- 
-.closed{
-  background:#6b7280;
-}
- 
-.btn-view{
-  background:#1f2937;
-  border:none;
-  padding:6px 14px;
-  border-radius:6px;
-  color:white;
+
+/* DESKTOP (≥1024px) */
+@media (min-width: 1024px){
+
+  .dashboard{
+    padding:40px 8%;
+  }
+
+  .welcome h1{
+    font-size:36px;
+  }
+
+  .cards_user{
+    gap:30px;
+  }
+
+  .navbar{
+    padding:20px 8%;
+  }
+
+  #button__menu{
+    padding:13px 20px;
+  }
 }

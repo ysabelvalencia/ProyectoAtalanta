@@ -16,14 +16,17 @@
 </head>
 
 <body>
-  <header class="header">
+  <header>
     <nav class="navbar">
-      <!---Logo Atalanta-->
+      <!-- Logo -->
       <img src="../assets/images/logos/ATALANTA_logo.png" alt="Atalanta's logo">
-      <button id="button__menu">
-        Cerrar Sesion
-      </button>
+
+      <a href="../pages/login.html" id="button__menu">
+        <img src="../assets/images/icons/Log_out.png" alt="Cerrar sesión">
+      </a>
+    </nav>
   </header>
+
   <div class="user">
 
     <main class="dashboard">
@@ -33,15 +36,15 @@
         <p>Panel de control</p>
       </section>
 
-      <section class="cards">
+      <section class="cards_user">
 
-        <div class="card">
+        <div class="card_user">
           <h2>Mis Tickets</h2>
           <p>Ver y gestionar tus incidencias</p>
           <button class="btn-red">+ Crear Ticket</button>
         </div>
 
-        <div class="card">
+        <div class="card_user">
           <h2>Mi Perfil</h2>
           <p>Editar tu información personal</p>
           <button class="btn-blue">Ver Perfil</button>
@@ -49,58 +52,10 @@
 
       </section>
 
-      <section class="tickets">
-
-        <h2>Mis incidencias recientes</h2>
-
-        <table>
-
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Estado</th>
-              <th>Actualizado</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            <tr>
-              <td>Servidor inestable</td>
-              <td><span class="status open">Abierto</span></td>
-              <td>hace 1 hora</td>
-              <td><button class="btn-view">Ver</button></td>
-            </tr>
-
-            <tr>
-              <td>Error de autenticación</td>
-              <td><span class="status progress">En progreso</span></td>
-              <td>hace 3 horas</td>
-              <td><button class="btn-view">Ver</button></td>
-            </tr>
-
-            <tr>
-              <td>Problema de red</td>
-              <td><span class="status resolved">Resuelto</span></td>
-              <td>hace 1 día</td>
-              <td><button class="btn-view">Ver</button></td>
-            </tr>
-
-            <tr>
-              <td>Fallo de configuración</td>
-              <td><span class="status closed">Cerrado</span></td>
-              <td>hace 2 días</td>
-              <td><button class="btn-view">Ver</button></td>
-            </tr>
-
-          </tbody>
-        </table>
-
-      </section>
-
     </main>
-    <script type="module" src="../js/main.js"></script>
+  </div>
+
+  <script type="module" src="../js/main.js"></script>
 </body>
 
 </html>
