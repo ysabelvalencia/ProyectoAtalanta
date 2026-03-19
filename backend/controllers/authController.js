@@ -1,108 +1,134 @@
-
 /**
  * authController.js
  *
- * Controlador de autenticación.
- * Aquí se gestiona la lógica de:
- * - Registro de usuario
- * - Login de usuario
+ * Controlador de autenticación:
+ * - Registro
+ * - Login
  *
- * Se encarga de:
- * - Validar datos
- * - Hashear contraseñas
- * - Generar tokens JWT
+ * Seguridad aplicada:
+ * - Validación de datos
+ * - Sanitización (XSS)
+ * - Hash de contraseñas (bcrypt)
+ * - JWT con expiración
+ * - Mensajes de error seguros
  */
 
-// Importamos librerías necesarias
-const bcrypt = require('bcrypt');          // Para encriptar contraseñas
-const jwt = require('jsonwebtoken');       // Para generar tokens de autenticación
-const xss = require('xss'); 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const xss = require('xss');
+const validator = require('validator');
 
-// Importamos el modelo de usuario (acceso a BD)
 const userModel = require('../models/userModel');
 
 
 // =======================
-// 🟢 REGISTRO DE USUARIO
+// 🟢 REGISTRO
 // =======================
 
 const register = async (req, res) => {
   try {
-    const { nombre, email, password } = req.body;
+    let { nombre, email, password } = req.body;
 
+    // Validación básica
     if (!nombre || !email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
     }
 
-    const cleanNombre = xss(nombre.trim());
+    // Sanitización
+    const cleanNombre = xss(nombre.trim()).slice(0, 100);
     const cleanEmail = xss(email.trim().toLowerCase());
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(cleanEmail)) {
+    // Validación email
+    if (!validator.isEmail(cleanEmail)) {
       return res.status(400).json({ message: 'Email inválido' });
     }
 
+    // Validación password
     if (password.length < 6) {
       return res.status(400).json({ message: 'Password demasiado corta' });
     }
 
+    // Comprobar si ya existe
     const existingUser = await userModel.getUserByEmail(cleanEmail);
 
     if (existingUser) {
-      return res.status(400).json({ message: 'Usuario ya existe' });
+      return res.status(409).json({ message: 'Usuario ya existe' });
     }
 
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await userModel.createUser(cleanNombre, cleanEmail, hashedPassword, 'Cliente');
+    // Guardar usuario (rol por defecto Cliente)
+    await userModel.createUser(
+      cleanNombre,
+      cleanEmail,
+      hashedPassword,
+      'Cliente'
+    );
 
-    res.json({ success: true });
+    return res.status(201).json({
+      message: 'Usuario registrado correctamente'
+    });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error servidor' });
+    console.error('Error en register:', error);
+    return res.status(500).json({ message: 'Error servidor' });
   }
 };
 
 
 // =======================
-// 🔵 LOGIN DE USUARIO
+// 🔵 LOGIN
 // =======================
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
 
+    // Validación básica
     if (!email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
     }
 
-    const user = await userModel.getUserByEmail(email);
+    // Sanitización
+    const cleanEmail = xss(email.trim().toLowerCase());
 
+    // Validación email
+    if (!validator.isEmail(cleanEmail)) {
+      return res.status(400).json({ message: 'Email inválido' });
+    }
+
+    // Buscar usuario
+    const user = await userModel.getUserByEmail(cleanEmail);
+
+    // Mensaje genérico (seguridad)
     if (!user) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
+    // Comparar password
     const validPassword = await bcrypt.compare(password, user.password_hash);
 
     if (!validPassword) {
       return res.status(401).json({ message: 'Credenciales incorrectas' });
     }
 
+    // Generar JWT
     const token = jwt.sign(
       {
         idUser: user.id_user,
         role: user.rol.toLowerCase()
       },
       process.env.JWT_SECRET,
-      { expiresIn: '2h' }
+      {
+        expiresIn: '2h'
+      }
     );
 
-    // ✅ CAMBIO: ahora devolvemos también info del usuario
-    res.json({
-      message: "Login correcto",
-      token: token,
+    // Respuesta
+    return res.json({
+      message: 'Login correcto',
+      token,
       user: {
         id: user.id_user,
         nombre: user.nombre,
@@ -112,58 +138,17 @@ const login = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error servidor' });
+    console.error('Error en login:', error);
+    return res.status(500).json({ message: 'Error servidor' });
   }
 };
 
-// Exportamos funciones para usarlas en las rutas
-module.exports = { register, login };
 
-// const login = async (req, res) => {
-//   try {
-//     // Extraemos datos del body
-//     const { email, password } = req.body;
+// =======================
+// 📤 EXPORT
+// =======================
 
-//     // 🔹 Validación básica
-//     if (!email || !password) {
-//       return res.status(400).json({ message: 'Faltan datos' });
-//     }
-
-//     // 🔍 Buscamos usuario en la base de datos
-//     const user = await userModel.getUserByEmail(email);
-
-//     // ❌ Si no existe, error genérico (mejor práctica de seguridad)
-//     if (!user) {
-//       return res.status(401).json({ message: 'Credenciales incorrectas' });
-//     }
-
-//     // 🔐 Comparamos contraseña introducida con la hasheada
-//     const validPassword = await bcrypt.compare(password, user.password_hash);
-
-//     if (!validPassword) {
-//       return res.status(401).json({ message: 'Credenciales incorrectas' });
-//     }
-
-//     // 🔑 Generamos token JWT con datos del usuario
-//     const token = jwt.sign(
-//       {
-//         idUser: user.id_user,           // ID del usuario
-//         role: user.rol.toLowerCase()   // Rol normalizado
-//       },
-//       process.env.JWT_SECRET,          // Clave secreta
-//       { expiresIn: '2h' }              // Expira en 2 horas
-//     );
-
-//     // Enviamos token al frontend
-//     res.json({ token });
-
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Error servidor' });
-//   }
-// };
-
-
-// // Exportamos funciones para usarlas en las rutas
-// module.exports = { register, login };
+module.exports = {
+  register,
+  login
+};
