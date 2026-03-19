@@ -1,158 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ciberseguridad" />
+    <meta name="keywords" content="cybersecurity" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ciberseguridad">
-<meta name="keywords" content="cybersecurity">
+    <title>Atalanta - Registro</title>
 
-<title>Atalanta - Registro</title>
+    <link rel="icon" href="../assets/images/ui/9.png" type="image/png" />
 
-<link rel="icon" href="../assets/images/ui/9.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css" />
 
-<link rel="stylesheet" href="../css/index.css">
+    <script
+      src="https://kit.fontawesome.com/bcc6ce623e.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<script src="https://kit.fontawesome.com/bcc6ce623e.js" crossorigin="anonymous"></script>
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <a id="Atalanta__logo" class="btn__link">
+          <img
+            src="../assets/images/logos/ATALANTA_logo.png"
+            alt="Atalanta logo"
+          />
+        </a>
 
-</head>
+        <div class="navbar__div">
+          <a href="./login.html" class="btn__link" target="_blank">Login</a>
+        </div>
+        <button id="button__menu">
+          <a href="./login.html" class="btn__link" target="_blank">Login</a>
+        </button>
+      </nav>
+    </header>
 
-<body>
+    <main class="register">
+      <section class="register__section">
+        <div class="register__container">
+          <header class="register__header">
+            <h1 class="register__title">Regístrate</h1>
 
-<header class="header">
+            <p class="register__subtitle">
+              Crea una nueva cuenta en el sistema
+            </p>
+          </header>
 
-<nav class="navbar">
+          <form class="register__form" id="registerForm">
+            <!-- Nombre -->
 
-    <a id="Atalanta__logo" class="btn__link">
-        <img src="../assets/images/logos/ATALANTA_logo.png" alt="Atalanta logo">
-    </a>
+            <div class="register__input-wrapper">
+              <i class="fa-solid fa-user"></i>
 
-    <div class="navbar__div">
-        <a href="./login.html" class="btn__link" target="_blank">Login</a>
-    </div>
-    <button id="button__menu">
-        <a href="./login.html" class="btn__link" target="_blank">Login</a>
-    </button>
-</nav>
-</header>
+              <input
+                class="register__input"
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Introduce tu nombre"
+                required
+              />
+            </div>
 
+            <!-- Email -->
 
-<main class="register">
+            <div class="register__input-wrapper">
+              <i class="fa-solid fa-envelope"></i>
 
-<section class="register__section">
+              <input
+                class="register__input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Introduce tu email"
+                required
+              />
+            </div>
 
-<div class="register__container">
+            <!-- Password -->
 
-<header class="register__header">
+            <div class="register__input-wrapper">
+              <i class="fa-solid fa-lock"></i>
 
-<h1 class="register__title">Regístrate</h1>
+              <input
+                class="register__input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Introduce tu contraseña"
+                required
+              />
+            </div>
 
-<p class="register__subtitle">
-Crea una nueva cuenta en el sistema
-</p>
+            <!-- Cargo -->
 
-</header>
+            <div class="register__input-wrapper">
+              <select id="role" name="role" class="diagnostic__select" required>
+                <option value="">Selecciona rol</option>
+                <option value="cliente">cliente</option>
+                <option value="trabajador">trabajador</option>
+                <option value="jefe">jefe</option>
+                <option value="admin">admin</option>
+              </select>
+            </div>
 
+            <button class="register__button" type="submit">Crear cuenta</button>
 
-<form class="register__form" id="registerForm">
+            <p class="login__register">
+              ¿Ya tienes cuenta?
 
-<!-- Nombre -->
+              <a class="register__login-link" href="login.html">
+                Inicia sesión aquí
+              </a>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
 
-<div class="register__input-wrapper">
-
-<i class="fa-solid fa-user"></i>
-
-<input
-class="register__input"
-type="text"
-id="user"
-name="user"
-placeholder="Introduce tu nombre"
-required>
-
-</div>
-
-
-<!-- Email -->
-
-<div class="register__input-wrapper">
-
-<i class="fa-solid fa-envelope"></i>
-
-<input
-class="register__input"
-type="email"
-id="email"
-name="email"
-placeholder="Introduce tu email"
-required>
-
-</div>
-
-
-<!-- Password -->
-
-<div class="register__input-wrapper">
-
-<i class="fa-solid fa-lock"></i>
-
-<input
-class="register__input"
-type="password"
-id="password"
-name="password"
-placeholder="Introduce tu contraseña"
-required>
-
-</div>
-
-
-<!-- Cargo -->
-
-<div class="register__input-wrapper">
-
-<select id="role" name="role" class="diagnostic__select" required>
-
-<option value="">Selecciona rol</option>
-<option value="cliente">cliente</option>
-<option value="trabajador">trabajador</option>
-<option value="jefe">jefe</option>
-<option value="admin">admin</option>
-</select>
-
-</div>
-
-
-<button class="register__button" type="submit">
-Crear cuenta
-</button>
-
-
-<p class="login__register">
-
-¿Ya tienes cuenta?
-
-<a class="register__login-link" href="login.html">
-Inicia sesión aquí
-</a>
-
-</p>
-
-</form>
-
-</div>
-
-</section>
-
-</main>
-
-
-<script type="module" src="../js/main.js"></script>
-
-</body>
+    <script type="module" src="../js/main.js"></script>
+  </body>
 </html>

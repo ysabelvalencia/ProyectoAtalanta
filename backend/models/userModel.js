@@ -41,7 +41,7 @@ const createUser = async (nombre, email, passwordHash, role) => {
       [nombre, email, passwordHash, role]
     );
 
-    return result;
+    return result.insertId;
 
   } catch (error) {
     console.error('Error en createUser:', error);

@@ -58,16 +58,34 @@ const register = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Guardar usuario (rol por defecto Cliente)
-    await userModel.createUser(
+    // 💾 Crear usuario → obtenemos ID
+    const newUserId = await userModel.createUser(
       cleanNombre,
       cleanEmail,
       hashedPassword,
       'Cliente'
     );
 
+    // 🔑 Generar token (AUTO LOGIN)
+    const token = jwt.sign(
+      {
+        idUser: newUserId,
+        role: 'cliente'
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '2h' }
+    );
+
+    // 📦 Respuesta
     return res.status(201).json({
-      message: 'Usuario registrado correctamente'
+      message: 'Usuario registrado correctamente',
+      token,
+      user: {
+        id: newUserId,
+        nombre: cleanNombre,
+        email: cleanEmail,
+        rol: 'Cliente'
+      }
     });
 
   } catch (error) {
@@ -75,7 +93,6 @@ const register = async (req, res) => {
     return res.status(500).json({ message: 'Error servidor' });
   }
 };
-
 
 // =======================
 // 🔵 LOGIN
