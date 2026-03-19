@@ -28,3 +28,28 @@ export function initUserWelcome() {
 
   h1.textContent = `Bienvenido ${user.nombre}`; 
 }
+
+export function initTicketModal() {
+  const openBtn = document.querySelector(".btn-red");
+  const modal = document.getElementById("modalTicket");
+  const closeBtn = document.getElementById("closeModal");
+
+  if (!openBtn || !modal || !closeBtn) return;
+
+  // abrir modal
+  openBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+  });
+
+  // cerrar modal (X)
+  closeBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  // cerrar clicando fuera
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
+}

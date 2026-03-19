@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="es">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,14 +16,18 @@
   <title>Atalanta - Perfil</title>
 </head>
 
+
+<link rel="stylesheet" href="../css/index.css" />
+</head>
+
 <body>
+
   <header>
     <nav class="navbar">
-      <!-- Logo -->
-      <img src="../assets/images/logos/ATALANTA_logo.png" alt="Atalanta's logo">
+      <img src="../assets/images/logos/ATALANTA_logo.png" alt="logo">
 
       <div class="button__menu-user" id="logoutBtn">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        Logout
       </div>
     </nav>
   </header>
@@ -41,7 +46,8 @@
         <div class="card_user">
           <h2>Mis Tickets</h2>
           <p>Ver y gestionar tus incidencias</p>
-          <button class="btn-red">+ Crear Ticket</button>
+
+          <button class="btn-red" id="openModal">+ Crear Ticket</button>
         </div>
 
         <div class="card_user">
@@ -52,9 +58,34 @@
 
       </section>
 
+      <section class="tickets">
+        <h2>Mis incidencias recientes</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Estado</th>
+              <th>Actualizado</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="ticketsBody"></tbody>
+        </table>
+      </section>
+
     </main>
   </div>
-
+  <!-- MODAL -->
+  <div id="modalTicket" class="modal hidden">
+    <div class="modal-content"><span class="close-modal" id="closeModal">&times;</span>
+      <h2>Crear Ticket</h2>
+      <form id="ticketForm"><input type="text" placeholder="Título" required /><textarea
+          placeholder="Describe el problema..." required></textarea><button type="submit" class="btn-red">Enviar
+          Ticket</button></form>
+    </div>
+  </div>
   <script type="module" src="../js/main.js"></script>
 </body>
 
