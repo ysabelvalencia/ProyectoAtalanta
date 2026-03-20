@@ -1,3 +1,4 @@
+
 /* CONTENEDOR */
 .user {
   height: calc(100vh - 70px);
@@ -200,12 +201,23 @@ tbody tr{
 
 /* caja del modal */
 .modal-content {
+  color: #ff2e4d ;
   background: #fff;
   padding: 2rem;
   border-radius: 16px;
   width: 400px;
   max-width: 90%;
   position: relative;
+  border: 1px solid #8a8686;
+  font-family: "Monserrat",sans-serif;
+  background:
+  linear-gradient(
+    to bottom,
+    #000000 0%,
+    #000000 50%,
+    #33000a 100%
+  );
+
 }
 
 /* botón cerrar */
@@ -224,6 +236,9 @@ tbody tr{
   margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #8a8686;
+  background: #000000;
+  color:#c2bdbd;
+  font-family: "Poppins", sans-serif;
 }
 

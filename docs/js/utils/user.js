@@ -26,7 +26,7 @@ export function initUserWelcome() {
 
   if (!user || !h1) return;
 
-  h1.textContent = `Bienvenido ${user.user_name}`; 
+  h1.textContent = `Sesión de ${user.user_name}`; 
 }
 
 export function initTicketModal() {
