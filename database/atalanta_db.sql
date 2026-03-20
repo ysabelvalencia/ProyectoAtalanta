@@ -40,100 +40,101 @@
 -- ==========================================
 --  BORRAR TABLAS SI EXISTEN
 -- ==========================================
-drop table if exists history_ticket;
 drop table if exists comments;
 drop table if exists tickets;
 drop table if exists users;
 
--- ==========================================
+-- =========================================
+-- CREAR BASE DE DATOS
+-- =========================================
+CREATE DATABASE atalanta_db;
+USE atalanta_db;
+
+
+-- =========================================
 --  TABLA USERS
--- ==========================================
-create table users (
-    id_user int auto_increment,
-    user_name varchar(100) not null,
-    email varchar(120) not null,
-    password_hash varchar(255) not null,
-    rol varchar(20)  default 'cliente' not null,
-    creation_date datetime default current_timestamp,
-    
-    constraint pk_id_user_rol primary key(id_user,rol),
-    constraint uq_email unique key(email)
+-- =========================================
+CREATE TABLE roles (
+    id_role INT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(20) NOT NULL UNIQUE
 );
 
--- prueba insertar datos en users
---insert into users (user_name, email, password_hash, rol) values ('laura','laura@laura.es','laura','admin');-
---insert into users (user_name, email, password_hash, rol) values ('ysa','ysa@ysa.es','ysa','client');
---insert into users (user_name, email, password_hash, rol) values ('irene','irene@irene.es','irene','employee');
---insert into users (user_name, email, password_hash, rol) values ('krystian','krystian@krystian.es','krystian','manager');
+INSERT INTO roles (id_role, role_name) VALUES
+(1, 'cliente'),
+(2, 'trabajador'),
+(3, 'jefe'),
+(4, 'admin');
 
--- ==========================================
---   TABLA TICKETS
--- ==========================================
-create table tickets(
-    id_ticket int auto_increment,
-    status varchar(20) default 'created',
-    title varchar(100) not null,
-    description varchar(500) not null,
-    creation_date datetime default current_timestamp,
-    
-    id_client int not null,
-    rol_client varchar(20) default 'client',
-    
-    constraint ck_rol_client check (rol_client in ('client')),
-    constraint ck_status check (status in('created')),
-    
-    constraint pk_id_ticket primary key(id_ticket),
-    constraint fk_id_client_rol_client foreign key (id_client,rol_client)
-        references users (id_user, role) on delete cascade
-);
--- prueba insertar datos en tickets
---insert into tickets (title,description,id_client,rol_client) values ('error1','busqueda de errores',2,'client');
- 
--- ==========================================
---   TABLA COMMENTS
--- ==========================================
-create table comments (
-    id_comment int auto_increment,
-    comment_description varchar(200) not null,
-    creation_date_comment datetime default current_timestamp,
-    id_ticket int not null,
-    id_employee int not null,
-    rol_employee varchar(20) not null,
-    
-    constraint ck_role_employee check (role_employee in ('employee')),
-    
-    constraint pk_id_comment pgit rimary key (id_comment),
-    constraint fk_id_ticket foreign key (id_ticket)
-        references tickets (id_ticket) on delete cascade,
-    constraint fk_id_employee_rol_employee foreign key (id_employee,rol_employee) 
-        references users (id_user,rol) on delete cascade
+
+CREATE TABLE users (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    id_role INT NOT NULL DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_user_role
+        FOREIGN KEY (id_role) REFERENCES roles(id_role)
 );
 
--- prueba insertar datos en comments
--- insert into comments (comment_description,id_ticket, id_employee,rol_employee) values ('lo que sea',1,3,'employee');
- 
--- ==========================================
---  TABLA HISTORY_TICKET
--- ==========================================
-create table history_ticket (
-    id_history_ticket int auto_increment,
-    preview_status varchar(20) default 'created' not null,
-    new_status varchar(20),
-    modified_date datetime default current_timestamp,
-    id_ticket_created int not null,
-    modified_by varchar(20) not null,
-    id_rol int not null,
-    
-    constraint ck_modified_by check (modified_by = 'employee' or modified_by = 'manager'),
-    constraint ck_preview_status check (preview_status in('created','asign','in progress', 'closed')),
-    constraint ck_new_status check (new_status in('asign','in progress', 'closed')),
-    
-    constraint pk_id_history_ticket primary key (id_history_ticket),
-    constraint fk_id_ticket_created foreign key (id_ticket_created)
-        references tickets (id_ticket) on delete cascade,
-    constraint fk_id_rol_modified_by foreign key (id_role,modified_by)
-        references users (id_user,rol) on delete cascade
+
+-- =========================================
+--  TABLA TICKETS
+-- =========================================
+CREATE TABLE tickets (
+    id_ticket INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    status ENUM('abierto', 'en_proceso', 'cerrado') DEFAULT 'abierto',
+    id_cliente INT NOT NULL,
+    id_trabajador INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_ticket_cliente
+        FOREIGN KEY (id_cliente) REFERENCES users(id_user),
+    CONSTRAINT fk_ticket_trabajador
+        FOREIGN KEY (id_trabajador) REFERENCES users(id_user)
 );
- 
- -- prueba insertar datos en history_ticket
- --insert into history_ticket (new_status,id_ticket_created,id_rol,modified_by) values ('asign',1,4,'manager');
+
+-- =========================================
+--  TABLA COMMENTS
+-- =========================================
+CREATE TABLE comments (
+    id_comment INT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    id_ticket INT NOT NULL,
+    id_user INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_comment_ticket
+        FOREIGN KEY (id_ticket) REFERENCES tickets(id_ticket),
+    CONSTRAINT fk_comment_user
+        FOREIGN KEY (id_user) REFERENCES users(id_user)
+);
+
+
+INSERT INTO users (user_name, email, password_hash, id_role) VALUES
+('kyle', 'kyle@email.com', 'hash123', 1),       -- cliente
+('ysa', 'ysa@email.com', 'hash123', 1),         -- cliente
+('irene', 'irene@email.com', 'hash123', 2),     -- trabajador
+('krystian', 'krystian@email.com', 'hash123', 3), -- jefe
+('laura', 'laura@email.com', 'hash123', 4);     -- admin
+
+
+INSERT INTO tickets (title, description, status, id_cliente, id_trabajador) VALUES
+('No funciona el login', 'No puedo acceder a mi cuenta', 'abierto', 1, NULL),
+('Error en la web', 'La página se queda en blanco', 'en_proceso', 2, 3),
+('Problema con contraseña', 'No puedo resetearla', 'cerrado', 1, 3),
+('Fallo en el servidor', 'El backend da error 500', 'en_proceso', 2, 3);
+
+
+INSERT INTO comments (content, id_ticket, id_user) VALUES
+('Estoy revisando el problema', 2, 3),
+('Ya he solucionado el error', 3, 3),
+('Sigue sin funcionar', 1, 1),
+('Puedes dar más detalles?', 4, 3),
+('Claro, ocurre al iniciar sesión', 4, 2);
+
+
+SELECT * FROM users;
+SELECT * FROM tickets;
+SELECT * FROM comments;

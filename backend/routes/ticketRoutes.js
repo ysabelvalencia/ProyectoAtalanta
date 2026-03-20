@@ -7,7 +7,7 @@ const commentController = require('../controllers/commentController');
 
 
 // =======================
-// 🎫 TICKETS
+// TICKETS
 // =======================
 
 // cliente crea ticket
@@ -36,7 +36,7 @@ router.put(
 
 
 // =======================
-// 💬 COMMENTS
+// COMMENTS
 // =======================
 
 // SOLO trabajador comenta

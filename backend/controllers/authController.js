@@ -6,7 +6,7 @@ const validator = require('validator');
 const userModel = require('../models/userModel');
 
 // =======================
-// 🟢 REGISTRO
+// REGISTRO
 // =======================
 
 const register = async (req, res) => {
@@ -71,7 +71,7 @@ const register = async (req, res) => {
 
 
 // =======================
-// 🔵 LOGIN
+// LOGIN
 // =======================
 
 const login = async (req, res) => {
@@ -129,7 +129,7 @@ const login = async (req, res) => {
 };
 
 // =======================
-// 🟣 ADMIN - CAMBIAR ROL
+// ADMIN - CAMBIAR ROL
 // =======================
 
 const updateRole = async (req, res) => {

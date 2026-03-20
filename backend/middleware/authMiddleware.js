@@ -11,7 +11,7 @@
 const jwt = require('jsonwebtoken');
 
 // =======================
-// 🔐 AUTENTICACIÓN
+// AUTENTICACIÓN
 // =======================
 
 const authMiddleware = (req, res, next) => {
@@ -40,7 +40,7 @@ const authMiddleware = (req, res, next) => {
 
 
 // =======================
-// 🛡️ AUTORIZACIÓN POR ROL
+// AUTORIZACIÓN POR ROL
 // =======================
 
 const checkRole = (allowedRoles) => {
@@ -62,7 +62,7 @@ const checkRole = (allowedRoles) => {
 
 
 // =======================
-// 📤 EXPORT
+// EXPORT
 // =======================
 
 module.exports = {

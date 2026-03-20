@@ -13,7 +13,7 @@ export function initLoginForm() {
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // ✅ VALIDACIÓN FRONT
+    // VALIDACIÓN FRONT
     if (!email || !password) {
       alert("Todos los campos son obligatorios");
       return;
@@ -26,7 +26,7 @@ export function initLoginForm() {
     }
 
     try {
-      // ✅ LOADING
+      // LOADING
       submitButton.disabled = true;
       submitButton.textContent = "Cargando...";
 
@@ -44,7 +44,7 @@ export function initLoginForm() {
         throw new Error(data.message || "Error en login");
       }
 
-      // ✅ TOKEN + USER
+      // TOKEN + USER
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
