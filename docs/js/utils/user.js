@@ -29,32 +29,94 @@ export function initUserWelcome() {
   h1.textContent = `Bienvenido ${user.user_name}`; 
 }
 
+//------------------------------------------------------------------------//
+
 export function initTicketModal() {
-  const openBtn = document.querySelector(".btn-red");
+  const openBtn = document.getElementById("openModal");
   const modal = document.getElementById("modalTicket");
   const closeBtn = document.getElementById("closeModal");
+  const form = document.getElementById("ticketForm");
+  const tbody = document.getElementById("ticketsBody");
 
-  if (!openBtn || !modal || !closeBtn) return;
+  if (!openBtn || !modal || !closeBtn || !form || !tbody) return;
+
+  const titleInput = form.querySelector("input");
+  const descInput = form.querySelector("textarea");
 
   // abrir modal
   openBtn.addEventListener("click", () => {
     modal.classList.remove("hidden");
   });
 
-  // cerrar modal (X)
+  // cerrar modal
   closeBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
 
-  // cerrar clicando fuera
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.classList.add("hidden");
     }
   });
+
+  let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+
+  renderTickets();
+
+  // guardar ticket
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const newTicket = {
+      title: titleInput.value,
+      description: descInput.value,
+      status: "Abierto",
+      date: new Date().toLocaleDateString()
+    };
+
+    tickets.push(newTicket);
+    localStorage.setItem("tickets", JSON.stringify(tickets));
+
+    renderTickets();
+
+    form.reset();
+    modal.classList.add("hidden");
+  });
+
+  function renderTickets() {
+    tbody.innerHTML = "";
+
+    tickets.forEach((ticket, index) => {
+      const row = document.createElement("tr");
+
+      row.innerHTML = `
+        <td>${ticket.title}</td>
+        <td>${ticket.status}</td>
+        <td>${ticket.date}</td>
+        <td>
+          <button class="view-btn" data-index="${index}">Ver</button>
+          <button class="delete-btn" data-index="${index}">Eliminar</button>
+        </td>
+      `;
+
+      // VER DESCRIPCIÓN
+      row.querySelector(".view-btn").addEventListener("click", () => {
+        alert(ticket.description);
+      });
+
+      // ELIMINAR
+      row.querySelector(".delete-btn").addEventListener("click", () => {
+        tickets.splice(index, 1);
+        localStorage.setItem("tickets", JSON.stringify(tickets));
+        renderTickets();
+      });
+
+      tbody.appendChild(row);
+    });
+  }
 }
 
-
+//-----------------------------------------------------------------------//
 export async function initGetProfile() {
   const token = localStorage.getItem("token");
 
