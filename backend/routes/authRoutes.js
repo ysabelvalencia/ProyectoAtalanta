@@ -83,4 +83,16 @@ router.get(
     res.json({ message: 'Zona admin' });
   }
 );
+
+// =======================
+// ADMIN - GESTIÓN ROLES
+// =======================
+
+router.put(
+  '/users/:id/role',
+  authMiddleware,
+  checkRole(['admin']),
+  authController.updateRole
+);
+
 module.exports = router;

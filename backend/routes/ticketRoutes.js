@@ -3,6 +3,12 @@ const router = express.Router();
 
 const { authMiddleware, checkRole } = require('../middleware/authMiddleware');
 const ticketController = require('../controllers/ticketController');
+const commentController = require('../controllers/commentController');
+
+
+// =======================
+// 🎫 TICKETS
+// =======================
 
 // cliente crea ticket
 router.post(
@@ -12,7 +18,6 @@ router.post(
   ticketController.createTicket
 );
 
-
 // jefe asigna ticket
 router.put(
   '/:id/asignar',
@@ -20,5 +25,27 @@ router.put(
   checkRole(['jefe']),
   ticketController.assignTicket
 );
+
+
+// =======================
+// 💬 COMMENTS
+// =======================
+
+// SOLO trabajador comenta
+router.post(
+  '/:id/comments',
+  authMiddleware,
+  checkRole(['trabajador']),
+  commentController.createComment
+);
+
+// historial (todos pueden verlo)
+router.get(
+  '/:id/comments',
+  authMiddleware,
+  checkRole(['trabajador', 'jefe', 'admin']),
+  commentController.getComments
+);
+
 
 module.exports = router;

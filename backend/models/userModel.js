@@ -60,9 +60,42 @@ const createUser = async (user_name, email, passwordHash) => {
   }
 };
 
+const updateUserRole = async (id_user, id_role) => {
+  const [result] = await db.query(
+    `
+    UPDATE users
+    SET id_role = ?
+    WHERE id_user = ?
+    `,
+    [id_role, id_user]
+  );
+
+  return result.affectedRows;
+};
+
+
+const getUserById = async (id_user) => {
+  const [rows] = await db.query(
+    `
+    SELECT 
+      u.id_user,
+      u.user_name,
+      r.role_name
+    FROM users u
+    JOIN roles r ON u.id_role = r.id_role
+    WHERE u.id_user = ?
+    `,
+    [id_user]
+  );
+
+  return rows[0];
+};
+
 
 // Exportamos funciones
 module.exports = {
   getUserByEmail,
   createUser,
+  updateUserRole,
+  getUserById
 };
