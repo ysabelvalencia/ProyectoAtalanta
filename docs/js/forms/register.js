@@ -41,7 +41,7 @@ export function initRegisterForm() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ nombre, email, password })
+        body: JSON.stringify({ user_name: nombre, email, password })
       });
 
       const data = await response.json();

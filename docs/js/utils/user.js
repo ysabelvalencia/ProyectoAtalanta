@@ -26,7 +26,7 @@ export function initUserWelcome() {
 
   if (!user || !h1) return;
 
-  h1.textContent = `Bienvenido ${user.nombre}`; 
+  h1.textContent = `Bienvenido ${user.user_name}`; 
 }
 
 export function initTicketModal() {
@@ -52,4 +52,29 @@ export function initTicketModal() {
       modal.classList.add("hidden");
     }
   });
+}
+
+
+export async function initGetProfile() {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await fetch("http://localhost:4000/api/auth/profile", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    console.log("Perfil:", data);
+
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
 }

@@ -1,9 +1,5 @@
 /************************************************
  * userModel.js
- *
- * Modelo de usuario.
- * Se encarga de interactuar directamente con la base de datos.
- * Aquí SOLO se hacen consultas SQL.
  ************************************************/
 
 const db = require('../config/db');
@@ -14,13 +10,22 @@ const db = require('../config/db');
 
 const getUserByEmail = async (email) => {
   try {
-    // Query segura con parámetros (evita SQL Injection)
     const [rows] = await db.query(
-      'SELECT id_user, nombre, email, password_hash, rol FROM users WHERE email = ?', // 👈 AÑADIDO nombre
+      `
+      SELECT 
+        u.id_user, 
+        u.user_name, 
+        u.email, 
+        u.password_hash, 
+        u.id_role,
+        r.role_name
+      FROM users u
+      JOIN roles r ON u.id_role = r.id_role
+      WHERE u.email = ?
+      `,
       [email]
     );
 
-    // Devolvemos el primer usuario encontrado
     return rows[0];
 
   } catch (error) {
@@ -34,11 +39,17 @@ const getUserByEmail = async (email) => {
 // CREAR USUARIO
 // =======================
 
-const createUser = async (nombre, email, passwordHash, role) => {
+// 👉 NOTA: ya NO pasamos role
+// usamos DEFAULT = cliente
+
+const createUser = async (user_name, email, passwordHash) => {
   try {
     const [result] = await db.query(
-      'INSERT INTO users (nombre, email, password_hash, rol) VALUES (?, ?, ?, ?)',
-      [nombre, email, passwordHash, role]
+      `
+      INSERT INTO users (user_name, email, password_hash)
+      VALUES (?, ?, ?)
+      `,
+      [user_name, email, passwordHash]
     );
 
     return result.insertId;
