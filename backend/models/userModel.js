@@ -60,9 +60,23 @@ const createUser = async (user_name, email, passwordHash) => {
   }
 };
 
+const updateUserRole = async (id_user, id_role) => {
+  const [result] = await db.query(
+    `
+    UPDATE users
+    SET id_role = ?
+    WHERE id_user = ?
+    `,
+    [id_role, id_user]
+  );
+
+  return result.affectedRows;
+};
+
 
 // Exportamos funciones
 module.exports = {
   getUserByEmail,
   createUser,
+  updateUserRole
 };

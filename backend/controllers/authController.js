@@ -128,8 +128,43 @@ const login = async (req, res) => {
   }
 };
 
+// =======================
+// 🟣 ADMIN - CAMBIAR ROL
+// =======================
+
+const updateRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { id_role } = req.body;
+
+    // 🔐 Validación fuerte
+    const validRoles = [1, 2, 3, 4];
+
+    if (!id_role || !validRoles.includes(id_role)) {
+      return res.status(400).json({ message: 'Rol inválido' });
+    }
+
+    const updated = await userModel.updateUserRole(id, id_role);
+
+    if (updated === 0) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    return res.json({
+      message: 'Rol actualizado correctamente',
+      userId: id,
+      newRole: id_role
+    });
+
+  } catch (error) {
+    console.error('Error en updateRole:', error);
+    return res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
 
 module.exports = {
   register,
-  login
+  login,
+  updateRole
 };
