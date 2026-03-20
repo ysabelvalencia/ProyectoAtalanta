@@ -28,21 +28,22 @@ router.put(
 
 
 // =======================
-// 💬 COMMENTS (anidados a ticket)
+// 💬 COMMENTS
 // =======================
 
-// crear comentario (cliente o trabajador)
+// SOLO trabajador comenta
 router.post(
   '/:id/comments',
   authMiddleware,
-  checkRole(['cliente', 'trabajador']),
+  checkRole(['trabajador']),
   commentController.createComment
 );
 
-// obtener historial de comentarios
+// historial (todos pueden verlo)
 router.get(
   '/:id/comments',
   authMiddleware,
+  checkRole(['trabajador', 'jefe', 'admin']),
   commentController.getComments
 );
 

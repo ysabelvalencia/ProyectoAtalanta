@@ -1,5 +1,10 @@
 const db = require('../config/db');
 
+
+// =======================
+// CREAR TICKET
+// =======================
+
 const createTicket = async (title, description, id_cliente) => {
   const [result] = await db.query(
     `
@@ -11,6 +16,11 @@ const createTicket = async (title, description, id_cliente) => {
 
   return result.insertId;
 };
+
+
+// =======================
+// ASIGNAR TICKET
+// =======================
 
 const assignTicket = async (id_ticket, id_trabajador) => {
   const [result] = await db.query(
@@ -25,7 +35,31 @@ const assignTicket = async (id_ticket, id_trabajador) => {
   return result.affectedRows;
 };
 
+
+// =======================
+// VALIDAR ASIGNACIÓN
+// =======================
+
+const isTicketAssignedToUser = async (id_ticket, id_user) => {
+  const [rows] = await db.query(
+    `
+    SELECT id_ticket
+    FROM tickets
+    WHERE id_ticket = ? AND id_trabajador = ?
+    `,
+    [id_ticket, id_user]
+  );
+
+  return rows.length > 0;
+};
+
+
+// =======================
+// EXPORT
+// =======================
+
 module.exports = {
   createTicket,
-  assignTicket
+  assignTicket,
+  isTicketAssignedToUser
 };
