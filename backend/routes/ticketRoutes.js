@@ -26,6 +26,14 @@ router.put(
   ticketController.assignTicket
 );
 
+// trabajador cambia estado
+router.put(
+  '/:id/status',
+  authMiddleware,
+  checkRole(['trabajador']),
+  ticketController.updateStatus
+);
+
 
 // =======================
 // 💬 COMMENTS

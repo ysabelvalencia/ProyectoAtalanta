@@ -53,6 +53,22 @@ const isTicketAssignedToUser = async (id_ticket, id_user) => {
   return rows.length > 0;
 };
 
+// =======================
+// CAMBIAR ESTADO
+// =======================
+
+const updateTicketStatus = async (id_ticket, status) => {
+  const [result] = await db.query(
+    `
+    UPDATE tickets
+    SET status = ?
+    WHERE id_ticket = ?
+    `,
+    [status, id_ticket]
+  );
+
+  return result.affectedRows;
+};
 
 // =======================
 // EXPORT
@@ -61,5 +77,6 @@ const isTicketAssignedToUser = async (id_ticket, id_user) => {
 module.exports = {
   createTicket,
   assignTicket,
-  isTicketAssignedToUser
+  isTicketAssignedToUser,
+  updateTicketStatus
 };

@@ -52,7 +52,56 @@ const assignTicket = async (req, res) => {
   }
 };
 
+// =======================
+// CAMBIAR ESTADO
+// =======================
+
+const updateStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const id_user = req.user.idUser;
+
+    // validar status permitido
+    const allowedStatus = ['abierto', 'en_proceso', 'cerrado'];
+
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({
+        message: 'Estado no válido'
+      });
+    }
+
+    // validar asignación
+    const isAssigned = await ticketModel.isTicketAssignedToUser(id, id_user);
+
+    if (!isAssigned) {
+      return res.status(403).json({
+        message: 'No tienes acceso a este ticket'
+      });
+    }
+
+    // actualizar estado
+    const updated = await ticketModel.updateTicketStatus(id, status);
+
+    if (updated === 0) {
+      return res.status(404).json({
+        message: 'Ticket no encontrado'
+      });
+    }
+
+    res.json({
+      message: 'Estado actualizado correctamente',
+      status
+    });
+
+  } catch (error) {
+    console.error('Error en updateStatus:', error);
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
 module.exports = {
   createTicket,
-  assignTicket
+  assignTicket,
+  updateStatus
 };
