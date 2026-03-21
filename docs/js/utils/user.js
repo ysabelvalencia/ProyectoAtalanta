@@ -2,8 +2,6 @@
 
 export function initCheckAuth() {
   const token = localStorage.getItem("token");
-
-  // si no hay token → fuera
   if (!token) {
     window.location.href = "/docs/pages/login.html";
   }
@@ -19,7 +17,7 @@ export function initLogout() {
   });
 }
 
-// mostrar nombre del usuario
+// MOSTRAR EL NOMBRE DEL USUARIO
 export function initUserWelcome() {
   const user = JSON.parse(localStorage.getItem("user"));
   const h1 = document.getElementById("bienvenida");
@@ -30,9 +28,9 @@ export function initUserWelcome() {
 }
 
 //------------------------------------------------------------------------//
+// VENTANA MODAL TICKET
 
 export function initTicketModal() {
-
   console.log("INIT TICKET MODAL");
 
   const openBtn = document.getElementById("openModal");
@@ -48,12 +46,12 @@ export function initTicketModal() {
 
   const token = localStorage.getItem("token");
 
-  // abrir modal
+  // ABRIR
   openBtn.addEventListener("click", () => {
     modal.classList.remove("hidden");
   });
 
-  // cerrar modal
+  // CERRAR
   closeBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
@@ -64,7 +62,7 @@ export function initTicketModal() {
     }
   });
 
-  //Cargar tickets desde el backend
+  // CARGAR TICKETS DESDE EL BACKEND
 
   async function loadTickets() {
     try {
@@ -84,15 +82,22 @@ export function initTicketModal() {
         console.error("ERROR: data no es array", data);
         return;
       }
-    renderTickets(data);
+      renderTickets(data);
     } catch (error) {
       console.error("Error cargando tickets:", error.message);
     }
   }
   loadTickets();
-  // guardar ticket
+
+  // GUARDAR TICKETS
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    if (!titleInput.value.trim() || !descInput.value.trim()) {
+      alert("Los campos no pueden estar vacíos");
+      return;
+    }
 
     const newTicket = {
       title: titleInput.value,
@@ -100,7 +105,7 @@ export function initTicketModal() {
     };
 
     try {
-      // Enviar ticket al backend
+      // ENVIAR TICKETS AL BACKEND
       const response = await fetch("http://localhost:4000/api/tickets", {
         method: "POST",
         headers: {
@@ -122,45 +127,86 @@ export function initTicketModal() {
 
       form.reset();
       modal.classList.add("hidden");
-
     } catch (error) {
       console.error("Error:", error.message);
     }
   });
 
-function renderTickets(tickets) {
-  tbody.innerHTML = "";
+  // MOSTRAR HISTORIAL DE TICKETS
 
-  tickets.forEach((ticket) => {
-    const row = document.createElement("tr");
+  function renderTickets(tickets) {
+    tbody.innerHTML = "";
 
-    const tdTitle = document.createElement("td");
-    tdTitle.textContent = ticket.title;
+    tickets.forEach((ticket) => {
+      const row = document.createElement("tr");
 
-    const tdStatus = document.createElement("td");
-    tdStatus.textContent = ticket.status;
+      const tdTitle = document.createElement("td");
+      tdTitle.textContent = ticket.title;
 
-    const tdDate = document.createElement("td");
-    tdDate.textContent = new Date(ticket.created_at).toLocaleDateString();
+      const tdStatus = document.createElement("td");
+      tdStatus.textContent = ticket.status;
 
-    const tdActions = document.createElement("td");
+      const tdDate = document.createElement("td");
+      tdDate.textContent = new Date(ticket.created_at).toLocaleDateString();
 
-    const btnView = document.createElement("button");
-    btnView.textContent = "Ver";
+      const tdActions = document.createElement("td");
 
-    btnView.addEventListener("click", () => {
-      alert(ticket.description);
+      const btnView = document.createElement("button");
+      btnView.textContent = "Ver";
+
+      btnView.addEventListener("click", () => {
+        alert(ticket.description);
+      });
+
+      // BOTÓN ELIMINAR
+      const btnDelete = document.createElement("button");
+      btnDelete.textContent = "Eliminar";
+      btnDelete.style.marginLeft = "10px";
+
+      btnDelete.addEventListener("click", async () => {
+        const confirmDelete = confirm(
+          "¿Seguro que quieres eliminar este ticket?",
+        );
+        if (!confirmDelete) return;
+
+        try {
+          const response = await fetch(
+            `http://localhost:4000/api/tickets/${ticket.id_ticket}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`, 
+              },
+            },
+          );
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message);
+          }
+
+          console.log("Ticket eliminado");
+
+          //RECARGAR LISTA DESDE BACKEND
+          loadTickets();
+        } catch (error) {
+          console.error("Error eliminando:", error.message);
+        }
+      });
+
+      //BOTONES
+      tdActions.appendChild(btnView);
+      tdActions.appendChild(btnDelete);
+
+      //COLUMNAS, FILAS
+      row.appendChild(tdTitle);
+      row.appendChild(tdStatus);
+      row.appendChild(tdDate);
+      row.appendChild(tdActions);
+      tbody.appendChild(row);
     });
-
-    tdActions.appendChild(btnView);
-
-    row.appendChild(tdTitle);
-    row.appendChild(tdStatus);
-    row.appendChild(tdDate);
-    row.appendChild(tdActions);
-    tbody.appendChild(row);
-  });
-}
+  }
 }
 
 //-----------------------------------------------------------------------//

@@ -7,7 +7,6 @@ const ticketModel = require('../models/ticketModel');
 const createTicket = async (req, res) => {
   try {
     const { title, description } = req.body;
-
     const id_cliente = req.user.idUser;
 
     if (!title || !description) {
@@ -43,13 +42,10 @@ const assignTicket = async (req, res) => {
     }
 
     const updated = await ticketModel.assignTicket(id, id_trabajador);
-
     if (updated === 0) {
       return res.status(404).json({ message: 'Ticket no encontrado' });
     }
-
     res.json({ message: 'Ticket asignado correctamente' });
-
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error servidor' });
@@ -122,9 +118,35 @@ const getMyTickets = async (req, res) => {
   }
 };
 
+// =======================
+// ELIMINAR TICKET
+// =======================
+
+const deleteTicket = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const id_cliente = req.user.idUser;
+
+    const deleted = await ticketModel.deleteTicket(id, id_cliente);
+
+    if (deleted === 0) {
+      return res.status(403).json({
+        message: "No autorizado o ticket no existe"
+      });
+    }
+
+    res.json({ message: "Ticket eliminado" });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error servidor" });
+  }
+};
+
 module.exports = {
   createTicket,
   assignTicket,
   updateStatus,
-  getMyTickets
+  getMyTickets,
+  deleteTicket
 };

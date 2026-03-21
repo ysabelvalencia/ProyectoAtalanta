@@ -46,6 +46,14 @@ router.get(
   ticketController.getMyTickets
 );
 
+// Cliente borra ticket
+router.delete(
+  '/:id',
+  authMiddleware,
+  checkRole(['cliente']),
+  ticketController.deleteTicket
+);
+
 
 // =======================
 // COMMENTS

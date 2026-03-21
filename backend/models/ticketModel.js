@@ -91,6 +91,24 @@ const getTicketsByUser = async (id_cliente) => {
 
   return rows;
 };
+
+// =======================
+// BORRAR TICKET
+// =======================
+
+const deleteTicket = async (id_ticket, id_cliente) => {
+  const [result] = await db.query(
+    `
+    DELETE FROM tickets
+    WHERE id_ticket = ? AND id_cliente = ?
+    `,
+    [id_ticket, id_cliente]
+  );
+
+  return result.affectedRows;
+};
+
+
 // =======================
 // EXPORT
 // =======================
@@ -100,5 +118,6 @@ module.exports = {
   assignTicket,
   isTicketAssignedToUser,
   updateTicketStatus,
-  getTicketsByUser
+  getTicketsByUser,
+  deleteTicket
 };
