@@ -1,3 +1,7 @@
+// =======================
+// ticketRoutes.js
+// =======================
+
 const express = require('express');
 const router = express.Router();
 
@@ -10,7 +14,7 @@ const commentController = require('../controllers/commentController');
 // TICKETS
 // =======================
 
-// cliente crea ticket
+// Cliente crea ticket
 router.post(
   '/',
   authMiddleware,
@@ -18,7 +22,7 @@ router.post(
   ticketController.createTicket
 );
 
-// jefe asigna ticket
+// Jefe asigna ticket
 router.put(
   '/:id/asignar',
   authMiddleware,
@@ -26,12 +30,20 @@ router.put(
   ticketController.assignTicket
 );
 
-// trabajador cambia estado
+// Trabajador cambia estado
 router.put(
   '/:id/status',
   authMiddleware,
   checkRole(['trabajador']),
   ticketController.updateStatus
+);
+
+// Cliente ve sus tickets
+router.get(
+  '/',
+  authMiddleware,
+  checkRole(['cliente']),
+  ticketController.getMyTickets
 );
 
 
@@ -47,7 +59,7 @@ router.post(
   commentController.createComment
 );
 
-// historial (todos pueden verlo)
+// Historial (todos pueden verlo)
 router.get(
   '/:id/comments',
   authMiddleware,

@@ -1,12 +1,12 @@
-/************************************************
- * userModel.js
- ************************************************/
+// =================================
+// commentModel.js
+// =================================
 
 const db = require('../config/db');
 
-// =======================
+// ================
 // BUSCAR USUARIO
-// =======================
+// ================
 
 const getUserByEmail = async (email) => {
   try {
@@ -38,9 +38,6 @@ const getUserByEmail = async (email) => {
 // =======================
 // CREAR USUARIO
 // =======================
-
-// 👉 NOTA: ya NO pasamos role
-// usamos DEFAULT = cliente
 
 const createUser = async (user_name, email, passwordHash) => {
   try {
@@ -92,7 +89,10 @@ const getUserById = async (id_user) => {
 };
 
 
-// Exportamos funciones
+// =========
+// EXPORTS
+// =========
+
 module.exports = {
   getUserByEmail,
   createUser,

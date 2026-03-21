@@ -1,8 +1,14 @@
-//commentModel.js
+// =================================
+// commentModel.js
+// =================================
 
 const db = require('../config/db');
 
-// crear comentario
+
+// ==================
+// CREAR COMENTARIO
+// ==================
+
 const createComment = async (content, id_ticket, id_user) => {
   const [result] = await db.query(
     `
@@ -15,8 +21,9 @@ const createComment = async (content, id_ticket, id_user) => {
   return result.insertId;
 };
 
-
-// obtener historial
+// ==================
+// OBTENER HISTORIAL
+// ==================
 const getCommentsByTicket = async (id_ticket) => {
   const [rows] = await db.query(
     `

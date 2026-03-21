@@ -1,17 +1,10 @@
-/**
- * authRoutes.js
- *
- * Define las rutas de autenticación.
- * Conecta las peticiones HTTP con los controllers.
- */
+// =======================
+// authRoutes
+// =======================
 
 const express = require('express');
 const router = express.Router();
-
-// Importamos controller de autenticación
 const authController = require('../controllers/authController');
-
-// Middlewares
 const { authMiddleware, checkRole } = require('../middleware/authMiddleware');
 
 
@@ -21,7 +14,6 @@ const { authMiddleware, checkRole } = require('../middleware/authMiddleware');
 
 // Registro de usuario
 router.post('/register', authController.register);
-
 // Login de usuario
 router.post('/login', authController.login);
 
@@ -29,9 +21,6 @@ router.post('/login', authController.login);
 // =======================
 // RUTA PROTEGIDA 
 // =======================
-
-
-
 router.get('/profile', authMiddleware, (req, res) => {
   res.json({
      message: 'Acceso permitido',
@@ -44,7 +33,7 @@ router.get('/profile', authMiddleware, (req, res) => {
 // RUTAS POR ROL
 // =======================
 
-// solo cliente
+// Cliente
 router.get(
   '/cliente',
   authMiddleware,
@@ -54,7 +43,7 @@ router.get(
   }
 );
 
-// trabajador
+// Trabajador
 router.get(
   '/trabajador',
   authMiddleware,
@@ -64,7 +53,7 @@ router.get(
   }
 );
 
-// jefe
+// Jefe
 router.get(
   '/jefe',
   authMiddleware,
@@ -74,7 +63,7 @@ router.get(
   }
 );
 
-// admin
+// Admin
 router.get(
   '/admin',
   authMiddleware,

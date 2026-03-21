@@ -1,3 +1,7 @@
+// =================================
+// ticketModel.js
+// =================================
+
 const db = require('../config/db');
 
 
@@ -71,6 +75,23 @@ const updateTicketStatus = async (id_ticket, status) => {
 };
 
 // =======================
+// OBTENER TICKETS POR CLIENTE
+// =======================
+
+const getTicketsByUser = async (id_cliente) => {
+  const [rows] = await db.query(
+    `
+    SELECT id_ticket, title, description, status, created_at
+    FROM tickets
+    WHERE id_cliente = ?
+    ORDER BY created_at DESC
+    `,
+    [id_cliente]
+  );
+
+  return rows;
+};
+// =======================
 // EXPORT
 // =======================
 
@@ -78,5 +99,6 @@ module.exports = {
   createTicket,
   assignTicket,
   isTicketAssignedToUser,
-  updateTicketStatus
+  updateTicketStatus,
+  getTicketsByUser
 };

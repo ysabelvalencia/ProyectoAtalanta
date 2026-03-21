@@ -1,3 +1,7 @@
+// =================================
+// ticketController.js
+// =================================
+
 const ticketModel = require('../models/ticketModel');
 
 const createTicket = async (req, res) => {
@@ -100,8 +104,27 @@ const updateStatus = async (req, res) => {
   }
 };
 
+// =======================
+// CONSEGUIR TICKETS DEL CLIENTE
+// =======================
+
+const getMyTickets = async (req, res) => {
+  try {
+    const id_cliente = req.user.idUser;
+
+    const tickets = await ticketModel.getTicketsByUser(id_cliente);
+
+    res.json(tickets);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
 module.exports = {
   createTicket,
   assignTicket,
-  updateStatus
+  updateStatus,
+  getMyTickets
 };

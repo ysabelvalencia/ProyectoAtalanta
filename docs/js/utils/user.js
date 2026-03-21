@@ -26,12 +26,15 @@ export function initUserWelcome() {
 
   if (!user || !h1) return;
 
-  h1.textContent = `Sesión de ${user.user_name}`; 
+  h1.textContent = `Sesión de ${user.user_name}`;
 }
 
 //------------------------------------------------------------------------//
 
 export function initTicketModal() {
+
+  console.log("INIT TICKET MODAL");
+
   const openBtn = document.getElementById("openModal");
   const modal = document.getElementById("modalTicket");
   const closeBtn = document.getElementById("closeModal");
@@ -42,6 +45,8 @@ export function initTicketModal() {
 
   const titleInput = form.querySelector("input");
   const descInput = form.querySelector("textarea");
+
+  const token = localStorage.getItem("token");
 
   // abrir modal
   openBtn.addEventListener("click", () => {
@@ -59,61 +64,103 @@ export function initTicketModal() {
     }
   });
 
-  let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+  //Cargar tickets desde el backend
 
-  renderTickets();
+  async function loadTickets() {
+    try {
+      const response = await fetch("http://localhost:4000/api/tickets", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      if (!Array.isArray(data)) {
+        console.error("ERROR: data no es array", data);
+        return;
+      }
+    renderTickets(data);
+    } catch (error) {
+      console.error("Error cargando tickets:", error.message);
+    }
+  }
+  loadTickets();
   // guardar ticket
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const newTicket = {
       title: titleInput.value,
       description: descInput.value,
-      status: "Abierto",
-      date: new Date().toLocaleDateString()
     };
 
-    tickets.push(newTicket);
-    localStorage.setItem("tickets", JSON.stringify(tickets));
+    try {
+      // Enviar ticket al backend
+      const response = await fetch("http://localhost:4000/api/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(newTicket),
+      });
 
-    renderTickets();
+      const data = await response.json();
 
-    form.reset();
-    modal.classList.add("hidden");
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      console.log("Ticket creado en BD:", data);
+
+      loadTickets();
+
+      form.reset();
+      modal.classList.add("hidden");
+
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   });
 
-  function renderTickets() {
-    tbody.innerHTML = "";
+function renderTickets(tickets) {
+  tbody.innerHTML = "";
 
-    tickets.forEach((ticket, index) => {
-      const row = document.createElement("tr");
+  tickets.forEach((ticket) => {
+    const row = document.createElement("tr");
 
-      row.innerHTML = `
-        <td>${ticket.title}</td>
-        <td>${ticket.status}</td>
-        <td>${ticket.date}</td>
-        <td>
-          <button class="view-btn" data-index="${index}">Ver</button>
-          <button class="delete-btn" data-index="${index}">Eliminar</button>
-        </td>
-      `;
+    const tdTitle = document.createElement("td");
+    tdTitle.textContent = ticket.title;
 
-      // VER DESCRIPCIÓN
-      row.querySelector(".view-btn").addEventListener("click", () => {
-        alert(ticket.description);
-      });
+    const tdStatus = document.createElement("td");
+    tdStatus.textContent = ticket.status;
 
-      // ELIMINAR
-      row.querySelector(".delete-btn").addEventListener("click", () => {
-        tickets.splice(index, 1);
-        localStorage.setItem("tickets", JSON.stringify(tickets));
-        renderTickets();
-      });
+    const tdDate = document.createElement("td");
+    tdDate.textContent = new Date(ticket.created_at).toLocaleDateString();
 
-      tbody.appendChild(row);
+    const tdActions = document.createElement("td");
+
+    const btnView = document.createElement("button");
+    btnView.textContent = "Ver";
+
+    btnView.addEventListener("click", () => {
+      alert(ticket.description);
     });
-  }
+
+    tdActions.appendChild(btnView);
+
+    row.appendChild(tdTitle);
+    row.appendChild(tdStatus);
+    row.appendChild(tdDate);
+    row.appendChild(tdActions);
+    tbody.appendChild(row);
+  });
+}
 }
 
 //-----------------------------------------------------------------------//
@@ -124,8 +171,8 @@ export async function initGetProfile() {
     const response = await fetch("http://localhost:4000/api/auth/profile", {
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const data = await response.json();
@@ -135,7 +182,6 @@ export async function initGetProfile() {
     }
 
     console.log("Perfil:", data);
-
   } catch (error) {
     console.error("Error:", error.message);
   }
