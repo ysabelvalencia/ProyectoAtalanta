@@ -75,7 +75,7 @@ const updateTicketStatus = async (id_ticket, status) => {
 };
 
 // =======================
-// OBTENER TICKETS POR CLIENTE
+// OBTENER TICKETS DEL CLIENTE
 // =======================
 
 const getTicketsByUser = async (id_cliente) => {
@@ -87,6 +87,23 @@ const getTicketsByUser = async (id_cliente) => {
     ORDER BY created_at DESC
     `,
     [id_cliente]
+  );
+
+  return rows;
+};
+
+// =======================
+// OBTENER TICKETS ASIGNADOS AL TRABAJADOR
+// =======================
+const getTicketsByWorker = async (id_trabajador) => {
+  const [rows] = await db.query(
+    `
+    SELECT id_ticket, title, description, status, created_at
+    FROM tickets
+    WHERE id_trabajador = ?
+    ORDER BY created_at DESC
+    `,
+    [id_trabajador]
   );
 
   return rows;
@@ -119,5 +136,6 @@ module.exports = {
   isTicketAssignedToUser,
   updateTicketStatus,
   getTicketsByUser,
-  deleteTicket
+  deleteTicket,
+  getTicketsByWorker
 };

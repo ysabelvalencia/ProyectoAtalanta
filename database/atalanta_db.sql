@@ -113,26 +113,32 @@ CREATE TABLE comments (
 
 
 INSERT INTO users (user_name, email, password_hash, id_role) VALUES
-('kyle', 'kyle@email.com', 'hash123', 1),       -- cliente
-('ysa', 'ysa@email.com', 'hash123', 1),         -- cliente
-('irene', 'irene@email.com', 'hash123', 2),     -- trabajador
-('krystian', 'krystian@email.com', 'hash123', 3), -- jefe
-('laura', 'laura@email.com', 'hash123', 4);     -- admin
+('Kyle', 'kyle@test.com', '$2b$10$N9qo8uLOickgx2ZMRZo5i.ej9l5uWJ8VQ0zvY8l9kaI0s5momkM4y', 3),       
+('Ysa', 'ysa@test.com', '$2b$10$N9qo8uLOickgx2ZMRZo5i.ej9l5uWJ8VQ0zvY8l9kaI0s5momkM4y', 4),         
+('Irene', 'irene@test.com', '$2b$10$N9qo8uLOickgx2ZMRZo5i.ej9l5uWJ8VQ0zvY8l9kaI0s5momkM4y', 1),     
+('Krystian', 'krystian@test.com', '$2b$10$N9qo8uLOickgx2ZMRZo5i.ej9l5uWJ8VQ0zvY8l9kaI0s5momkM4y', 2),
+('Laura', 'laura@test.com', '$2b$10$N9qo8uLOickgx2ZMRZo5i.ej9l5uWJ8VQ0zvY8l9kaI0s5momkM4y', 2),
+('Sonia', 'sonia@test.com', '$2b$10$N9qo8uLOickgx2ZMRZo5i.ej9l5uWJ8VQ0zvY8l9kaI0s5momkM4y', 1);     
 
 
 INSERT INTO tickets (title, description, status, id_cliente, id_trabajador) VALUES
-('No funciona el login', 'No puedo acceder a mi cuenta', 'abierto', 1, NULL),
-('Error en la web', 'La página se queda en blanco', 'en_proceso', 2, 3),
-('Problema con contraseña', 'No puedo resetearla', 'cerrado', 1, 3),
-('Fallo en el servidor', 'El backend da error 500', 'en_proceso', 2, 3);
-
+('Error login', 'No puedo acceder a mi cuenta', 'abierto', 6, NULL),
+('Página en blanco', 'La web no carga correctamente', 'en_proceso', 9, 7),
+('Reset contraseña', 'No recibo email de recuperación', 'cerrado', 6, 8),
+('Error 500', 'El servidor falla al enviar formulario', 'en_proceso', 9, 8),
+('Bug en dashboard', 'No aparecen mis tickets', 'abierto', 6, NULL),
+('Problema CSS', 'Los estilos no cargan bien', 'en_proceso', 9, 7),
+('Error API', 'Fetch devuelve error 401', 'abierto', 6, NULL);
 
 INSERT INTO comments (content, id_ticket, id_user) VALUES
-('Estoy revisando el problema', 2, 3),
-('Ya he solucionado el error', 3, 3),
-('Sigue sin funcionar', 1, 1),
-('Puedes dar más detalles?', 4, 3),
-('Claro, ocurre al iniciar sesión', 4, 2);
+('Estoy revisando el problema', 30, 9),
+('Parece un fallo del backend', 31, 8),
+('Ya está solucionado', 32, 4),
+('¿Puedes dar más detalles?', 33, ),
+('Ocurre al enviar el formulario', 34, 5),
+('He encontrado el bug', 34, 4),
+('Se debe a un error en CSS', 34, 4),
+('Estoy trabajando en ello', 34, 5);
 
 
 SELECT * FROM users;

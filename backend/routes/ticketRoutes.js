@@ -30,6 +30,14 @@ router.put(
   ticketController.assignTicket
 );
 
+// Trabajador ve sus tickets asignados
+router.get(
+  '/assigned',
+  authMiddleware,
+  checkRole(['trabajador']),
+  ticketController.getAssignedTickets
+);
+
 // Trabajador cambia estado
 router.put(
   '/:id/status',

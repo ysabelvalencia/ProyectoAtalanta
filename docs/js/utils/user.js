@@ -12,12 +12,12 @@ export function initLogout() {
   if (!btnLogout) return;
 
   btnLogout.addEventListener("click", () => {
-    localStorage.removeItem("token"); // borrar token
-    window.location.href = "/docs/pages/login.html"; // redirigir
+    localStorage.removeItem("token");
+    window.location.href = "/docs/pages/login.html";
   });
 }
 
-// MOSTRAR EL NOMBRE DEL USUARIO
+// MOSTRAR NOMBRE USUARIO
 export function initUserWelcome() {
   const user = JSON.parse(localStorage.getItem("user"));
   const h1 = document.getElementById("bienvenida");
@@ -27,8 +27,7 @@ export function initUserWelcome() {
   h1.textContent = `Sesión de ${user.user_name}`;
 }
 
-//------------------------------------------------------------------------//
-// VENTANA MODAL TICKET
+//------------------------------------------------------------//
 
 export function initTicketModal() {
   console.log("INIT TICKET MODAL");
@@ -46,12 +45,19 @@ export function initTicketModal() {
 
   const token = localStorage.getItem("token");
 
-  // ABRIR
+  // 🔥 FIX IMPORTANTE: obtener usuario correctamente
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("USER:", user);
+
+  // 🔥 FIX IMPORTANTE: usar "role" (no "rol")
+  const isWorker = user?.role === "trabajador";
+
+  // ABRIR MODAL
   openBtn.addEventListener("click", () => {
     modal.classList.remove("hidden");
   });
 
-  // CERRAR
+  // CERRAR MODAL
   closeBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
@@ -62,11 +68,16 @@ export function initTicketModal() {
     }
   });
 
-  // CARGAR TICKETS DESDE EL BACKEND
+  //------------------------------------------------------------//
+  // 🔥 CARGAR TICKETS SEGÚN ROL
 
   async function loadTickets() {
     try {
-      const response = await fetch("http://localhost:4000/api/tickets", {
+      const url = isWorker
+        ? "http://localhost:4000/api/tickets/assigned"
+        : "http://localhost:4000/api/tickets";
+
+      const response = await fetch(url, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,21 +86,28 @@ export function initTicketModal() {
 
       const data = await response.json();
 
+      console.log("DATA:", data);
+
       if (!response.ok) {
         throw new Error(data.message);
       }
+
       if (!Array.isArray(data)) {
         console.error("ERROR: data no es array", data);
         return;
       }
+
       renderTickets(data);
+
     } catch (error) {
       console.error("Error cargando tickets:", error.message);
     }
   }
+
   loadTickets();
 
-  // GUARDAR TICKETS
+  //------------------------------------------------------------//
+  // CREAR TICKET (solo cliente)
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -105,7 +123,6 @@ export function initTicketModal() {
     };
 
     try {
-      // ENVIAR TICKETS AL BACKEND
       const response = await fetch("http://localhost:4000/api/tickets", {
         method: "POST",
         headers: {
@@ -121,18 +138,20 @@ export function initTicketModal() {
         throw new Error(data.message);
       }
 
-      console.log("Ticket creado en BD:", data);
+      console.log("Ticket creado:", data);
 
       loadTickets();
 
       form.reset();
       modal.classList.add("hidden");
+
     } catch (error) {
       console.error("Error:", error.message);
     }
   });
 
-  // MOSTRAR HISTORIAL DE TICKETS
+  //------------------------------------------------------------//
+  // RENDER TICKETS
 
   function renderTickets(tickets) {
     tbody.innerHTML = "";
@@ -140,15 +159,71 @@ export function initTicketModal() {
     tickets.forEach((ticket) => {
       const row = document.createElement("tr");
 
+      // TÍTULO
       const tdTitle = document.createElement("td");
       tdTitle.textContent = ticket.title;
 
+      // ESTADO
       const tdStatus = document.createElement("td");
-      tdStatus.textContent = ticket.status;
 
+      if (isWorker) {
+        // 🔥 TRABAJADOR → SELECT
+        const select = document.createElement("select");
+
+        ["abierto", "en_proceso", "cerrado"].forEach((estado) => {
+          const option = document.createElement("option");
+          option.value = estado;
+          option.textContent = estado;
+
+          if (estado === ticket.status) {
+            option.selected = true;
+          }
+
+          select.appendChild(option);
+        });
+
+        // CAMBIAR ESTADO
+        select.addEventListener("change", async () => {
+          try {
+            const response = await fetch(
+              `http://localhost:4000/api/tickets/${ticket.id_ticket}/status`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                  status: select.value,
+                }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              throw new Error(data.message);
+            }
+
+            console.log("Estado actualizado:", data);
+
+          } catch (error) {
+            console.error("Error:", error.message);
+          }
+        });
+
+        tdStatus.appendChild(select);
+
+      } else {
+        // 🔥 CLIENTE → TEXTO
+        tdStatus.textContent = ticket.status;
+      }
+
+      // FECHA
       const tdDate = document.createElement("td");
       tdDate.textContent = new Date(ticket.created_at).toLocaleDateString();
 
+      // ACCIONES
       const tdActions = document.createElement("td");
 
       const btnView = document.createElement("button");
@@ -158,58 +233,60 @@ export function initTicketModal() {
         alert(ticket.description);
       });
 
-      // BOTÓN ELIMINAR
-      const btnDelete = document.createElement("button");
-      btnDelete.textContent = "Eliminar";
-      btnDelete.style.marginLeft = "10px";
-
-      btnDelete.addEventListener("click", async () => {
-        const confirmDelete = confirm(
-          "¿Seguro que quieres eliminar este ticket?",
-        );
-        if (!confirmDelete) return;
-
-        try {
-          const response = await fetch(
-            `http://localhost:4000/api/tickets/${ticket.id_ticket}`,
-            {
-              method: "DELETE",
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`, 
-              },
-            },
-          );
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message);
-          }
-
-          console.log("Ticket eliminado");
-
-          //RECARGAR LISTA DESDE BACKEND
-          loadTickets();
-        } catch (error) {
-          console.error("Error eliminando:", error.message);
-        }
-      });
-
-      //BOTONES
       tdActions.appendChild(btnView);
-      tdActions.appendChild(btnDelete);
 
-      //COLUMNAS, FILAS
+      // 🔥 SOLO CLIENTE PUEDE ELIMINAR
+      if (!isWorker) {
+        const btnDelete = document.createElement("button");
+        btnDelete.textContent = "Eliminar";
+        btnDelete.style.marginLeft = "10px";
+
+        btnDelete.addEventListener("click", async () => {
+          const confirmDelete = confirm("¿Seguro que quieres eliminar?");
+          if (!confirmDelete) return;
+
+          try {
+            const response = await fetch(
+              `http://localhost:4000/api/tickets/${ticket.id_ticket}`,
+              {
+                method: "DELETE",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              throw new Error(data.message);
+            }
+
+            console.log("Ticket eliminado");
+
+            loadTickets();
+
+          } catch (error) {
+            console.error("Error eliminando:", error.message);
+          }
+        });
+
+        tdActions.appendChild(btnDelete);
+      }
+
+      // MONTAR FILA
       row.appendChild(tdTitle);
       row.appendChild(tdStatus);
       row.appendChild(tdDate);
       row.appendChild(tdActions);
+
       tbody.appendChild(row);
     });
   }
 }
 
-//-----------------------------------------------------------------------//
+//------------------------------------------------------------//
+
 export async function initGetProfile() {
   const token = localStorage.getItem("token");
 
@@ -228,6 +305,7 @@ export async function initGetProfile() {
     }
 
     console.log("Perfil:", data);
+
   } catch (error) {
     console.error("Error:", error.message);
   }

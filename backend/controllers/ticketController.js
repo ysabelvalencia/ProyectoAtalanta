@@ -100,6 +100,7 @@ const updateStatus = async (req, res) => {
   }
 };
 
+
 // =======================
 // CONSEGUIR TICKETS DEL CLIENTE
 // =======================
@@ -119,7 +120,7 @@ const getMyTickets = async (req, res) => {
 };
 
 // =======================
-// ELIMINAR TICKET
+// ELIMINAR TICKET (CLIENTE)
 // =======================
 
 const deleteTicket = async (req, res) => {
@@ -143,10 +144,29 @@ const deleteTicket = async (req, res) => {
   }
 };
 
+// =======================
+// CONSEGUIR TICKETS ASIGNADOS AL TRABAJADOR
+// =======================
+
+const getAssignedTickets = async (req, res) => {
+  try {
+    const id_trabajador = req.user.idUser;
+
+    const tickets = await ticketModel.getTicketsByWorker(id_trabajador);
+
+    res.json(tickets);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
 module.exports = {
   createTicket,
   assignTicket,
   updateStatus,
   getMyTickets,
-  deleteTicket
+  deleteTicket,
+  getAssignedTickets
 };
