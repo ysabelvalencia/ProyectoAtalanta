@@ -186,7 +186,8 @@ export function initTicketModal() {
 
       // VER
       const btnView = document.createElement("button");
-      btnView.textContent = "Ver";
+      btnView.innerHTML = `<i class="fa-solid fa-eye"></i>`;
+      btnView.classList.add("btnUser", "btn-view");
 
       btnView.addEventListener("click", () => {
         localStorage.setItem("selectedTicket", JSON.stringify(ticket));
@@ -200,8 +201,8 @@ export function initTicketModal() {
 
       if (!isStaff) {
         const btnDelete = document.createElement("button");
-        btnDelete.textContent = "Eliminar";
-        btnDelete.style.marginLeft = "10px";
+        btnDelete.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+        btnDelete.classList.add("btnUser", "btn-delete");
 
         btnDelete.addEventListener("click", async () => {
           const confirmDelete = confirm("¿Seguro que quieres eliminar?");
