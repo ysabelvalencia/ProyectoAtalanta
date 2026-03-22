@@ -1,23 +1,82 @@
-<div class="ticket-detail">
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ciberseguridad" />
+    <meta name="keywords" content="cybersecurity" />
+    <link rel="icon" href="../assets/images/ui/9.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/index.css" />
+    <script
+      src="https://kit.fontawesome.com/bcc6ce623e.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Atalanta - Tickets</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <img src="../assets/images/logos/ATALANTA_logo.png" alt="logo" />
 
-  <h2 id="ticketTitle"></h2>
-  <p id="ticketDescription"></p>
+        <div class="button__menu-user" id="logoutBtn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </div>
+      </nav>
+    </header>
 
-  <div>
-    <label>Estado:</label>
-    <select id="statusSelect"></select>
-    <button id="saveStatusBtn">Guardar</button>
-  </div>
+    <div class="user">
+      <main class="dashboard">
+        <section class="welcome">
+          <h1 id="bienvenida">Sesion de</h1>
+          <p>Panel de control</p>
+        </section>
+        <section class="ticket-container">
+          <!-- CARD DEL TICKET -->
+          <div class="ticket-card">
+            <h2 id="ticketTitle" class="ticket-title"></h2>
+            <p id="ticketDescription" class="ticket-description"></p>
+            <div class="ticket-meta-group">
+              <p class="ticket-meta">
+                Creado por: <span id="ticketAuthor"></span>
+              </p>
 
-  <hr>
+              <p class="ticket-meta">
+                Fecha creación: <span id="ticketDate"></span>
+              </p>
+            </div>
 
-  <h3>Comentarios</h3>
+            <div class="ticket-status">
+              <label>Estado:</label>
+              <select id="statusSelect"></select>
+              <button id="saveStatusBtn" class="btn-blue">Guardar</button>
+            </div>
+          </div>
 
-  <div id="commentsContainer"></div>
+          <!-- CARD DE COMENTARIOS -->
+          <div class="comments-card">
+            <h3 class="comments-title">Comentarios</h3>
 
-  <div id="commentForm">
-    <textarea id="commentInput" placeholder="Escribe un comentario"></textarea>
-    <button id="sendCommentBtn">Enviar</button>
-  </div>
+            <div id="commentForm" class="comment-form">
+              <textarea
+                id="commentInput"
+                placeholder="Escribe un comentario..."
+              ></textarea>
 
-</div>
+              <button id="sendCommentBtn" class="btn-red">
+                Enviar comentario
+              </button>
+            </div>
+
+            <div id="commentsContainer" class="comments-container"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>

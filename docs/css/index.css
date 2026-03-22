@@ -19,6 +19,7 @@
 @import "./pages/login.css";
 @import "./pages/register.css";
 @import "./pages/user.css";
+@import "./pages/ticket-detail.css";
 
 /* LAYOUT */
 @import "./layout/footer.css";

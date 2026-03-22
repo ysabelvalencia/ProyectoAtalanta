@@ -20,12 +20,16 @@ export function initTicketDetail() {
 
   // RENDER INFO
   title.textContent = ticket.title;
-  desc.textContent = ticket.description;
+  if (desc) {
+    desc.textContent = ticket.description;
+  }
 
   //--------------------------------------------------
   // ESTADO
 
-  const estados = ["abierto", "en_proceso", "cerrado"];
+  const estados = ["abierto", "en proceso", "cerrado"];
+
+  statusSelect.innerHTML = "";
 
   estados.forEach((estado) => {
     const option = document.createElement("option");
@@ -37,7 +41,7 @@ export function initTicketDetail() {
     statusSelect.appendChild(option);
   });
 
-  // 🔥 SOLO STAFF PUEDE CAMBIAR
+  // SOLO STAFF PUEDE CAMBIAR
   if (!isStaff) {
     statusSelect.disabled = true;
     saveBtn.style.display = "none";
@@ -54,7 +58,7 @@ export function initTicketDetail() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ status: statusSelect.value }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -62,7 +66,6 @@ export function initTicketDetail() {
       if (!response.ok) throw new Error(data.message);
 
       alert("Estado actualizado");
-
     } catch (error) {
       console.error(error.message);
     }
@@ -79,15 +82,14 @@ export function initTicketDetail() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.message);
 
-      renderComments(data);
-
+      renderComments(data.comments);
     } catch (error) {
       console.error(error.message);
     }
@@ -99,47 +101,61 @@ export function initTicketDetail() {
   // RENDER COMMENTS
 
   function renderComments(comments) {
-    commentsContainer.innerHTML = "";
-
     comments.forEach((c) => {
       const div = document.createElement("div");
+      div.classList.add("comment");
 
       div.innerHTML = `
-        <p>${c.content}</p>
-        <small>${new Date(c.created_at).toLocaleString()}</small>
-      `;
+      <img src="https://i.pravatar.cc/40?u=${c.id_user}" alt="avatar">
 
-      // 🔥 SOLO STAFF PUEDE BORRAR
-      if (isStaff) {
-        const btnDelete = document.createElement("button");
-        btnDelete.textContent = "Eliminar";
+      <div class="comment-content">
 
-        btnDelete.addEventListener("click", async () => {
-          try {
-            const res = await fetch(
-              `http://localhost:4000/api/comments/${c.id_comment}`,
-              {
-                method: "DELETE",
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
+        <div class="comment-header">
+          <strong>${c.user_name || "Usuario"}</strong> · 
+          ${new Date(c.created_at).toLocaleString()}
+        </div>
 
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.message);
+        <div class="comment-text">
+          ${c.content}
+        </div>
 
-            loadComments();
+        ${
+          isStaff
+            ? `<span class="comment-delete" data-id="${c.id_comment}">
+                <i class="fa-solid fa-trash"></i>
+               </span>`
+            : ""
+        }
 
-          } catch (error) {
-            console.error(error.message);
-          }
-        });
-
-        div.appendChild(btnDelete);
-      }
+      </div>
+    `;
 
       commentsContainer.appendChild(div);
+    });
+
+    //--------------------------------------------------
+    // EVENTOS DELETE (después de renderizar)
+
+    document.querySelectorAll(".comment-delete").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const id = e.currentTarget.dataset.id;
+
+        try {
+          const res = await fetch(`http://localhost:4000/api/comments/${id}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.message);
+
+          loadComments();
+        } catch (error) {
+          console.error(error.message);
+        }
+      });
     });
   }
 
@@ -166,7 +182,7 @@ export function initTicketDetail() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ content }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -175,7 +191,6 @@ export function initTicketDetail() {
 
       commentInput.value = "";
       loadComments();
-
     } catch (error) {
       console.error(error.message);
     }
