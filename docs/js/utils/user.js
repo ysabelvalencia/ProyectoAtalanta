@@ -47,18 +47,19 @@ export function initTicketModal() {
 
   if (!token || !user) return;
 
-  const isWorker = user.role === "trabajador";
-
   //------------------------------------------------------------//
-  // CONTROL UI POR ROL
+  //CONTROL UI POR ROL
+  const STAFF_ROLES = ["trabajador", "jefe", "admin"];
+  const isStaff = STAFF_ROLES.includes(user.role);
 
-  if (isWorker) {
+  if (isStaff) {
     cardCreate?.classList.add("hidden");
   }
+
   //------------------------------------------------------------//
   // MODAL (SOLO CLIENTE)
 
-  if (!isWorker && openBtn && modal && closeBtn && form) {
+  if (!isStaff && openBtn && modal && closeBtn && form) {
     const titleInput = form.querySelector("input");
     const descInput = form.querySelector("textarea");
 
@@ -117,12 +118,13 @@ export function initTicketModal() {
       }
     });
   }
+
   //------------------------------------------------------------//
   // CARGAR TICKETS SEGÚN ROL
 
   async function loadTickets() {
     try {
-      const url = isWorker
+      const url = isStaff
         ? "http://localhost:4000/api/tickets/assigned"
         : "http://localhost:4000/api/tickets";
 
@@ -192,7 +194,7 @@ export function initTicketModal() {
       //------------------------------------------------------------//
       // SOLO CLIENTE PUEDE ELIMINAR
 
-      if (!isWorker) {
+      if (!isStaff) {
         const btnDelete = document.createElement("button");
         btnDelete.textContent = "Eliminar";
         btnDelete.style.marginLeft = "10px";

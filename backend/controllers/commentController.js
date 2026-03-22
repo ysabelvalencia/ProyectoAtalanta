@@ -1,3 +1,8 @@
+// =======================
+// commentController.js
+// =======================
+
+
 const commentModel = require('../models/commentModel');
 const ticketModel = require('../models/ticketModel');
 
@@ -12,12 +17,12 @@ const createComment = async (req, res) => {
     const { content } = req.body;
     const id_user = req.user.idUser;
 
-    // 🔹 Validación básica
+    // Validación básica
     if (!content) {
       return res.status(400).json({ message: 'Contenido vacío' });
     }
 
-    // 🔐 VALIDACIÓN CLAVE (solo tickets asignados)
+    // VALIDACIÓN CLAVE (solo tickets asignados)
     const isAssigned = await ticketModel.isTicketAssignedToUser(id, id_user);
 
     if (!isAssigned) {
@@ -26,7 +31,7 @@ const createComment = async (req, res) => {
       });
     }
 
-    // 💾 Crear comentario
+    // Crear comentario
     const commentId = await commentModel.createComment(
       content,
       id,
@@ -66,8 +71,38 @@ const getComments = async (req, res) => {
   }
 };
 
+// =======================
+// BORRAR COMENTARIO
+// =======================
+
+const deleteComment = async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const id_user = req.user.idUser;
+
+    const isOwner = await commentModel.isCommentOwner(id, id_user);
+
+    if (!isOwner) {
+      return res.status(403).json({
+        message: 'No puedes borrar este comentario'
+      });
+    }
+
+    await commentModel.deleteComment(id);
+
+    res.json({
+      message: 'Comentario eliminado'
+    });
+
+  } catch (error) {
+    console.error('Error en deleteComment:', error);
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
 
 module.exports = {
   createComment,
-  getComments
-};
+  getComments,
+  deleteComment
+}

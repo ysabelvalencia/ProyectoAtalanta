@@ -1,5 +1,5 @@
 // =======================
-// authRoutes
+// authRoutes.js
 // =======================
 
 const express = require('express');
