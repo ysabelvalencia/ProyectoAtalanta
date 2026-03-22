@@ -211,6 +211,9 @@ to bottom,
 #1a0006 60%,
 #33000a 100%
 );
+background:#050505;
+color:white;
+font-family:"Poppins", sans-serif;
 }
 
 .areas__title{
@@ -300,6 +303,7 @@ text-align:left;
       #1a0006 40%,
       #000000 100%
     );
+    color:white;
   }
 
 .teams__title{
