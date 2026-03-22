@@ -16,7 +16,7 @@ export function initLogout() {
     window.location.href = "/docs/pages/login.html";
   });
 }
-
+//------------------------------------------------------------//
 // MOSTRAR NOMBRE USUARIO
 export function initUserWelcome() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -28,6 +28,7 @@ export function initUserWelcome() {
 }
 
 //------------------------------------------------------------//
+//CREAR TICKETS
 
 export function initTicketModal() {
   console.log("INIT TICKET MODAL");
@@ -37,39 +38,87 @@ export function initTicketModal() {
   const closeBtn = document.getElementById("closeModal");
   const form = document.getElementById("ticketForm");
   const tbody = document.getElementById("ticketsBody");
+  const cardCreate = document.getElementById("cardCreateTicket");
 
-  if (!openBtn || !modal || !closeBtn || !form || !tbody) return;
-
-  const titleInput = form.querySelector("input");
-  const descInput = form.querySelector("textarea");
+  if (!tbody) return;
 
   const token = localStorage.getItem("token");
-
-  // 🔥 FIX IMPORTANTE: obtener usuario correctamente
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("USER:", user);
 
-  // 🔥 FIX IMPORTANTE: usar "role" (no "rol")
-  const isWorker = user?.role === "trabajador";
+  if (!token || !user) return;
 
-  // ABRIR MODAL
-  openBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
-  });
-
-  // CERRAR MODAL
-  closeBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.add("hidden");
-    }
-  });
+  const isWorker = user.role === "trabajador";
 
   //------------------------------------------------------------//
-  // 🔥 CARGAR TICKETS SEGÚN ROL
+  // CONTROL UI POR ROL
+
+  if (isWorker) {
+    cardCreate?.classList.add("hidden");
+  }
+  //------------------------------------------------------------//
+  // MODAL (SOLO CLIENTE)
+
+  if (!isWorker && openBtn && modal && closeBtn && form) {
+    const titleInput = form.querySelector("input");
+    const descInput = form.querySelector("textarea");
+
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+
+    // CREAR TICKET
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!titleInput.value.trim() || !descInput.value.trim()) {
+        alert("Los campos no pueden estar vacíos");
+        return;
+      }
+
+      const newTicket = {
+        title: titleInput.value,
+        description: descInput.value,
+      };
+
+      try {
+        const response = await fetch("http://localhost:4000/api/tickets", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newTicket),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message);
+        }
+
+        console.log("Ticket creado:", data);
+
+        loadTickets();
+
+        form.reset();
+        modal.classList.add("hidden");
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    });
+  }
+  //------------------------------------------------------------//
+  // CARGAR TICKETS SEGÚN ROL
 
   async function loadTickets() {
     try {
@@ -98,57 +147,12 @@ export function initTicketModal() {
       }
 
       renderTickets(data);
-
     } catch (error) {
       console.error("Error cargando tickets:", error.message);
     }
   }
 
   loadTickets();
-
-  //------------------------------------------------------------//
-  // CREAR TICKET (solo cliente)
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    if (!titleInput.value.trim() || !descInput.value.trim()) {
-      alert("Los campos no pueden estar vacíos");
-      return;
-    }
-
-    const newTicket = {
-      title: titleInput.value,
-      description: descInput.value,
-    };
-
-    try {
-      const response = await fetch("http://localhost:4000/api/tickets", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(newTicket),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-
-      console.log("Ticket creado:", data);
-
-      loadTickets();
-
-      form.reset();
-      modal.classList.add("hidden");
-
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  });
 
   //------------------------------------------------------------//
   // RENDER TICKETS
@@ -163,61 +167,9 @@ export function initTicketModal() {
       const tdTitle = document.createElement("td");
       tdTitle.textContent = ticket.title;
 
-      // ESTADO
+      // ESTADO (SIEMPRE TEXTO)
       const tdStatus = document.createElement("td");
-
-      if (isWorker) {
-        // 🔥 TRABAJADOR → SELECT
-        const select = document.createElement("select");
-
-        ["abierto", "en_proceso", "cerrado"].forEach((estado) => {
-          const option = document.createElement("option");
-          option.value = estado;
-          option.textContent = estado;
-
-          if (estado === ticket.status) {
-            option.selected = true;
-          }
-
-          select.appendChild(option);
-        });
-
-        // CAMBIAR ESTADO
-        select.addEventListener("change", async () => {
-          try {
-            const response = await fetch(
-              `http://localhost:4000/api/tickets/${ticket.id_ticket}/status`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                  status: select.value,
-                }),
-              }
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-              throw new Error(data.message);
-            }
-
-            console.log("Estado actualizado:", data);
-
-          } catch (error) {
-            console.error("Error:", error.message);
-          }
-        });
-
-        tdStatus.appendChild(select);
-
-      } else {
-        // 🔥 CLIENTE → TEXTO
-        tdStatus.textContent = ticket.status;
-      }
+      tdStatus.textContent = ticket.status;
 
       // FECHA
       const tdDate = document.createElement("td");
@@ -226,16 +178,20 @@ export function initTicketModal() {
       // ACCIONES
       const tdActions = document.createElement("td");
 
+      // VER
       const btnView = document.createElement("button");
       btnView.textContent = "Ver";
 
       btnView.addEventListener("click", () => {
-        alert(ticket.description);
+        localStorage.setItem("selectedTicket", JSON.stringify(ticket));
+        window.location.href = "/docs/pages/ticket-detail.html";
       });
 
       tdActions.appendChild(btnView);
 
-      // 🔥 SOLO CLIENTE PUEDE ELIMINAR
+      //------------------------------------------------------------//
+      // SOLO CLIENTE PUEDE ELIMINAR
+
       if (!isWorker) {
         const btnDelete = document.createElement("button");
         btnDelete.textContent = "Eliminar";
@@ -253,7 +209,7 @@ export function initTicketModal() {
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
-              }
+              },
             );
 
             const data = await response.json();
@@ -265,7 +221,6 @@ export function initTicketModal() {
             console.log("Ticket eliminado");
 
             loadTickets();
-
           } catch (error) {
             console.error("Error eliminando:", error.message);
           }
@@ -274,7 +229,8 @@ export function initTicketModal() {
         tdActions.appendChild(btnDelete);
       }
 
-      // MONTAR FILA
+      //------------------------------------------------------------//
+
       row.appendChild(tdTitle);
       row.appendChild(tdStatus);
       row.appendChild(tdDate);
@@ -286,6 +242,7 @@ export function initTicketModal() {
 }
 
 //------------------------------------------------------------//
+// PERFIL
 
 export async function initGetProfile() {
   const token = localStorage.getItem("token");
@@ -305,7 +262,6 @@ export async function initGetProfile() {
     }
 
     console.log("Perfil:", data);
-
   } catch (error) {
     console.error("Error:", error.message);
   }

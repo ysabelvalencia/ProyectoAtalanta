@@ -1,87 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Ciberseguridad" />
+    <meta name="keywords" content="cybersecurity" />
+    <link rel="icon" href="../assets/images/ui/9.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/index.css" />
+    <script
+      src="https://kit.fontawesome.com/bcc6ce623e.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Atalanta - Perfil</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <img src="../assets/images/logos/ATALANTA_logo.png" alt="logo" />
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ciberseguridad" />
-  <meta name="keywords" content="cybersecurity" />
-  <link rel="icon" href="../assets/images/ui/9.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="../css/index.css" />
-  <script src="https://kit.fontawesome.com/bcc6ce623e.js" crossorigin="anonymous"></script>
-  <title>Atalanta - Perfil</title>
-</head>
-<body>
-
-  <header>
-    <nav class="navbar">
-      <img src="../assets/images/logos/ATALANTA_logo.png" alt="logo">
-
-      <div class="button__menu-user" id="logoutBtn">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      </div>
-    </nav>
-  </header>
-
-  <div class="user">
-
-    <main class="dashboard">
-
-      <section class="welcome">
-        <h1 id="bienvenida">Bienvenido</h1>
-        <p>Panel de control</p>
-      </section>
-
-      <section class="cards_user">
-
-        <div class="card_user">
-          <h2>Mis Tickets</h2>
-          <p>Ver y gestionar tus incidencias</p>
-
-          <button class="btn-red" id="openModal">+ Crear Ticket</button>
+        <div class="button__menu-user" id="logoutBtn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>
+      </nav>
+    </header>
 
-        <div class="card_user">
-          <h2>Mi Perfil</h2>
-          <p>Editar tu información personal</p>
-          <button class="btn-blue">Ver Perfil</button>
-        </div>
+    <div class="user">
+      <main class="dashboard">
+        <section class="welcome">
+          <h1 id="bienvenida">Bienvenido</h1>
+          <p>Panel de control</p>
+        </section>
 
-      </section>
+        <section class="cards_user">
+          <div class="card_user" id="cardCreateTicket">
+            <h2>Mis Tickets</h2>
+            <p>Ver y gestionar tus incidencias</p>
 
-      <section class="tickets">
-        <h2>Mis incidencias recientes</h2>
+            <button class="btn-red" id="openModal">+ Crear Ticket</button>
+          </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Estado</th>
-              <th>Actualizado</th>
-              <th></th>
-            </tr>
-          </thead>
+          <div class="card_user">
+            <h2>Mi Perfil</h2>
+            <p>Editar tu información personal</p>
+            <button class="btn-blue">Ver Perfil</button>
+          </div>
+        </section>
 
-          <tbody id="ticketsBody"></tbody>
-        </table>
-      </section>
+        <section class="tickets">
+          <h2>Mis incidencias recientes</h2>
 
-    </main>
-  </div>
-  <!-- MODAL -->
-  <div id="modalTicket" class="modal hidden">
-    <div class="modal-content"><span class="close-modal" id="closeModal">&times;</span>
-      <h2>Crear Ticket</h2>
-      <form id="ticketForm"><input type="text" placeholder="Título" required /><textarea
-          placeholder="Describe el problema..." required></textarea><button type="submit" class="btn-red">Enviar
-          Ticket</button></form>
+          <table>
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Estado</th>
+                <th>Actualizado</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody id="ticketsBody"></tbody>
+          </table>
+        </section>
+      </main>
     </div>
-  </div>
-  <script type="module" src="../js/main.js"></script>
-</body>
-
+    <!-- MODAL -->
+    <div id="modalTicket" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2>Crear Ticket</h2>
+        <form id="ticketForm">
+          <input type="text" placeholder="Título" required /><textarea
+            placeholder="Describe el problema..."
+            required
+          ></textarea
+          ><button type="submit" class="btn-red">Enviar Ticket</button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="../js/main.js"></script>
+  </body>
 </html>
