@@ -26,7 +26,7 @@
 }
 
 .ticket-description {
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 12px;
 }
 
@@ -37,7 +37,12 @@
   margin-bottom: 15px;
 }
 
-.ticket-meta {
+.line{
+  border-color: rgb(56, 56, 56);
+  margin-bottom: 5px;
+}
+
+.ticket-meta, .ticket-number {
   font-size: 13px;
   color: #aaa;
 }
@@ -211,6 +216,22 @@
   }
 }
 
+.label {
+  display: block;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.value title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.value desc{
+  font-size: 60px;
+  font-weight: 600;
+}
 /* =========================
    DESKTOP
 ========================= */

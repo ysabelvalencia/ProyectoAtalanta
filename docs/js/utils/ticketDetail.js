@@ -17,7 +17,7 @@ export function initTicketDetail() {
   const desc = document.getElementById("ticketDescription");
   const statusSelect = document.getElementById("statusSelect");
   const saveBtn = document.getElementById("saveStatusBtn");
-
+  const numTicket = document.getElementById("numTicket");
   const createdBy = document.getElementById("createdBy");
   const createdAt = document.getElementById("createdAt");
 
@@ -43,15 +43,13 @@ export function initTicketDetail() {
     window.location.href = "/docs/pages/user.html";
   });
 
-
-   //--------------------------------------------------
+  //--------------------------------------------------
   // SI NO ES STAFF NO VE COMENTARIOS
 
   if (!isStaff) {
     document.querySelector(".comments-card")?.remove();
     saveBtn?.remove();
   }
-
 
   //--------------------------------------------------
   // CARGAR TICKET REAL DESDE BACKEND
@@ -83,14 +81,22 @@ export function initTicketDetail() {
   // RENDER TICKET
 
   function renderTicket() {
-    title.textContent = ticket.title;
+    title.innerHTML = `
+                      <span class="label">Título:</span>
+                      <span class="value title">${ticket.title}</span>`;
 
     if (desc) {
-      desc.textContent = ticket.description;
+      desc.innerHTML = `
+                      <span class="label">Descripción:</span>
+                      <span class="value desc">${ticket.description}</span>`;
     }
 
     if (createdBy) {
       createdBy.textContent = ticket.user_name || "Desconocido";
+    }
+
+    if (numTicket) {
+      numTicket.textContent = `Ticket: #${ticket.id_ticket}`;
     }
 
     if (createdAt) {
