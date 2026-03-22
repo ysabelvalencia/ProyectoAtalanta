@@ -1,4 +1,4 @@
-export function initPartnersCarousel(){
+export function initPartnersCarousel() {
 
   const track = document.querySelector(".partners__track")
   const logos = document.querySelectorAll(".partners__logo")
@@ -6,61 +6,82 @@ export function initPartnersCarousel(){
   const nextBtn = document.querySelector(".next")
   const prevBtn = document.querySelector(".prev")
 
-  if(!track || logos.length === 0) return
+  if (!track || logos.length === 0) return
 
   let page = 0
+  let interval
 
-  function getVisible(){
-    if(window.innerWidth >= 768) return 4
+ 
+  function getVisible() {
+    if (window.innerWidth >= 768) return 4
     return 1
   }
 
-  function update(){
-
-    const container = document.querySelector(".partners__carousel")
-    const containerWidth = container.offsetWidth
-
-    track.style.transform = `translateX(${-containerWidth * page}px)`
-  }
-
-  function maxPage(){
+ 
+  function maxPage() {
     const visible = getVisible()
-    return Math.ceil(logos.length / visible) - 1
+    return logos.length - visible
   }
 
-  function goNext(){
 
+  function update() {
+    const logoWidth = logos[0].offsetWidth
+    track.style.transform = `translateX(${-logoWidth * page}px)`
+  }
+
+
+  function goNext() {
     const max = maxPage()
 
-    page++
-
-    if(page > max){
+    if (page >= max) {
       page = 0
+    } else {
+      page++
     }
 
     update()
   }
 
-  function goPrev(){
 
+  function goPrev() {
     const max = maxPage()
 
-    page--
-
-    if(page < 0){
+    if (page <= 0) {
       page = max
+    } else {
+      page--
     }
 
     update()
   }
 
-  nextBtn?.addEventListener("click", goNext)
-  prevBtn?.addEventListener("click", goPrev)
 
-  window.addEventListener("resize",()=>{
+  function startAuto() {
+    interval = setInterval(goNext, 3000)
+  }
+
+
+  function resetAuto() {
+    clearInterval(interval)
+    startAuto()
+  }
+
+
+  nextBtn?.addEventListener("click", () => {
+    goNext()
+    resetAuto()
+  })
+
+  prevBtn?.addEventListener("click", () => {
+    goPrev()
+    resetAuto()
+  })
+
+  window.addEventListener("resize", () => {
     page = 0
     update()
   })
 
+  startAuto()
   update()
 }
