@@ -18,7 +18,7 @@ const commentController = require('../controllers/commentController');
 router.post(
   '/',
   authMiddleware,
-  checkRole('cliente'),
+  checkRole(['cliente']),
   ticketController.createTicket
 );
 
@@ -26,7 +26,7 @@ router.post(
 router.get(
   '/',
   authMiddleware,
-  checkRole('cliente'),
+  checkRole(['cliente']),
   ticketController.getMyTickets
 );
 
@@ -34,7 +34,7 @@ router.get(
 router.delete(
   '/:id',
   authMiddleware,
-  checkRole('cliente'),
+  checkRole(['cliente']),
   ticketController.deleteTicket
 );
 
@@ -47,7 +47,7 @@ router.delete(
 router.put(
   '/:id/asignar',
   authMiddleware,
-  checkRole('jefe'),
+  checkRole(['jefe']),
   ticketController.assignTicket
 );
 
@@ -55,7 +55,7 @@ router.put(
 router.get(
   '/assigned',
   authMiddleware,
-  checkRole('trabajador'),
+  checkRole(['trabajador']),
   ticketController.getAssignedTickets
 );
 
@@ -63,7 +63,7 @@ router.get(
 router.put(
   '/:id/status',
   authMiddleware,
-  checkRole('trabajador'),
+  checkRole(['trabajador']),
   ticketController.updateStatus
 );
 
@@ -77,7 +77,7 @@ router.put(
 router.post(
   '/:id/comments',
   authMiddleware,
-  checkRole('trabajador'),
+  checkRole(['trabajador']),
   commentController.createComment
 );
 
@@ -86,7 +86,7 @@ router.post(
 router.delete(
   '/comments/:id',
   authMiddleware,
-  checkRole('trabajador'),
+  checkRole(['trabajador']),
   commentController.deleteComment
 );
 
@@ -94,7 +94,7 @@ router.delete(
 router.get(
   '/:id/comments',
   authMiddleware,
-  checkRole('trabajador', 'jefe', 'admin'),
+  checkRole(['trabajador', 'jefe', 'admin']),
   commentController.getComments
 );
 

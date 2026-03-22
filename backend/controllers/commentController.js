@@ -71,32 +71,51 @@ const getComments = async (req, res) => {
   }
 };
 
+
+
 // =======================
 // BORRAR COMENTARIO
 // =======================
 
 const deleteComment = async (req, res) => {
   try {
-    const { id } = req.params; 
+    const { id } = req.params;
     const id_user = req.user.idUser;
 
+    console.log("DELETE comment:", id, "user:", id_user);
+
+    // Validación básica
+    if (!id) {
+      return res.status(400).json({ message: "ID inválido" });
+    }
+
+    // Comprobar que el comentario existe y es del usuario
     const isOwner = await commentModel.isCommentOwner(id, id_user);
 
     if (!isOwner) {
       return res.status(403).json({
-        message: 'No puedes borrar este comentario'
+        message: "No puedes borrar este comentario"
       });
     }
 
-    await commentModel.deleteComment(id);
+    // Borrar comentario
+    const deleted = await commentModel.deleteComment(id);
 
-    res.json({
-      message: 'Comentario eliminado'
+    if (!deleted) {
+      return res.status(404).json({
+        message: "Comentario no encontrado"
+      });
+    }
+
+    return res.json({
+      message: "Comentario eliminado"
     });
 
   } catch (error) {
-    console.error('Error en deleteComment:', error);
-    res.status(500).json({ message: 'Error servidor' });
+    console.error("Error en deleteComment:", error);
+    return res.status(500).json({
+      message: "Error servidor"
+    });
   }
 };
 

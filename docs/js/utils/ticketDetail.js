@@ -27,15 +27,14 @@ export function initTicketDetail() {
   //--------------------------------------------------
   // ESTADO
 
-  const estados = ["abierto", "en proceso", "cerrado"];
+  const estados = ["abierto", "en_proceso", "cerrado"];
 
   statusSelect.innerHTML = "";
 
   estados.forEach((estado) => {
     const option = document.createElement("option");
     option.value = estado;
-    option.textContent = estado;
-
+    option.textContent = estado === "en_proceso" ? "en proceso" : estado;
     if (estado === ticket.status) option.selected = true;
 
     statusSelect.appendChild(option);
@@ -48,6 +47,10 @@ export function initTicketDetail() {
   }
 
   saveBtn?.addEventListener("click", async () => {
+    const newStatus = statusSelect.value;
+
+    if (!newStatus) return;
+
     try {
       const response = await fetch(
         `http://localhost:4000/api/tickets/${ticket.id_ticket}/status`,
@@ -57,7 +60,7 @@ export function initTicketDetail() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ status: statusSelect.value }),
+          body: JSON.stringify({ status: newStatus }),
         },
       );
 
@@ -65,7 +68,11 @@ export function initTicketDetail() {
 
       if (!response.ok) throw new Error(data.message);
 
-      alert("Estado actualizado");
+      // 🔥 actualizar en localStorage
+      ticket.status = newStatus;
+      localStorage.setItem("selectedTicket", JSON.stringify(ticket));
+
+      alert("Estado actualizado correctamente");
     } catch (error) {
       console.error(error.message);
     }
@@ -101,6 +108,8 @@ export function initTicketDetail() {
   // RENDER COMMENTS
 
   function renderComments(comments) {
+    commentsContainer.innerHTML = "";
+
     comments.forEach((c) => {
       const div = document.createElement("div");
       div.classList.add("comment");
@@ -134,22 +143,28 @@ export function initTicketDetail() {
     });
 
     //--------------------------------------------------
-    // EVENTOS DELETE (después de renderizar)
+    // BORRAR COMENTARIO
 
     document.querySelectorAll(".comment-delete").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         const id = e.currentTarget.dataset.id;
 
         try {
-          const res = await fetch(`http://localhost:4000/api/comments/${id}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
+          const res = await fetch(
+            `http://localhost:4000/api/tickets/comments/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             },
-          });
+          );
 
-          const data = await res.json();
-          if (!res.ok) throw new Error(data.message);
+          if (!res.ok) {
+            const text = await res.text();
+            console.error("Backend error:", text);
+            throw new Error("Error eliminando comentario");
+          }
 
           loadComments();
         } catch (error) {

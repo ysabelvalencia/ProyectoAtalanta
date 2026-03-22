@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initPartnersCarousel();
   initRegisterForm();
   initLoginForm();
-  initTicketDetail();
 
   const path = window.location.pathname;
   if (path.includes("user.html")) {

@@ -1,17 +1,19 @@
-const checkRole = (...allowedRoles) => {
-  return (req, res, next) => {
-    const user = req.user;
+//roleMiddleWare.js
 
-    if (!user) {
-      return res.status(401).json({ message: "No autenticado" });
+checkRole = (allowedRoles) => {
+  if (!Array.isArray(allowedRoles)) {
+    allowedRoles = [allowedRoles]; 
+  }
+
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ message: 'No autenticado' });
     }
 
-    if (!allowedRoles.includes(user.role)) {
-      return res.status(403).json({ message: "Acceso prohibido" });
+    if (!allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({ message: 'Acceso prohibido' });
     }
 
     next();
   };
 };
-
-module.exports = checkRole;
