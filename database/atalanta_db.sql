@@ -26,9 +26,9 @@
 -- =================================
 -- CREAR USUARIO --> tarantola
 -- =================================
---create user 'tarantola'@'%' identified by '1234';
---grant all privileges on atalanta_db.* to 'tarantola'@'%';
---flush privileges;
+-- create user 'tarantola'@'%' identified by '1234';
+-- grant all privileges on atalanta_db.* to 'tarantola'@'%';
+-- flush privileges;
 
 -- Si queremos utilizar myql workbench, una vez realizados los cambios anteriores:
 -- En mysql, Mysql connections (+)
