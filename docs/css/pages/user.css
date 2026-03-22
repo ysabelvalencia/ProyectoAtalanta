@@ -1,4 +1,3 @@
-
 .user {
   min-height: calc(100vh - 70px);
   padding: 16px;
@@ -12,12 +11,12 @@
   font-family: "Poppins", sans-serif;
 }
 
-.user::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.65);
-  z-index:0;
+.user::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 0;
 }
 
 .dashboard {
@@ -38,74 +37,62 @@
   display: flex;
 }
 
-.button__menu-user{
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.button__menu-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  padding:10px 14px;
-  border-radius:8px;
+  padding: 10px 14px;
+  border-radius: 8px;
 
-  cursor:pointer;
-  transition:0.3s;
+  cursor: pointer;
+  transition: 0.3s;
 
-  color:white;
+  color: white;
 }
 
-.button__menu-user:hover{
-  background:#e02640;
+.button__menu-user:hover {
+  background: #e02640;
 }
 
-.welcome h1{
-  font-size:24px;
+.welcome h1 {
+  font-size: 24px;
 }
 
-.welcome p{
-  color:#aaa;
+.welcome p {
+  color: #aaa;
 }
 
-
-.cards_user{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  margin-top:20px;
+.cards_user {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
 }
 
-.card_user{
-  background:rgba(255,255,255,0.05);
-  padding:16px;
-  border-radius:12px;
+.card_user {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 12px;
   backdrop-filter: blur(10px);
 }
 
-.card_user h2{
-  margin-bottom:8px;
+.card_user h2 {
+  margin-bottom: 8px;
 }
 
-.card_user p{
-  color:#aaa;
+.card_user p {
+  color: #aaa;
 }
 
 .btn-red,
-.btn-blue{
-  margin-top:16px;
-  padding:10px 16px;
-  border-radius:6px;
-  border:none;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.btn-red{
-  background:#ff2e4d;
-  color:white;
+.btn-blue {
+  margin-top: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
   border: none;
-}
-
-.btn-blue{
-  background:#3b82f6;
-  color:white;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 
@@ -124,11 +111,10 @@
   padding: 0;
 }
 
-.btn-view {
+.btn-view, .btn-blue {
   background: rgba(59, 130, 246, 0.15);
   border: 1px solid rgba(59, 130, 246, 0.4);
   color: #3b82f6;
-
   margin-right: 6px;
 }
 
@@ -137,54 +123,56 @@
   color: white;
 }
 
-.btn-delete, .btn-back {
+.btn-delete,
+.btn-back, .btn-red {
   background: rgba(88, 10, 22, 0.489);
-  border: 1px solid rgba(255, 46, 77, 0.4);
+  border: 1px solid rgba(255, 46, 77, 0.589);
   color: #ff2e4d;
 }
 
-.btn-delete:hover, .btn-back:hover {
+.btn-delete:hover,
+.btn-back:hover,.btn-red:hover {
   background: #a91f34;
   color: white;
 }
 
-
-.tickets{
-  margin-top:40px;
+.tickets {
+  margin-top: 40px;
 }
 
-.table-wrapper{
+.table-wrapper {
   width: 100%;
   overflow-x: auto;
 }
 
-table{
-  width:100%;
+table {
+  width: 100%;
   border-collapse: collapse;
-  margin-top:16px;
+  margin-top: 16px;
   table-layout: fixed;
 }
 
-thead{
-  color:#aaa;
-  font-size:13px;
+thead {
+  color: #aaa;
+  font-size: 13px;
 }
 
-tbody tr{
-  border-top:1px solid rgba(255,255,255,0.1);
+tbody tr {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-th, td{
-  padding:8px 6px;
-  font-size:13px;
-  text-align:left;
+th,
+td {
+  padding: 8px 6px;
+  font-size: 13px;
+  text-align: left;
   vertical-align: middle;
 
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-td{
+td {
   word-break: break-word;
 }
 
@@ -193,34 +181,33 @@ td:last-child {
   text-align: right;
 }
 
-
 /* ========================= */
 /* TABLET */
 /* ========================= */
-@media (min-width: 768px){
-
+@media (min-width: 768px) {
   .dashboard {
     max-width: 700px;
     padding: 30px;
   }
 
-  .welcome h1{
-    font-size:30px;
+  .welcome h1 {
+    font-size: 30px;
   }
 
-  .cards_user{
-    flex-direction:row;
-    flex-wrap:wrap;
+  .cards_user {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
-  .card_user{
-    flex:1;
-    min-width:250px;
+  .card_user {
+    flex: 1;
+    min-width: 250px;
   }
 
-  th, td{
-    padding:10px;
-    font-size:14px;
+  th,
+  td {
+    padding: 10px;
+    font-size: 14px;
   }
 
   .btnUser {
@@ -229,20 +216,20 @@ td:last-child {
   }
 }
 
-
 /* ========================= */
 /* MODAL */
 /* ========================= */
-.modal {
-  position: fixed;
-  inset:0;
-  background: rgba(0,0,0,0.7);
 
+.modal {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
-
   z-index: 999;
+  backdrop-filter: blur(6px);
 }
 
 .hidden {
@@ -250,30 +237,94 @@ td:last-child {
 }
 
 .modal-content {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 16px;
-
+  background: rgba(20, 20, 30, 0.85);
+  backdrop-filter: blur(20px);
+  padding: 28px;
+  border-radius: 20px;
   width: 90%;
-  max-width: 400px;
-
+  max-width: 420px;
   position: relative;
+  color: white;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: modalFade 0.25s ease;
+}
+
+/* animación */
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .close-modal {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 20px;
+  top: 12px;
+  right: 16px;
+  font-size: 18px;
   cursor: pointer;
+  color: #aaa;
+  transition: 0.2s;
+}
+
+.close-modal:hover {
+  color: #fff;
+}
+
+.modal-content h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
 }
 
 .modal-content input,
 .modal-content textarea {
   width: 100%;
   margin: 10px 0;
-  padding: 10px;
+  padding: 12px;
 
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+
+  font-size: 14px;
+
+  transition: 0.2s;
+}
+
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #aaa;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  outline: none;
+  border: 1px solid #ff2e4d;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-content button {
+  margin-top: 16px;
+  width: fit-content;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  background: rgba(88, 10, 22, 0.489);
+  border: 1px solid rgba(255, 46, 77, 0.589);
+  color: #ff2e4d;
+}
+
+.modal-content button:hover {
+   background: #a91f34;
+   color: white;
 }
