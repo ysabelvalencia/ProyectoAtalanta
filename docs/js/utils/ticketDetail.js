@@ -28,6 +28,32 @@ export function initTicketDetail() {
   let ticket = null;
 
   //--------------------------------------------------
+  // BOTÓN VOLVER
+
+  const backBtn = document.createElement("button");
+  backBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i>`;
+  backBtn.classList.add("btnUser", "btn-back");
+
+  const container = document.querySelector(".ticket-container");
+  if (container) {
+    container.prepend(backBtn);
+  }
+
+  backBtn.addEventListener("click", () => {
+    window.location.href = "/docs/pages/user.html";
+  });
+
+
+   //--------------------------------------------------
+  // SI NO ES STAFF NO VE COMENTARIOS
+
+  if (!isStaff) {
+    document.querySelector(".comments-card")?.remove();
+    saveBtn?.remove();
+  }
+
+
+  //--------------------------------------------------
   // CARGAR TICKET REAL DESDE BACKEND
 
   async function loadTicket() {
@@ -38,7 +64,7 @@ export function initTicketDetail() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       const data = await response.json();
@@ -68,9 +94,7 @@ export function initTicketDetail() {
     }
 
     if (createdAt) {
-      createdAt.textContent = new Date(
-        ticket.created_at
-      ).toLocaleString();
+      createdAt.textContent = new Date(ticket.created_at).toLocaleString();
     }
 
     // ESTADO
@@ -81,8 +105,7 @@ export function initTicketDetail() {
     estados.forEach((estado) => {
       const option = document.createElement("option");
       option.value = estado;
-      option.textContent =
-        estado === "en_proceso" ? "en proceso" : estado;
+      option.textContent = estado === "en_proceso" ? "en proceso" : estado;
 
       if (estado === ticket.status) option.selected = true;
 
@@ -113,7 +136,7 @@ export function initTicketDetail() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ status: newStatus }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -139,7 +162,7 @@ export function initTicketDetail() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       const data = await response.json();
@@ -178,12 +201,11 @@ export function initTicketDetail() {
 
           ${
             isStaff
-              ? `<span class="comment-delete" data-id="${c.id_comment}">
+              ? `<span class="btnUser btn-delete" data-id="${c.id_comment}">
                   <i class="fa-solid fa-trash"></i>
                  </span>`
               : ""
           }
-
         </div>
       `;
 
@@ -205,7 +227,7 @@ export function initTicketDetail() {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
-            }
+            },
           );
 
           if (!res.ok) {
@@ -245,7 +267,7 @@ export function initTicketDetail() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ content }),
-        }
+        },
       );
 
       const data = await response.json();

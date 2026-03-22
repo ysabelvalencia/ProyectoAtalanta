@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (path.includes("ticket-detail.html")) {
     initCheckAuth();
+    initLogout();
     initUserWelcome();
     initTicketDetail();
   }

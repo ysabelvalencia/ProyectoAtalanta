@@ -1,9 +1,8 @@
-/* CONTENEDOR */
+
 .user {
   min-height: calc(100vh - 70px);
   padding: 16px;
   display: flex;
-  align-items: center;
   justify-content: center;
   background-image: url("../../assets/images/backgrounds/login.webp");
   background-size: cover;
@@ -21,18 +20,31 @@
   z-index:0;
 }
 
-/* BOTÓN (AHORA CON IMAGEN) */
+.dashboard {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  z-index: 1;
+}
+
 .button__menu-user{
   display:flex;
   align-items:center;
   justify-content:center;
-  border:none;
-  padding:13px 20px;
+
+  padding:10px 14px;
   border-radius:8px;
+
   cursor:pointer;
-  font-weight:500;
   transition:0.3s;
-  text-decoration:none; /* para <a> */
+
   color:white;
 }
 
@@ -40,96 +52,58 @@
   background:#e02640;
 }
 
-/* DASHBOARD */
-.dashboard{
-  padding:30px;
-  position:relative;
-  z-index:1;
-  display:flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* WELCOME */
 .welcome h1{
-  font-size:28px;
+  font-size:24px;
 }
 
 .welcome p{
   color:#aaa;
 }
 
-/* CARDS - MOBILE */
+
 .cards_user{
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:16px;
   margin-top:20px;
 }
 
 .card_user{
   background:rgba(255,255,255,0.05);
-  padding:20px;
+  padding:16px;
   border-radius:12px;
   backdrop-filter: blur(10px);
 }
 
 .card_user h2{
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .card_user p{
   color:#aaa;
 }
 
-/* BOTONES */
-.btn-red{
-  margin-top:20px;
-  background:#ff2e4d;
-  border:none;
-  padding:12px 20px;
+.btn-red,
+.btn-blue{
+  margin-top:16px;
+  padding:10px 16px;
   border-radius:6px;
-  color:white;
+  border:none;
   cursor:pointer;
+  font-size:14px;
+}
+
+.btn-red{
+  background:#ff2e4d;
+  color:white;
+  border: none;
 }
 
 .btn-blue{
-  margin-top:20px;
   background:#3b82f6;
-  border:none;
-  padding:12px 20px;
-  border-radius:6px;
   color:white;
-  cursor:pointer;
 }
 
-/* TABLE */
-.tickets{
-  margin-top:50px;
-}
-
-.table-wrapper{
-  width: 100%;
-  overflow-x: auto; 
-}
-table{
-  width:100%;
-  margin-top:20px;
-  table-layout: fixed;
-}
-
-th, td{
-  padding:5px;
-  text-align:left;
-  word-break: break-word;
-}
-
-td:last-child {
-  white-space: nowrap;
-  text-align: center;
-}
 
 .btnUser {
   width: 28px;
@@ -138,9 +112,11 @@ td:last-child {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 6px;
   cursor: pointer;
-  flex-shrink: 0; 
+  transition: 0.2s;
+
   padding: 0;
 }
 
@@ -148,47 +124,84 @@ td:last-child {
   background: rgba(59, 130, 246, 0.15);
   border: 1px solid rgba(59, 130, 246, 0.4);
   color: #3b82f6;
-  margin-right: 10px;
+
+  margin-right: 6px;
 }
 
 .btn-view:hover {
   background: #3b82f6;
   color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
 }
 
-.btn-delete {
-  background: rgba(255, 46, 77, 0.15);
+.btn-delete, .btn-back {
+  background: rgba(88, 10, 22, 0.489);
   border: 1px solid rgba(255, 46, 77, 0.4);
   color: #ff2e4d;
 }
 
-.btn-delete:hover {
-  background: #ff2e4d;
+.btn-delete:hover, .btn-back:hover {
+  background: #a91f34;
   color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(255, 46, 77, 0.4);
+}
+
+
+.tickets{
+  margin-top:40px;
+}
+
+.table-wrapper{
+  width: 100%;
+  overflow-x: auto;
+}
+
+table{
+  width:100%;
+  border-collapse: collapse;
+  margin-top:16px;
+  table-layout: fixed;
 }
 
 thead{
   color:#aaa;
+  font-size:13px;
 }
 
 tbody tr{
   border-top:1px solid rgba(255,255,255,0.1);
 }
 
+th, td{
+  padding:8px 6px;
+  font-size:13px;
+  text-align:left;
+  vertical-align: middle;
 
-/*  TABLET (≥768px) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td{
+  word-break: break-word;
+}
+
+td:last-child {
+  white-space: nowrap;
+  text-align: right;
+}
+
+
+/* ========================= */
+/* TABLET */
+/* ========================= */
 @media (min-width: 768px){
 
-  .dashboard{
-    padding:40px 6%;
+  .dashboard {
+    max-width: 700px;
+    padding: 30px;
   }
 
   .welcome h1{
-    font-size:32px;
+    font-size:30px;
   }
 
   .cards_user{
@@ -201,44 +214,24 @@ tbody tr{
     min-width:250px;
   }
 
-  .navbar{
-    padding:20px 6%;
+  th, td{
+    padding:10px;
+    font-size:14px;
+  }
+
+  .btnUser {
+    width: 32px;
+    height: 32px;
   }
 }
 
-/* DESKTOP (≥1024px) */
-@media (min-width: 1024px){
 
-  .dashboard{
-    padding:40px 8%;
-  }
-
-  .welcome h1{
-    font-size:36px;
-  }
-
-  .cards_user{
-    gap:30px;
-  }
-
-  .navbar{
-    padding:20px 8%;
-  }
-
-  .button__menu-user{
-    padding:13px 20px;
-  }
-
-  
-}
-
-/* fondo oscuro */
+/* ========================= */
+/* MODAL */
+/* ========================= */
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset:0;
   background: rgba(0,0,0,0.7);
 
   display: flex;
@@ -248,22 +241,21 @@ tbody tr{
   z-index: 999;
 }
 
-/* oculto */
 .hidden {
   display: none;
 }
 
-/* caja del modal */
 .modal-content {
   background: #fff;
   padding: 2rem;
   border-radius: 16px;
-  width: 400px;
-  max-width: 90%;
+
+  width: 90%;
+  max-width: 400px;
+
   position: relative;
 }
 
-/* botón cerrar */
 .close-modal {
   position: absolute;
   top: 10px;
@@ -272,14 +264,12 @@ tbody tr{
   cursor: pointer;
 }
 
-/* inputs */
 .modal-content input,
 .modal-content textarea {
   width: 100%;
   margin: 10px 0;
   padding: 10px;
+
   border-radius: 8px;
   border: 1px solid #ccc;
-
 }
-
