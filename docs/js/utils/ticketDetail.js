@@ -1,9 +1,11 @@
 export function initTicketDetail() {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
-  const ticket = JSON.parse(localStorage.getItem("selectedTicket"));
+  const storedTicket = JSON.parse(localStorage.getItem("selectedTicket"));
 
-  if (!token || !user || !ticket) return;
+  if (!token || !user || !storedTicket) return;
+
+  const ticketId = storedTicket.id_ticket;
 
   const STAFF_ROLES = ["trabajador", "jefe", "admin"];
   const isStaff = STAFF_ROLES.includes(user.role);
@@ -11,40 +13,90 @@ export function initTicketDetail() {
   // ELEMENTOS
   const title = document.getElementById("ticketTitle");
   if (!title) return;
+
   const desc = document.getElementById("ticketDescription");
   const statusSelect = document.getElementById("statusSelect");
   const saveBtn = document.getElementById("saveStatusBtn");
+
+  const createdBy = document.getElementById("createdBy");
+  const createdAt = document.getElementById("createdAt");
+
   const commentsContainer = document.getElementById("commentsContainer");
   const commentInput = document.getElementById("commentInput");
   const sendBtn = document.getElementById("sendCommentBtn");
 
-  // RENDER INFO
-  title.textContent = ticket.title;
-  if (desc) {
-    desc.textContent = ticket.description;
+  let ticket = null;
+
+  //--------------------------------------------------
+  // CARGAR TICKET REAL DESDE BACKEND
+
+  async function loadTicket() {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/tickets/${ticketId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.message);
+
+      ticket = data;
+
+      renderTicket();
+    } catch (error) {
+      console.error("Error cargando ticket:", error.message);
+    }
   }
 
   //--------------------------------------------------
-  // ESTADO
+  // RENDER TICKET
 
-  const estados = ["abierto", "en_proceso", "cerrado"];
+  function renderTicket() {
+    title.textContent = ticket.title;
 
-  statusSelect.innerHTML = "";
+    if (desc) {
+      desc.textContent = ticket.description;
+    }
 
-  estados.forEach((estado) => {
-    const option = document.createElement("option");
-    option.value = estado;
-    option.textContent = estado === "en_proceso" ? "en proceso" : estado;
-    if (estado === ticket.status) option.selected = true;
+    if (createdBy) {
+      createdBy.textContent = ticket.user_name || "Desconocido";
+    }
 
-    statusSelect.appendChild(option);
-  });
+    if (createdAt) {
+      createdAt.textContent = new Date(
+        ticket.created_at
+      ).toLocaleString();
+    }
 
-  // SOLO STAFF PUEDE CAMBIAR
-  if (!isStaff) {
-    statusSelect.disabled = true;
-    saveBtn.style.display = "none";
+    // ESTADO
+    const estados = ["abierto", "en_proceso", "cerrado"];
+
+    statusSelect.innerHTML = "";
+
+    estados.forEach((estado) => {
+      const option = document.createElement("option");
+      option.value = estado;
+      option.textContent =
+        estado === "en_proceso" ? "en proceso" : estado;
+
+      if (estado === ticket.status) option.selected = true;
+
+      statusSelect.appendChild(option);
+    });
+
+    if (!isStaff) {
+      statusSelect.disabled = true;
+      saveBtn.style.display = "none";
+    }
   }
+
+  //--------------------------------------------------
+  // CAMBIAR ESTADO
 
   saveBtn?.addEventListener("click", async () => {
     const newStatus = statusSelect.value;
@@ -61,16 +113,14 @@ export function initTicketDetail() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ status: newStatus }),
-        },
+        }
       );
 
       const data = await response.json();
 
       if (!response.ok) throw new Error(data.message);
 
-      // 🔥 actualizar en localStorage
       ticket.status = newStatus;
-      localStorage.setItem("selectedTicket", JSON.stringify(ticket));
 
       alert("Estado actualizado correctamente");
     } catch (error) {
@@ -84,12 +134,12 @@ export function initTicketDetail() {
   async function loadComments() {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/tickets/${ticket.id_ticket}/comments`,
+        `http://localhost:4000/api/tickets/${ticketId}/comments`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
+        }
       );
 
       const data = await response.json();
@@ -102,8 +152,6 @@ export function initTicketDetail() {
     }
   }
 
-  loadComments();
-
   //--------------------------------------------------
   // RENDER COMMENTS
 
@@ -115,29 +163,29 @@ export function initTicketDetail() {
       div.classList.add("comment");
 
       div.innerHTML = `
-      <img src="https://i.pravatar.cc/40?u=${c.id_user}" alt="avatar">
+        <img src="https://icones.pro/wp-content/uploads/2022/07/icones-d-administration-rouge.png" alt="avatar">
 
-      <div class="comment-content">
+        <div class="comment-content">
 
-        <div class="comment-header">
-          <strong>${c.user_name || "Usuario"}</strong> · 
-          ${new Date(c.created_at).toLocaleString()}
+          <div class="comment-header">
+            <strong>${c.user_name || "Usuario"}</strong> · 
+            ${new Date(c.created_at).toLocaleString()}
+          </div>
+
+          <div class="comment-text">
+            ${c.content}
+          </div>
+
+          ${
+            isStaff
+              ? `<span class="comment-delete" data-id="${c.id_comment}">
+                  <i class="fa-solid fa-trash"></i>
+                 </span>`
+              : ""
+          }
+
         </div>
-
-        <div class="comment-text">
-          ${c.content}
-        </div>
-
-        ${
-          isStaff
-            ? `<span class="comment-delete" data-id="${c.id_comment}">
-                <i class="fa-solid fa-trash"></i>
-               </span>`
-            : ""
-        }
-
-      </div>
-    `;
+      `;
 
       commentsContainer.appendChild(div);
     });
@@ -157,7 +205,7 @@ export function initTicketDetail() {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
-            },
+            }
           );
 
           if (!res.ok) {
@@ -189,7 +237,7 @@ export function initTicketDetail() {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/tickets/${ticket.id_ticket}/comments`,
+        `http://localhost:4000/api/tickets/${ticketId}/comments`,
         {
           method: "POST",
           headers: {
@@ -197,7 +245,7 @@ export function initTicketDetail() {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ content }),
-        },
+        }
       );
 
       const data = await response.json();
@@ -210,4 +258,10 @@ export function initTicketDetail() {
       console.error(error.message);
     }
   });
+
+  //--------------------------------------------------
+  // INIT
+
+  loadTicket();
+  loadComments();
 }

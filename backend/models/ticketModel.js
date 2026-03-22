@@ -81,10 +81,17 @@ const updateTicketStatus = async (id_ticket, status) => {
 const getTicketsByUser = async (id_cliente) => {
   const [rows] = await db.query(
     `
-    SELECT id_ticket, title, description, status, created_at
-    FROM tickets
-    WHERE id_cliente = ?
-    ORDER BY created_at DESC
+    SELECT 
+      t.id_ticket,
+      t.title,
+      t.description,
+      t.status,
+      t.created_at,
+      u.user_name
+    FROM tickets t
+    JOIN users u ON t.id_cliente = u.id_user
+    WHERE t.id_cliente = ?
+    ORDER BY t.created_at DESC
     `,
     [id_cliente]
   );
@@ -93,18 +100,54 @@ const getTicketsByUser = async (id_cliente) => {
 };
 
 // =======================
-// OBTENER TICKETS ASIGNADOS AL TRABAJADOR
+// OBTENER TICKETS POR ID
 // =======================
-const getTicketsByWorker = async (id_trabajador) => {
+
+const getTicketById = async (id_ticket) => {
   const [rows] = await db.query(
     `
-    SELECT id_ticket, title, description, status, created_at
-    FROM tickets
-    WHERE id_trabajador = ?
-    ORDER BY created_at DESC
+    SELECT 
+      t.id_ticket,
+      t.title,
+      t.description,
+      t.status,
+      t.created_at,
+      u.user_name
+    FROM tickets t
+    JOIN users u ON t.id_cliente = u.id_user
+    WHERE t.id_ticket = ?
+    `,
+    [id_ticket]
+  );
+
+  return rows[0];
+};
+
+// =======================
+// OBTENER TICKETS ASIGNADOS AL TRABAJADOR
+// =======================
+
+const getTicketsByWorker = async (id_trabajador) => {
+
+  console.log("QUERY WORKER EJECUTADA");
+  const [rows] = await db.query(
+    `
+    SELECT 
+      t.id_ticket,
+      t.title,
+      t.description,
+      t.status,
+      t.created_at,
+      u.user_name
+    FROM tickets t
+    JOIN users u ON t.id_cliente = u.id_user
+    WHERE t.id_trabajador = ?
+    ORDER BY t.created_at DESC
     `,
     [id_trabajador]
   );
+
+  console.log("RESULT QUERY:", rows);
 
   return rows;
 };
@@ -137,5 +180,6 @@ module.exports = {
   updateTicketStatus,
   getTicketsByUser,
   deleteTicket,
-  getTicketsByWorker
+  getTicketsByWorker,
+  getTicketById
 };

@@ -39,6 +39,7 @@ router.delete(
 );
 
 
+
 // =======================
 // TICKETS - STAFF
 // =======================
@@ -98,5 +99,11 @@ router.get(
   commentController.getComments
 );
 
+
+router.get(
+  '/:id',
+  authMiddleware,
+  ticketController.getTicketById
+);
 
 module.exports = router;

@@ -52,6 +52,24 @@ const assignTicket = async (req, res) => {
   }
 };
 
+const getTicketById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const ticket = await ticketModel.getTicketById(id);
+
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket no encontrado" });
+    }
+
+    res.json(ticket);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error servidor" });
+  }
+};
+
 // =======================
 // CAMBIAR ESTADO
 // =======================
@@ -168,5 +186,6 @@ module.exports = {
   updateStatus,
   getMyTickets,
   deleteTicket,
-  getAssignedTickets
+  getAssignedTickets,
+  getTicketById
 };

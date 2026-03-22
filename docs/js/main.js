@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     initGetProfile();
   }
   if (path.includes("ticket-detail.html")) {
+    initCheckAuth();
+    initUserWelcome();
     initTicketDetail();
   }
 

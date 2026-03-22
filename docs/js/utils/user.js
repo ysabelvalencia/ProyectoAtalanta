@@ -50,7 +50,11 @@ export function initTicketModal() {
   //------------------------------------------------------------//
   //CONTROL UI POR ROL
   const STAFF_ROLES = ["trabajador", "jefe", "admin"];
-  const isStaff = STAFF_ROLES.includes(user.role);
+  const isStaff =
+    user.role === "trabajador" || user.role === "jefe" || user.role === "admin";
+
+  console.log("ROLE:", user.role);
+  console.log("IS STAFF:", isStaff);
 
   if (isStaff) {
     cardCreate?.classList.add("hidden");
@@ -137,7 +141,7 @@ export function initTicketModal() {
 
       const data = await response.json();
 
-      console.log("DATA:", data);
+      console.log("TICKETS BACK:", data);
 
       if (!response.ok) {
         throw new Error(data.message);
