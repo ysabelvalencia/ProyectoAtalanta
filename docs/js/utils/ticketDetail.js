@@ -221,7 +221,7 @@ export function initTicketDetail() {
     //--------------------------------------------------
     // BORRAR COMENTARIO
 
-    document.querySelectorAll(".comment-delete").forEach((btn) => {
+    document.querySelectorAll(".btn-delete").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         const id = e.currentTarget.dataset.id;
 
@@ -249,7 +249,7 @@ export function initTicketDetail() {
       });
     });
   }
-
+  
   //--------------------------------------------------
   // CREAR COMENTARIO
 
