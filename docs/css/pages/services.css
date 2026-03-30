@@ -306,12 +306,12 @@ text-align:left;
       #000000 100%
     );
     color:white;
+    font-family:"Montserrat",sans-serif;
   }
 
 .teams__title{
 font-size:1.8rem;
 margin-bottom:20px;
-font-family:"Montserrat",sans-serif;
 font-weight:700;
 }
 
