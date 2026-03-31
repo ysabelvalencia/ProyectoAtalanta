@@ -6,7 +6,6 @@ main{
     position: relative;
     z-index: 0;
   }
-/* Autofill limpio sin !important */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
