@@ -36,7 +36,6 @@ const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // YA NO PASAMOS ROLE
     const newUserId = await userModel.createUser(
       cleanUserName,
       cleanEmail,
@@ -46,7 +45,7 @@ const register = async (req, res) => {
     const token = jwt.sign(
       {
         idUser: newUserId,
-        role: 'cliente' // 👈 porque default = cliente
+        role: 'cliente' 
       },
       process.env.JWT_SECRET,
       { expiresIn: '2h' }
@@ -103,7 +102,7 @@ const login = async (req, res) => {
     const token = jwt.sign(
       {
         idUser: user.id_user,
-        role: user.role_name // 🔥 aquí el cambio importante
+        role: user.role_name 
       },
       process.env.JWT_SECRET,
       {

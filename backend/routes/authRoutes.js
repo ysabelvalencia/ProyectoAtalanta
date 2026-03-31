@@ -28,10 +28,20 @@ router.get('/profile', authMiddleware, (req, res) => {
    });
 });
 
+// =======================
+// ADMIN - GESTIÓN ROLES
+// =======================
 
-// =======================
-// RUTAS POR ROL
-// =======================
+router.put(
+  '/users/:id/role',
+  authMiddleware,
+  checkRole(['admin']),
+  authController.updateRole
+);
+
+// ============================================
+// RUTAS DE VALIDACION DE ACCESO POR ROLES (TESTING)
+// ==============================================
 
 // Cliente
 router.get(
@@ -73,15 +83,6 @@ router.get(
   }
 );
 
-// =======================
-// ADMIN - GESTIÓN ROLES
-// =======================
 
-router.put(
-  '/users/:id/role',
-  authMiddleware,
-  checkRole(['admin']),
-  authController.updateRole
-);
 
 module.exports = router;

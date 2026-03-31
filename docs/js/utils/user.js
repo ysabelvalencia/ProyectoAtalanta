@@ -261,7 +261,6 @@ export async function initGetProfile() {
         Authorization: `Bearer ${token}`,
       },
     });
-
     const data = await response.json();
 
     if (!response.ok) {
