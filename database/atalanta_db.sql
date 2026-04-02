@@ -26,6 +26,9 @@ drop user if exists tarantola;
 -- =================================
 -- CREAR USUARIO --> tarantola
 -- =================================
+
+create database atalanta_db;
+use atalanta_db;
 create user 'tarantola'@'%' identified by 'wz$}>43Mr.t6ZEa%';
 grant all privileges on atalanta_db.* to 'tarantola'@'%';
 flush privileges;

@@ -22,7 +22,7 @@ const createComment = async (req, res) => {
       return res.status(400).json({ message: 'Contenido vacío' });
     }
 
-    // VALIDACIÓN CLAVE (solo tickets asignados)
+    // Solo tickets asignados
     const isAssigned = await ticketModel.isTicketAssignedToUser(id, id_user);
 
     if (!isAssigned) {

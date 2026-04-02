@@ -91,7 +91,7 @@ router.delete(
   commentController.deleteComment
 );
 
-// Historial (todos pueden verlo)
+// Historial (staff)
 router.get(
   '/:id/comments',
   authMiddleware,

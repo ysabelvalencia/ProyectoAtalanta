@@ -15,7 +15,7 @@ export function initRegisterForm() {
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // ✅ Validación
+    //  Validación
     if (!nombre || !email || !password) {
       alert("Todos los campos son obligatorios");
       return;

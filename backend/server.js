@@ -8,7 +8,6 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-//npm install helmet
 
 require('dotenv').config();
 
@@ -22,39 +21,28 @@ const app = express();
 //  SEGURIDAD
 // =======================
 
-// Headers de seguridad
 app.use(helmet());
-
-app.use(cors()); // 👈 PERMITE TODOS LOS ORÍGENES (solo desarrollo)
-
-// Control de CORS (solo permitir tu frontend)
-// app.use(cors({
-//   origin: 'http://localhost:5500'
-// }));
+app.use(cors()); 
 
 
 // =======================
 //  MIDDLEWARES
 // =======================
 
-// Permite recibir JSON en peticiones
 app.use(express.json());
-
 
 // =======================
 //  RUTAS
 // =======================
-
 app.use('/api/auth', authRoutes);
 app.use('/api/tickets', ticketRoutes);
-
 
 // =======================
 //  RUTA TEST
 // =======================
 
 app.get('/', (req, res) => {
-  res.send('API funcionando 🚀');
+  res.send('API funcionando');
 });
 
 

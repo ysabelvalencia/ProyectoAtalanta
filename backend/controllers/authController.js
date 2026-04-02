@@ -136,7 +136,6 @@ const updateRole = async (req, res) => {
     const { id } = req.params;
     const { id_role } = req.body;
 
-    // 🔐 Validación fuerte
     const validRoles = [1, 2, 3, 4];
 
     if (!id_role || !validRoles.includes(id_role)) {

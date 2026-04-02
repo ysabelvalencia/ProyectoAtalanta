@@ -2,7 +2,7 @@
 // commentModel.js
 // =================================
 
-const db = require('../config/db');
+const db = require("../config/db");
 
 // ================
 // BUSCAR USUARIO
@@ -23,17 +23,15 @@ const getUserByEmail = async (email) => {
       JOIN roles r ON u.id_role = r.id_role
       WHERE u.email = ?
       `,
-      [email]
+      [email],
     );
 
     return rows[0];
-
   } catch (error) {
-    console.error('Error en getUserByEmail:', error);
+    console.error("Error en getUserByEmail:", error);
     throw error;
   }
 };
-
 
 // =======================
 // CREAR USUARIO
@@ -46,13 +44,12 @@ const createUser = async (user_name, email, passwordHash) => {
       INSERT INTO users (user_name, email, password_hash)
       VALUES (?, ?, ?)
       `,
-      [user_name, email, passwordHash]
+      [user_name, email, passwordHash],
     );
 
     return result.insertId;
-
   } catch (error) {
-    console.error('Error en createUser:', error);
+    console.error("Error en createUser:", error);
     throw error;
   }
 };
@@ -64,12 +61,11 @@ const updateUserRole = async (id_user, id_role) => {
     SET id_role = ?
     WHERE id_user = ?
     `,
-    [id_role, id_user]
+    [id_role, id_user],
   );
 
   return result.affectedRows;
 };
-
 
 const getUserById = async (id_user) => {
   const [rows] = await db.query(
@@ -82,12 +78,11 @@ const getUserById = async (id_user) => {
     JOIN roles r ON u.id_role = r.id_role
     WHERE u.id_user = ?
     `,
-    [id_user]
+    [id_user],
   );
 
   return rows[0];
 };
-
 
 // =========
 // EXPORTS
@@ -97,5 +92,5 @@ module.exports = {
   getUserByEmail,
   createUser,
   updateUserRole,
-  getUserById
+  getUserById,
 };
