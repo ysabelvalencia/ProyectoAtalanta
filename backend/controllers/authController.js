@@ -128,6 +128,32 @@ const login = async (req, res) => {
 };
 
 // =======================
+// ADMIN - VER USUARIOS
+// =======================
+
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.getAllUsers();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
+// =======================
+// ADMIN - VER ROLES
+// =======================
+
+const getRoles = async (req, res) => {
+  try {
+    const roles = await userModel.getRoles();
+    res.json(roles);
+  } catch (error) {
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
+// =======================
 // ADMIN - CAMBIAR ROL
 // =======================
 
@@ -164,5 +190,7 @@ const updateRole = async (req, res) => {
 module.exports = {
   register,
   login,
+  getAllUsers,
+  getRoles,
   updateRole
 };

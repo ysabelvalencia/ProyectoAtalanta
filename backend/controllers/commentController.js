@@ -57,6 +57,20 @@ const createComment = async (req, res) => {
 const getComments = async (req, res) => {
   try {
     const { id } = req.params;
+    const user = req.user;
+
+    if (user.role === 'trabajador') {
+      const isAssigned = await ticketModel.isTicketAssignedToUser(
+        id,
+        user.idUser
+      );
+
+      if (!isAssigned) {
+        return res.status(403).json({
+          message: 'No tienes acceso a este ticket'
+        });
+      }
+    }
 
     const comments = await commentModel.getCommentsByTicket(id);
 

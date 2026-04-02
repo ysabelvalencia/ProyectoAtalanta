@@ -3,6 +3,7 @@
 // =================================
 
 const ticketModel = require('../models/ticketModel');
+const userModel = require('../models/userModel');
 
 const createTicket = async (req, res) => {
   try {
@@ -41,6 +42,17 @@ const assignTicket = async (req, res) => {
       return res.status(400).json({ message: 'Falta id_trabajador' });
     }
 
+    const worker = await userModel.getUserById(id_trabajador);
+     if (!worker) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    
+    if (worker.role_name !== 'trabajador') {
+      return res.status(400).json({
+        message: 'El usuario asignado no es un trabajador'
+      });
+    }
+
     const updated = await ticketModel.assignTicket(id, id_trabajador);
     if (updated === 0) {
       return res.status(404).json({ message: 'Ticket no encontrado' });
@@ -71,7 +83,7 @@ const getTicketById = async (req, res) => {
 };
 
 // =======================
-// CAMBIAR ESTADO
+// TRABAJADOR - CAMBIAR ESTADO
 // =======================
 
 const updateStatus = async (req, res) => {
@@ -120,7 +132,7 @@ const updateStatus = async (req, res) => {
 
 
 // =======================
-// CONSEGUIR TICKETS DEL CLIENTE
+// CLIENTE - MOSTRAR TICKETS
 // =======================
 
 const getMyTickets = async (req, res) => {
@@ -138,7 +150,7 @@ const getMyTickets = async (req, res) => {
 };
 
 // =======================
-// ELIMINAR TICKET (CLIENTE)
+// CLIENTE - ELIMINAR TICKET 
 // =======================
 
 const deleteTicket = async (req, res) => {
@@ -163,7 +175,21 @@ const deleteTicket = async (req, res) => {
 };
 
 // =======================
-// CONSEGUIR TICKETS ASIGNADOS AL TRABAJADOR
+// JEFE - VER TODOS LOS TICKETS
+// =======================
+
+const getAllTickets = async (req, res) => {
+  try {
+    const tickets = await ticketModel.getAllTickets();
+    res.json(tickets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error servidor' });
+  }
+};
+
+// =======================
+// TRABAJADOR - MOSTRAR TICKETS ASIGNADOS 
 // =======================
 
 const getAssignedTickets = async (req, res) => {
@@ -187,5 +213,6 @@ module.exports = {
   getMyTickets,
   deleteTicket,
   getAssignedTickets,
-  getTicketById
+  getTicketById,
+  getAllTickets
 };

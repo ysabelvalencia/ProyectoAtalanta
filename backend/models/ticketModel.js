@@ -6,7 +6,7 @@ const db = require('../config/db');
 
 
 // =======================
-// CREAR TICKET
+// CLIENTE - CREAR TICKET
 // =======================
 
 const createTicket = async (title, description, id_cliente) => {
@@ -21,61 +21,8 @@ const createTicket = async (title, description, id_cliente) => {
   return result.insertId;
 };
 
-
 // =======================
-// ASIGNAR TICKET
-// =======================
-
-const assignTicket = async (id_ticket, id_trabajador) => {
-  const [result] = await db.query(
-    `
-    UPDATE tickets
-    SET id_trabajador = ?
-    WHERE id_ticket = ?
-    `,
-    [id_trabajador, id_ticket]
-  );
-
-  return result.affectedRows;
-};
-
-
-// =======================
-// VALIDAR ASIGNACIÓN
-// =======================
-
-const isTicketAssignedToUser = async (id_ticket, id_user) => {
-  const [rows] = await db.query(
-    `
-    SELECT id_ticket
-    FROM tickets
-    WHERE id_ticket = ? AND id_trabajador = ?
-    `,
-    [id_ticket, id_user]
-  );
-
-  return rows.length > 0;
-};
-
-// =======================
-// CAMBIAR ESTADO
-// =======================
-
-const updateTicketStatus = async (id_ticket, status) => {
-  const [result] = await db.query(
-    `
-    UPDATE tickets
-    SET status = ?
-    WHERE id_ticket = ?
-    `,
-    [status, id_ticket]
-  );
-
-  return result.affectedRows;
-};
-
-// =======================
-// OBTENER TICKETS DEL CLIENTE
+// CLIENTE - OBTENER TICKETS POR USUARIO
 // =======================
 
 const getTicketsByUser = async (id_cliente) => {
@@ -98,6 +45,84 @@ const getTicketsByUser = async (id_cliente) => {
 
   return rows;
 };
+
+// =======================
+// JEFE - TODOS LOS TICKET
+// =======================
+
+const getAllTickets = async () => {
+  const [rows] = await db.query(`
+    SELECT 
+      t.id_ticket,
+      t.title,
+      t.description,
+      t.status,
+      t.created_at,
+      u.user_name AS cliente,
+      w.user_name AS trabajador
+    FROM tickets t
+    JOIN users u ON t.id_cliente = u.id_user
+    LEFT JOIN users w ON t.id_trabajador = w.id_user
+  `);
+
+  return rows;
+};
+
+
+// =======================
+// JEFE - ASIGNAR TICKET
+// =======================
+
+const assignTicket = async (id_ticket, id_trabajador) => {
+  const [result] = await db.query(
+    `
+    UPDATE tickets
+    SET id_trabajador = ?
+    WHERE id_ticket = ?
+    `,
+    [id_trabajador, id_ticket]
+  );
+
+  return result.affectedRows;
+};
+
+
+
+// =======================
+// VALIDAR ASIGNACIÓN
+// =======================
+
+const isTicketAssignedToUser = async (id_ticket, id_user) => {
+  const [rows] = await db.query(
+    `
+    SELECT id_ticket
+    FROM tickets
+    WHERE id_ticket = ? AND id_trabajador = ?
+    `,
+    [id_ticket, id_user]
+  );
+
+  return rows.length > 0;
+};
+
+
+// =======================
+// TRABAJADOR - CAMBIAR ESTADO
+// =======================
+
+const updateTicketStatus = async (id_ticket, status) => {
+  const [result] = await db.query(
+    `
+    UPDATE tickets
+    SET status = ?
+    WHERE id_ticket = ?
+    `,
+    [status, id_ticket]
+  );
+
+  return result.affectedRows;
+};
+
 
 // =======================
 // OBTENER TICKETS POR ID
@@ -175,6 +200,7 @@ const deleteTicket = async (id_ticket, id_cliente) => {
 
 module.exports = {
   createTicket,
+  getAllTickets,
   assignTicket,
   isTicketAssignedToUser,
   updateTicketStatus,

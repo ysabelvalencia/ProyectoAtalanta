@@ -1,5 +1,5 @@
 // =================================
-// commentModel.js
+// userModel.js
 // =================================
 
 const db = require("../config/db");
@@ -84,6 +84,55 @@ const getUserById = async (id_user) => {
   return rows[0];
 };
 
+// =======================
+// OBTENER ROLES (ADMIN)
+// =======================
+
+const getRoles = async () => {
+  const [rows] = await db.query(`
+    SELECT id_role, role_name
+    FROM roles
+  `);
+
+  return rows;
+};
+
+// =======================
+// OBTENER TODOS LOS USUARIOS (ADMIN)
+// =======================
+
+const getAllUsers = async () => {
+  const [rows] = await db.query(`
+    SELECT 
+      u.id_user,
+      u.user_name,
+      u.email,
+      r.role_name
+    FROM users u
+    JOIN roles r ON u.id_role = r.id_role
+  `);
+
+  return rows;
+};
+
+// =======================
+// OBTENER TRABAJADORES (JEFE)
+// =======================
+
+const getWorkers = async () => {
+  const [rows] = await db.query(`
+    SELECT 
+      u.id_user,
+      u.user_name
+    FROM users u
+    JOIN roles r ON u.id_role = r.id_role
+    WHERE r.role_name = 'trabajador'
+  `);
+
+  return rows;
+};
+
+
 // =========
 // EXPORTS
 // =========
@@ -93,4 +142,7 @@ module.exports = {
   createUser,
   updateUserRole,
   getUserById,
+  getRoles,
+  getAllUsers,
+  getWorkers
 };

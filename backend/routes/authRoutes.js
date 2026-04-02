@@ -29,9 +29,26 @@ router.get('/profile', authMiddleware, (req, res) => {
 });
 
 // =======================
-// ADMIN - GESTIÓN ROLES
+// ADMIN
 // =======================
 
+// VER USUARIOS
+router.get(
+  '/users',
+  authMiddleware,
+  checkRole(['admin']),
+  authController.getAllUsers
+);
+
+//VER ROLES
+router.get(
+  '/roles',
+  authMiddleware,
+  checkRole(['admin']),
+  authController.getRoles
+);
+
+//CAMBIAR ROLES
 router.put(
   '/users/:id/role',
   authMiddleware,
