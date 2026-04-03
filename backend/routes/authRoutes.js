@@ -60,45 +60,45 @@ router.put(
 // RUTAS DE VALIDACION DE ACCESO POR ROLES (TESTING)
 // ==============================================
 
-// Cliente
-router.get(
-  '/cliente',
-  authMiddleware,
-  checkRole(['cliente']),
-  (req, res) => {
-    res.json({ message: 'Zona cliente' });
-  }
-);
+// // Cliente
+// router.get(
+//   '/cliente',
+//   authMiddleware,
+//   checkRole(['cliente']),
+//   (req, res) => {
+//     res.json({ message: 'Zona cliente' });
+//   }
+// );
 
-// Trabajador
-router.get(
-  '/trabajador',
-  authMiddleware,
-  checkRole(['trabajador']),
-  (req, res) => {
-    res.json({ message: 'Zona trabajador' });
-  }
-);
+// // Trabajador
+// router.get(
+//   '/trabajador',
+//   authMiddleware,
+//   checkRole(['trabajador']),
+//   (req, res) => {
+//     res.json({ message: 'Zona trabajador' });
+//   }
+// );
 
-// Jefe
-router.get(
-  '/jefe',
-  authMiddleware,
-  checkRole(['jefe']),
-  (req, res) => {
-    res.json({ message: 'Zona jefe' });
-  }
-);
+// // Jefe
+// router.get(
+//   '/jefe',
+//   authMiddleware,
+//   checkRole(['jefe']),
+//   (req, res) => {
+//     res.json({ message: 'Zona jefe' });
+//   }
+// );
 
-// Admin
-router.get(
-  '/admin',
-  authMiddleware,
-  checkRole(['admin']),
-  (req, res) => {
-    res.json({ message: 'Zona admin' });
-  }
-);
+// // Admin
+// router.get(
+//   '/admin',
+//   authMiddleware,
+//   checkRole(['admin']),
+//   (req, res) => {
+//     res.json({ message: 'Zona admin' });
+//   }
+// );
 
 
 

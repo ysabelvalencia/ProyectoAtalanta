@@ -28,7 +28,7 @@ export function initUserWelcome() {
 }
 
 //------------------------------------------------------------//
-//CREAR TICKETS
+
 
 export function initTicketModal() {
   console.log("INIT TICKET MODAL");

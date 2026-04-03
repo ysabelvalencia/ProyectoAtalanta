@@ -52,7 +52,7 @@ export function initTicketDetail() {
   }
 
   //--------------------------------------------------
-  // CARGAR TICKET REAL DESDE BACKEND
+  // CARGAR TICKET DESDE BACKEND
 
   async function loadTicket() {
     try {
@@ -287,8 +287,7 @@ export function initTicketDetail() {
     }
   });
 
-  //--------------------------------------------------
-  // INIT
+ 
 
   loadTicket();
   loadComments();

@@ -141,7 +141,8 @@ CREATE TABLE comments (
     id_user INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_comment_ticket
-        FOREIGN KEY (id_ticket) REFERENCES tickets(id_ticket),
+        FOREIGN KEY (id_ticket) REFERENCES tickets(id_ticket)
+        ON DELETE CASCADE,
     CONSTRAINT fk_comment_user
         FOREIGN KEY (id_user) REFERENCES users(id_user)
 );

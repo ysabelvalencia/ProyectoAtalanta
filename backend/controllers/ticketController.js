@@ -158,6 +158,12 @@ const deleteTicket = async (req, res) => {
     const { id } = req.params;
     const id_cliente = req.user.idUser;
 
+    if (isNaN(id)) {
+      return res.status(400).json({
+        message: "ID inválido"
+      });
+    }
+
     const deleted = await ticketModel.deleteTicket(id, id_cliente);
 
     if (deleted === 0) {
