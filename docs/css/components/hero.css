@@ -125,6 +125,10 @@
 .hero-slider__button:hover {
   background: #ff1c48;
 }
+.hero-slider__button a{
+  text-decoration: none;
+  color: white;
+}
 
 .hero-slider__dots {
   position: absolute;
