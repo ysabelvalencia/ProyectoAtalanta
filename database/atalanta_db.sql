@@ -10,7 +10,7 @@
 -- =================================
 -- BORRAR BASE DE DATOS SI EXISTE
 -- =================================
--- drop database if exists atalanta_db;
+drop database if exists atalanta_db;
 
 -- =================================
 -- CREAR BASE DE DATOS
@@ -72,14 +72,20 @@ CREATE TABLE users (
 );
 
 -- =========================================
--- Se crean los usarios a través del formulario de registro
--- Después actualizamos los roles
+-- Se crean los usarios a través del formulario de registro para que se guarde correctamente la contraseña en formato hash.
 
--- Kyle (id_user 1) = jefe (id_role 3)
--- Ysa (id_user 2) = admin (id_role 4)
--- Irene (id_user 3)= cliente (id_role 1)
--- Krystian (id_user 4)= trabajador (id_role 2)
--- Laura (id_user 5)= trabajador (id_role 2)
+-- Después actualizamos los roles de prueba
+
+--Nota: El único usuario que debe modificarse a través de la base de datos es admin. El resto pueden modificarse a través de pruebas en postman si se desea. 
+
+--No obstante se dejan los updates para poder verificar y realizar las pruebas que se necesiten.
+
+-- Usuario1 (id_user 1) = jefe (id_role 3)
+-- Usuario2 (id_user 2) = admin (id_role 4)
+-- Usuario3 (id_user 3)= cliente (id_role 1)
+-- Usuario4 (id_user 4)= trabajador (id_role 2)
+-- Usuario5 (id_user 5)= trabajador (id_role 2)
+
 -- =========================================
 
 UPDATE users
